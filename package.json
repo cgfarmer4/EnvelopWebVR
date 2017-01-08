@@ -13,6 +13,7 @@
     "webpack": "^2.2.0-rc.3"
   },
   "dependencies": {
-    "three": "^0.83.0"
+    "three": "^0.83.0",
+    "xebra.js": "^1.0.1"
   }
 }
