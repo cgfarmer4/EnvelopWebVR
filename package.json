@@ -13,7 +13,9 @@
     "webpack": "^2.2.0-rc.3"
   },
   "dependencies": {
-    "three": "^0.83.0",
-    "xebra.js": "^1.0.1"
+    "engine.io": "^1.8.2",
+    "engine.io-client": "^1.8.2",
+    "osc": "^2.2.0",
+    "three": "^0.83.0"
   }
 }

@@ -1,87 +1,23 @@
-import * as Xebra from 'xebra.js';
+import * as eio from 'engine.io-client';
 
 class maxToBrowser {
-    constructor() {
-        let options = {
-            hostname: "127.0.0.1",
-            port: 8086,
-            supported_objects: ["button"]
-        };
-        
-        this.xebraState = new Xebra.State(options);
+    constructor(threeDScene) {
+        const socket = new eio.Socket('ws://localhost:1337/');
 
-        // Do something when a button gets added to the Max patcher
-        this.xebraState.on("object_added", (object) => {
-            if (object.type === "button") this.addHTMLButton(object);
-        });
-
-        // Do something when a button is removed
-        this.xebraState.on("object_removed", (object) => {
-            if (object.type === "button") this.removeHTMLButton(object);
-        });
-
-        this.xebraState.on("loaded", () => { 
-            this.debugObjectTree();
-        });
-
-        this.xebraState.connect();
-    }
-    addHTMLButton(object) {
-        let newButton = document.createElement("button");
-        newButton.id = "button-" + object.id;
-
-        newButton.onmousedown = function() {
-            object.setParamValue("value", 1);
-        };
-
-        newButton.onmouseup = function() {
-            object.setParamValue("value", 0);
-        };
-
-        newButton.appendChild(document.createTextNode("Button " + object.id));
-        document.getElementById("container").appendChild(newButton);
-    }
-    removeHTMLButton(object) {
-        let button = document.getElementById("button-" + object.id);
-        button.parentNode.removeChild(button);
-    }
-    debugObjectTree() {
-        let patchers = this.xebraState.getPatchers();
-
-        patchers.forEach( function(patcher) {
-            console.log("Patcher", patcher.name);
-            let objects = patcher.getObjects();
-
-            objects.forEach( function(object) {
-                console.log("\tObject", object.id, object.type);
-                let paramTypes = object.getParamTypes();
+        socket.on('open', function(){
+            socket.on('message', function(data){
+                let oscMessage = JSON.parse(data);
                 
-                paramTypes.forEach( function(paramType) {
-                    console.log("\t\t", paramType, ":", object.getParamValue(paramType));
-                });
-            });
+                threeDScene.cubesMesh[0].position.x = oscMessage[0].args[0] * 1000;
+                threeDScene.cubesMesh[0].position.y = oscMessage[0].args[1] * 1000;
+                threeDScene.cubesMesh[0].position.z = -250;
 
-            console.log("\n");
-        });
-    }
-    debugFrameNode() {
-        let patchers = xebraState.getPatchers();
-        patchers.forEach( function(patcher) {
-            console.log("Patcher", patcher.name);
-            let frames = patcher.getFrames();
+                threeDScene.cubesMesh[1].position.x = oscMessage[1].args[0] * 1000;
+                threeDScene.cubesMesh[1].position.y = oscMessage[1].args[1] * 1000;
+                threeDScene.cubesMesh[1].position.z = -250;
 
-            frames.forEach( function(frame) {
-                console.log("\tFrame", frame.id, "viewmode:", frame.viewMode);
-                let objects = frame.getObjects();
-
-                objects.forEach( function(object) {
-                    console.log("\t\tObject", object.id, object.type);
-                    let paramTypes = object.getParamTypes();
-                    
-                    paramTypes.forEach( function(paramType) {
-                        console.log("\t\t\t", paramType, ":", object.getParamValue(paramType));
-                    });
-                });
+                console.info("Source 1", oscMessage[0].args[0], oscMessage[0].args[1], oscMessage[0].args[2])
+                console.info("Source 2", oscMessage[1].args[0], oscMessage[0].args[1], oscMessage[0].args[2])
             });
         });
     }

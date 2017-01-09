@@ -46,16 +46,15 @@ class threeDScene {
     cubes() {
         this.cubesMesh = [];
 
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 2; i++) {
 
             let material = new THREE.MeshNormalMaterial();
             let geometry = new THREE.BoxGeometry( 50, 50, 50 );
             let mesh = new THREE.Mesh( geometry, material );
 
-            // Give each cube a random position
-            mesh.position.x = (Math.random() * 1000) - 500;
-            mesh.position.y = (Math.random() * 1000) - 500;
-            mesh.position.z = (Math.random() * 1000) - 500;
+            mesh.position.x = -100;
+            mesh.position.y = -100;
+            mesh.position.z = -285;
 
             this.scene.add(mesh);
 
@@ -72,12 +71,6 @@ class threeDScene {
         }
         else {
             requestAnimationFrame(this.animate.bind(this));    
-        }
-
-        // Every frame, rotate the cubes a little bit
-        for (let i = 0; i < cubes.length; i++) {
-            cubes[i].rotation.x += 0.01;
-            cubes[i].rotation.y += 0.02;
         }
 
         // Render the scene
