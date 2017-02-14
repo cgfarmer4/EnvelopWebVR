@@ -11,20 +11,29 @@ var udpPort = new osc.UDPPort({
     localPort: 57121
 });
 
-// Listen for incoming OSC bundles.
+// Positional level bundles
 udpPort.on("bundle", function (oscBundle, timeTag, info) {
-    myEmitter.emit('jungle', { 
+    myEmitter.emit('bundle', { 
         0: oscBundle.packets[0],
         1: oscBundle.packets[1]
     });
-    // console.log("An OSC bundle just arrived for time tag", timeTag, ":", oscBundle.packets[0],oscBundle.packets[1]);
 });
 
-// Open the socket.
+// Speaker level message
+udpPort.on("message", function (message, timeTag, info) {
+    myEmitter.emit('message', message);
+});
+
+// UDP connection to MAX
 udpPort.open();
 
-server.on('connection', function(socket){
-    myEmitter.on('jungle', function(data) {
+// Browser Web Socket connection
+server.once('connection', function(socket){
+    myEmitter.on('bundle', function(data) {
+        socket.send(JSON.stringify(data));
+    })
+
+    myEmitter.on('message', function (data) {
         socket.send(JSON.stringify(data));
     })
 })

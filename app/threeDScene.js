@@ -1,86 +1,89 @@
 'use_strict';
 
 import * as THREE from 'three';
-import '../vendor/VRControls';
-import '../vendor/VREffect';
-// import '../vendor/WebVRPolyfill';
+import * as EnvelopModel from './envelopModel';
+import * as CCapture from '../vendor/CCapture';
+import * as Controls from './controls';
+import * as CubemapToEquirectangular from '../vendor/CubemapToEquirectangular';
 
 class threeDScene {
     constructor() {
+        this.clock = new THREE.Clock();
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
-        this.renderer = new THREE.WebGLRenderer({ 
-            antialias: true 
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 10000);
+        this.renderer = new THREE.WebGLRenderer({
+            antialias: true
         });
 
+        // Stage for rendering.
+        this.renderer.setClearColor(new THREE.Color('skyblue'));
         this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.container = document.body.appendChild(this.renderer.domElement);
 
-        document.body.appendChild(this.renderer.domElement);
-
-        this.controls = new THREE.VRControls(this.camera);
-        this.controls.standing = true;
-
-        this.effect = new THREE.VREffect(this.renderer);
-        this.effect.setSize(window.innerWidth, window.innerHeight);
-
-        this.vrDisplay = {};
-
-        navigator.getVRDisplays().then((displays) => {
-            if (displays.length > 0) {
-                this.vrDisplay = displays[0];
-            }
+        // Click events
+        document.getElementById('startVR').addEventListener('click', () => {
+            if (this.controlSwitcher && this.controlSwitcher.controls.type === 'vr') return;
+            this.controlSwitcher = new Controls('vr', this.scene, this.camera, this.renderer);
+            window.addEventListener('vrdisplaypresentchange', this.onResize.bind(this));
         });
 
-        //Setup Events
-        document.querySelector('#startVR').addEventListener('click', () => {
-            this.vrDisplay.requestPresent([{source: this.renderer.domElement}]);
-            this.isShowingVR = true;
+        document.getElementById('startTrackball').addEventListener('click', () => {
+            if (this.controlSwitcher && this.controlSwitcher.controls.type === 'trackball') return;
+            this.controlSwitcher = new Controls('trackball', this.scene, this.camera);
         });
 
-        window.addEventListener('vrdisplaypresentchange', this.onResize.bind(this));
+        document.getElementById('startButton').addEventListener('click', (event) => {
+            this.controlSwitcher = new Controls('orbit', this.scene, this.camera, this.renderer, this.container);
+            this.capturer360 = new CCapture({
+                format: 'threesixty',
+                display: true,
+                autoSaveTime: 3,
+                equiManaged: new CubemapToEquirectangular(this.renderer, true, "4K", this.camera, this.scene)
+            });
+            this.capturer360.start();
+            this.capturing = true;
+        });
+
+        document.getElementById('saveButton').addEventListener('click', (event) => {
+            this.capturing = false;
+            capturer360.stop();
+        });
+
+        // Window events
         window.addEventListener('resize', this.onResize.bind(this));
-
-        this.cubes();
+        this.setupSpeakerModel();
+        
+        // Trackball defaut
+        this.controlSwitcher = new Controls('trackball', this.scene, this.camera);
         this.animate();
     }
-    cubes() {
-        this.cubesMesh = [];
-
-        for (let i = 0; i < 2; i++) {
-
-            let material = new THREE.MeshNormalMaterial();
-            let geometry = new THREE.BoxGeometry( 50, 50, 50 );
-            let mesh = new THREE.Mesh( geometry, material );
-
-            mesh.position.x = -100;
-            mesh.position.y = -100;
-            mesh.position.z = -285;
-
-            this.scene.add(mesh);
-
-            // Store each mesh in array
-            this.cubesMesh.push(mesh);
-        }
+    setupSpeakerModel() {
+        let loader = new THREE.ObjectLoader();
+        loader.parse(EnvelopModel, (blenderModel) => {
+            this.scene.add(blenderModel);
+        });
     }
     animate() {
-        let cubes = this.cubesMesh;
-
-        //If we don't change the source here, the HMD will not move the camera.
-        if(this.isShowingVR) {
-            this.vrDisplay.requestAnimationFrame(this.animate.bind(this));    
+        let delta = this.clock.getDelta();
+        requestAnimationFrame(this.animate.bind(this));
+        this.controlSwitcher.controls.update(delta);
+        this.renderer.render(this.scene, this.camera);
+        // If we don't change the source here, the HMD will not move the camera.
+        if (this.controlSwitcher.controls.type === 'vr') {
+            this.vrDisplay.requestAnimationFrame(this.animate.bind(this));
+            this.effect.render(this.scene, this.camera);
         }
-        else {
-            requestAnimationFrame(this.animate.bind(this));    
+        if(this.capturing) {
+            this.capturer360.capture(this.container);
         }
-
-        // Render the scene
-        this.controls.update();
-        this.effect.render(this.scene, this.camera);
     }
     onResize() {
-        this.effect.setSize(window.innerWidth, window.innerHeight);
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
+        if (this.controlSwitcher.controls.type === 'vr') {
+            this.effect.setSize(window.innerWidth, window.innerHeight); 
+        }
     }
 }
 
