@@ -1,79 +1,16 @@
+; (function () {
 
-import * as THREE from 'three';
-module.exports = CubemapToEquirectangular;
+    "use strict";
 
-function CubemapToEquirectangular(renderer, provideCubeCamera, resolution, sceneCamera, mainScene) {
+    var root = this
 
-    var resolution = resolution.toUpperCase() || "4K";
-    this.sceneCamera = sceneCamera;
-    this.mainScene = mainScene;
-    this.width = 1;
-    this.height = 1;
+    var has_require = typeof require !== 'undefined'
 
-    this.renderer = renderer;
+    var THREE = root.THREE || has_require && require('three')
+    if (!THREE)
+        throw new Error('CubemapToEquirectangular requires three.js')
 
-    this.material = new THREE.RawShaderMaterial({
-        uniforms: {
-            map: {
-                type: 't',
-                value: null
-            }
-        },
-        vertexShader: this.vertexShader,
-        fragmentShader: this.fragmentShader,
-        side: THREE.DoubleSide
-    });
-
-    this.scene = new THREE.Scene();
-    this.quad = new THREE.Mesh(
-        new THREE.PlaneBufferGeometry(1, 1),
-        this.material
-    );
-    this.scene.add(this.quad);
-    this.camera = new THREE.OrthographicCamera(1 / -2, 1 / 2, 1 / 2, 1 / -2, -10000, 10000);
-
-    this.canvas = document.createElement('canvas');
-    this.ctx = this.canvas.getContext('2d');
-
-    this.cubeCamera = null;
-    this.attachedCamera = null;
-
-
-    if (resolution === "4K") {
-        this.setSize(4096, 2048);
-    }
-
-    if (resolution === "2K") {
-        this.setSize(2048, 1024);
-    }
-
-    if (resolution === "1K") {
-        this.setSize(1024, 512);
-    }
-
-
-    var gl = this.renderer.getContext();
-    this.cubeMapSize = gl.getParameter(gl.MAX_CUBE_MAP_TEXTURE_SIZE)
-
-    if (provideCubeCamera) {
-
-        if (resolution === "4K") {
-            this.getCubeCamera(2048);
-        }
-
-        if (resolution === "2K") {
-            this.getCubeCamera(1024);
-        }
-
-        if (resolution === "1K") {
-            this.getCubeCamera(512);
-        }
-    }
-
-    return this;
-}
-
-CubemapToEquirectangular.prototype.vertexShader = `
+    var vertexShader = `
 attribute vec3 position;
 attribute vec2 uv;
 
@@ -90,7 +27,7 @@ void main()  {
 }
 `;
 
-CubemapToEquirectangular.prototype.fragmentShader = `
+    var fragmentShader = `
 precision mediump float;
 
 uniform samplerCube map;
@@ -118,111 +55,120 @@ void main()  {
 }
 `;
 
+    function CubemapToEquirectangular(renderer, provideCubeCamera) {
 
-CubemapToEquirectangular.prototype.setSize = function (width, height) {
+        this.width = 1;
+        this.height = 1;
 
-    this.width = width;
-    this.height = height;
+        this.renderer = renderer;
 
-    this.quad.scale.set(this.width, this.height, 1);
+        this.material = new THREE.RawShaderMaterial({
+            uniforms: {
+                map: { type: 't', value: null }
+            },
+            vertexShader: vertexShader,
+            fragmentShader: fragmentShader,
+            side: THREE.DoubleSide
+        });
 
-    this.camera.left = this.width / -2;
-    this.camera.right = this.width / 2;
-    this.camera.top = this.height / 2;
-    this.camera.bottom = this.height / -2;
+        this.scene = new THREE.Scene();
+        this.quad = new THREE.Mesh(
+            new THREE.PlaneBufferGeometry(1, 1),
+            this.material
+        );
+        this.scene.add(this.quad);
+        this.camera = new THREE.OrthographicCamera(1 / - 2, 1 / 2, 1 / 2, 1 / - 2, -10000, 10000);
 
-    this.camera.updateProjectionMatrix();
+        this.canvas = document.createElement('canvas');
+        this.ctx = this.canvas.getContext('2d');
 
-    this.output = new THREE.WebGLRenderTarget(this.width, this.height, {
-        minFilter: THREE.LinearFilter,
-        magFilter: THREE.LinearFilter,
-        wrapS: THREE.ClampToEdgeWrapping,
-        wrapT: THREE.ClampToEdgeWrapping,
-        format: THREE.RGBAFormat,
-        type: THREE.UnsignedByteType
-    });
+        this.cubeCamera = null;
+        this.attachedCamera = null;
 
-    this.canvas.width = this.width;
-    this.canvas.height = this.height;
+        this.setSize(4096, 2048);
 
-}
+        var gl = this.renderer.getContext();
+        this.cubeMapSize = gl.getParameter(gl.MAX_CUBE_MAP_TEXTURE_SIZE)
 
-CubemapToEquirectangular.prototype.getCubeCamera = function (size) {
+        if (provideCubeCamera) {
+            this.getCubeCamera(2048)
+        }
 
-    this.cubeCamera = new THREE.CubeCamera(.1, 10000, Math.min(this.cubeMapSize, size));
-    return this.cubeCamera;
+        let cubeDOM = document.body.appendChild(this.canvas);
+    }
 
-}
+    CubemapToEquirectangular.prototype.setSize = function (width, height) {
 
-CubemapToEquirectangular.prototype.attachCubeCamera = function (camera) {
+        this.width = width;
+        this.height = height;
 
-    this.getCubeCamera();
-    this.attachedCamera = camera;
+        this.quad.scale.set(this.width, this.height, 1);
 
-}
+        this.camera.left = this.width / - 2;
+        this.camera.right = this.width / 2;
+        this.camera.top = this.height / 2;
+        this.camera.bottom = this.height / - 2;
 
-CubemapToEquirectangular.prototype.convert = function (cubeCamera) {
+        this.camera.updateProjectionMatrix();
 
-    this.quad.material.uniforms.map.value = cubeCamera.renderTarget.texture;
-    this.renderer.render(this.scene, this.camera, this.output, true);
+        this.output = new THREE.WebGLRenderTarget(this.width, this.height, {
+            minFilter: THREE.LinearFilter,
+            magFilter: THREE.LinearFilter,
+            wrapS: THREE.ClampToEdgeWrapping,
+            wrapT: THREE.ClampToEdgeWrapping,
+            format: THREE.RGBAFormat,
+            type: THREE.UnsignedByteType
+        });
 
-    var pixels = new Uint8Array(4 * this.width * this.height);
-    this.renderer.readRenderTargetPixels(this.output, 0, 0, this.width, this.height, pixels);
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
 
-    var imageData = new ImageData(new Uint8ClampedArray(pixels), this.width, this.height);
+    }
 
-    this.ctx.putImageData(imageData, 0, 0);
+    CubemapToEquirectangular.prototype.getCubeCamera = function (size) {
 
-    this.canvas.toBlob(function (blob) {
+        this.cubeCamera = new THREE.CubeCamera(.1, 1000, Math.min(this.cubeMapSize, size));
+        return this.cubeCamera;
 
-        var url = URL.createObjectURL(blob);
+    }
 
-        var fileName = 'pano-' + document.title + '-' + Date.now() + '.jpg';
-        var anchor = document.createElement('a');
-        anchor.href = url;
-        anchor.setAttribute("download", fileName);
-        anchor.className = "download-js-link";
-        anchor.innerHTML = "downloading...";
-        anchor.style.display = "none";
-        document.body.appendChild(anchor);
-        setTimeout(function () {
-            anchor.click();
-            document.body.removeChild(anchor);
-        }, 1);
+    CubemapToEquirectangular.prototype.attachCubeCamera = function (camera) {
 
-    }, 'image/jpeg');
+        this.getCubeCamera();
+        this.attachedCamera = camera;
 
-}
+    }
 
-CubemapToEquirectangular.prototype.preBlob = function (cubeCamera) {
+    CubemapToEquirectangular.prototype.convert = function (cubeCamera) {
 
-    var autoClear = this.renderer.autoClear;
-    this.renderer.autoClear = true;
-    this.cubeCamera.position.copy(this.sceneCamera.position);
-    this.cubeCamera.updateCubeMap(this.renderer, this.mainScene);
-    this.renderer.autoClear = autoClear;
+        this.quad.material.uniforms.map.value = cubeCamera.renderTarget.texture;
+        this.renderer.render(this.scene, this.camera, this.output, true);
 
-    this.quad.material.uniforms.map.value = cubeCamera.renderTarget.texture;
-    this.renderer.render(this.scene, this.camera, this.output, true);
+        var pixels = new Uint8Array(4 * this.width * this.height);
+        this.renderer.readRenderTargetPixels(this.output, 0, 0, this.width, this.height, pixels);
 
-    var pixels = new Uint8Array(4 * this.width * this.height);
-    this.renderer.readRenderTargetPixels(this.output, 0, 0, this.width, this.height, pixels);
+        var imageData = new ImageData(new Uint8ClampedArray(pixels), this.width, this.height);
 
-    var imageData = new ImageData(new Uint8ClampedArray(pixels), this.width, this.height);
+        this.ctx.putImageData(imageData, 0, 0);
+    }
 
-    this.ctx.putImageData(imageData, 0, 0);
+    CubemapToEquirectangular.prototype.update = function (camera, scene) {
+        var autoClear = this.renderer.autoClear;
+        this.renderer.autoClear = true;
+        this.cubeCamera.position.copy(camera.position);
+        this.cubeCamera.updateCubeMap(this.renderer, scene);
+        this.renderer.autoClear = autoClear;
+        this.convert(this.cubeCamera);
+    }
 
-}
+    if (typeof exports !== 'undefined') {
+        if (typeof module !== 'undefined' && module.exports) {
+            exports = module.exports = CubemapToEquirectangular
+        }
+        exports.CubemapToEquirectangular = CubemapToEquirectangular
+    }
+    else {
+        root.CubemapToEquirectangular = CubemapToEquirectangular
+    }
 
-
-CubemapToEquirectangular.prototype.update = function (camera, scene) {
-
-    var autoClear = this.renderer.autoClear;
-    this.renderer.autoClear = true;
-    this.cubeCamera.position.copy(camera.position);
-    this.cubeCamera.updateCubeMap(this.renderer, scene);
-    this.renderer.autoClear = autoClear;
-
-    this.convert(this.cubeCamera);
-
-}
+}).call(this);

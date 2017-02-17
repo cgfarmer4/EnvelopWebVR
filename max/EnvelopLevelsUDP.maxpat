@@ -1500,9 +1500,9 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1448.0, 311.756012, 173.0, 22.0 ],
+					"patching_rect" : [ 1448.0, 311.756012, 147.0, 22.0 ],
 					"style" : "",
-					"text" : "udpsend 192.168.0.131 57121"
+					"text" : "udpsend 127.0.0.1 57121"
 				}
 
 			}
@@ -2721,8 +2721,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-					"fontsize" : [ 12.059008 ]
+					"fontsize" : [ 12.059008 ],
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 				}
 ,
 				"parentstyle" : "",

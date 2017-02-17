@@ -19,6 +19,10 @@ class maxToBrowser {
 
         this.mapSceneToModel(threeDScene.scene);
     }
+    /**
+     * Map blender layer names to imported Three.js objects
+     * @param {Object} Three.js Scene
+     */
     mapSceneToModel(scene) {
         this.speakers = {};
         this.towers = {};

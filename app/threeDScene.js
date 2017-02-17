@@ -2,9 +2,8 @@
 
 import * as THREE from 'three';
 import * as EnvelopModel from './envelopModel';
-import * as CCapture from '../vendor/CCapture';
 import * as Controls from './controls';
-import * as CubemapToEquirectangular from '../vendor/CubemapToEquirectangular';
+import * as Record from './record';
 
 class threeDScene {
     constructor() {
@@ -35,19 +34,13 @@ class threeDScene {
 
         document.getElementById('startButton').addEventListener('click', (event) => {
             this.controlSwitcher = new Controls('orbit', this.scene, this.camera, this.renderer, this.container);
-            this.capturer360 = new CCapture({
-                format: 'threesixty',
-                display: true,
-                autoSaveTime: 3,
-                equiManaged: new CubemapToEquirectangular(this.renderer, true, "4K", this.camera, this.scene)
-            });
-            this.capturer360.start();
+            this.record = new Record(this.renderer, this.camera, this.scene);
             this.capturing = true;
         });
 
         document.getElementById('saveButton').addEventListener('click', (event) => {
             this.capturing = false;
-            capturer360.stop();
+            this.record.stop();
         });
 
         // Window events
@@ -66,17 +59,20 @@ class threeDScene {
     }
     animate() {
         let delta = this.clock.getDelta();
-        requestAnimationFrame(this.animate.bind(this));
         this.controlSwitcher.controls.update(delta);
         this.renderer.render(this.scene, this.camera);
+
         // If we don't change the source here, the HMD will not move the camera.
         if (this.controlSwitcher.controls.type === 'vr') {
             this.vrDisplay.requestAnimationFrame(this.animate.bind(this));
             this.effect.render(this.scene, this.camera);
         }
+
         if(this.capturing) {
-            this.capturer360.capture(this.container);
+            this.record.cubeMap.update(this.camera, this.scene);
         }
+
+        requestAnimationFrame(this.animate.bind(this));
     }
     onResize() {
         this.camera.aspect = window.innerWidth / window.innerHeight;
