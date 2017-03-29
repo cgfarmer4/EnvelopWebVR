@@ -9,7 +9,7 @@
  *
  */
 
-import * as THREE from 'three';
+const THREE = require('three');
 
 THREE.VREffect = function( renderer, onError ) {
 

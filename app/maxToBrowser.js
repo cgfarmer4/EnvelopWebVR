@@ -1,4 +1,4 @@
-import * as eio from 'engine.io-client';
+const eio = require('engine.io-client');
 
 class maxToBrowser {
     constructor(threeDScene) {

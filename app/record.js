@@ -1,7 +1,7 @@
 'use_strict';
 
-import * as CubemapToEquirectangular from '../vendor/CubemapToEquirectangular';
-import * as download from 'downloadjs';
+const CubemapToEquirectangular = require('../vendor/CubemapToEquirectangular');
+const download = require('downloadjs');
 
 class Record {
     constructor(renderer, camera, scene) {

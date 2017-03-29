@@ -1,9 +1,10 @@
 'use_strict';
 
-import * as THREE from 'three';
-import * as EnvelopModel from './envelopModel';
-import * as Controls from './controls';
-import * as Record from './record';
+const THREE = require('three');
+const EnvelopModel = require('./envelopModel');
+const Controls = require('./controls');
+const Record = require('./record');
+const ThreeAudio = require('three-audio-timeline');
 
 class threeDScene {
     constructor() {
@@ -43,13 +44,27 @@ class threeDScene {
             this.record.stop();
         });
 
+        var geometry = new THREE.SphereGeometry(5, 32, 32);
+        var material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+        var sphere = new THREE.Mesh(geometry, material);
+        sphere.material.transparent = true;
+        this.scene.add(sphere);
+
         // Window events
         window.addEventListener('resize', this.onResize.bind(this));
         this.setupSpeakerModel();
-        
+
         // Trackball defaut
         this.controlSwitcher = new Controls('trackball', this.scene, this.camera);
         this.animate();
+
+        let timeline = new ThreeAudio.Timeline();
+        let animation = new ThreeAudio.Animation("Sphere Material", sphere.material, timeline);
+
+        animation.to(0, { opacity: 0 }, 1, "Quadratic.EaseIn")
+                 .to(5, { opacity: 1 }, 2);
+
+        let GUI = new ThreeAudio.GUI(timeline);
     }
     setupSpeakerModel() {
         let loader = new THREE.ObjectLoader();
@@ -68,7 +83,7 @@ class threeDScene {
             this.effect.render(this.scene, this.camera);
         }
 
-        if(this.capturing) {
+        if (this.capturing) {
             this.record.cubeMap.update(this.camera, this.scene);
         }
 
@@ -78,7 +93,7 @@ class threeDScene {
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
         if (this.controlSwitcher.controls.type === 'vr') {
-            this.effect.setSize(window.innerWidth, window.innerHeight); 
+            this.effect.setSize(window.innerWidth, window.innerHeight);
         }
     }
 }

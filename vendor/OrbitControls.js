@@ -13,7 +13,7 @@
 //    Zoom - middle mouse, or mousewheel / touch: two finger spread or squish
 //    Pan - right mouse, or arrow keys / touch: three finter swipe
 
-import * as THREE from 'three';
+const THREE = require('three');
 
 THREE.OrbitControls = function (object, domElement) {
 

@@ -3,7 +3,7 @@
  * @author mrdoob / http://mrdoob.com
  */
 
-import * as THREE from 'three';
+const THREE = require('three');
 
 THREE.VRControls = function ( object, onError ) {
 

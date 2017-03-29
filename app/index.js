@@ -1,5 +1,5 @@
-import * as ThreeDScene from './threeDScene';
-import * as MaxToBrowser from'./maxToBrowser';
+const ThreeDScene =  require('./threeDScene');
+// const MaxToBrowser = require('./maxToBrowser');
 
 let threeDScene = new ThreeDScene();
-let maxToBrowser = new MaxToBrowser(threeDScene);
+// let maxToBrowser = new MaxToBrowser(threeDScene);

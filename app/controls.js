@@ -1,8 +1,8 @@
-import * as THREE from 'three';
-import '../vendor/VRControls';
-import '../vendor/VREffect';
-import '../vendor/TrackballControls';
-import '../vendor/OrbitControls';
+const THREE = require('three');
+const VRControls = require('../vendor/VRControls');
+const VREffect = require('../vendor/VREffect');
+const TrackballControls = require('../vendor/TrackballControls');
+const OrbitControls = require('../vendor/OrbitControls');
 
 class Controls {
     constructor(type, threeDScene, camera, renderer, container) {
