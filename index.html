@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Getting Started with WebVR and Spatial Audio</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
 
@@ -8,17 +9,44 @@
         body {
             margin: 0;
         }
+        
+        canvas {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+        
+        .buttonHolder {
+            /*position: absolute;*/
+        }
+        #detailsView {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            margin: 10px;
+        }
     </style>
-    
-  </head>
-  <body>
 
-    <div class="buttonHolder" style="position:relative;text-align:center;">
+</head>
+
+<body>
+    <div class="buttonHolder" style="text-align:center;">
+        <button id="playButton">play</button>
+        <button id="pauseButton">pause</button>
+        <button id="exportButton">export</button>
+        <button id="stopButton">stop</button>
+
         <button id="startButton">Start Capture</button>
-        <button id="saveButton" >Stop Capture</button>
+        <button id="saveButton">Stop Capture</button>
         <button id="startVR"> VR </button>
         <button id="startTrackball"> Trackball </button>
     </div>
     <script src="dist/bundle.js"></script>
-  </body>
+</body>
+
 </html>
