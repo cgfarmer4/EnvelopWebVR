@@ -16,7 +16,7 @@ class threeDScene {
         });
 
         // Stage for rendering.
-        this.renderer.setClearColor(new THREE.Color('skyblue'));
+        this.renderer.setClearColor(new THREE.Color(0x666666));
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.container = document.body.appendChild(this.renderer.domElement);
@@ -48,63 +48,60 @@ class threeDScene {
         window.addEventListener('resize', this.onResize.bind(this));
 
         // Trackball defaut
-        // this.controlSwitcher = new Controls('trackball', this.scene, this.camera);
+        this.controlSwitcher = new Controls('trackball', this.scene, this.camera);
         
         //Envelop
         this.envelop = new Envelop(this.scene);
         this.timeline = this.setupTimeline();
         let number = new ThreeAudio.Tracks.Number('Test Chart', this.timeline);
-        let number1 = new ThreeAudio.Tracks.Number('Test Chart2', this.timeline);
-        let position = new ThreeAudio.Tracks.Position('POSI!', this.timeline);
-        let position2 = new ThreeAudio.Tracks.Position('POSI!2', this.timeline);
-        let position3 = new ThreeAudio.Tracks.Position('POSI!3', this.timeline);
+        // let number1 = new ThreeAudio.Tracks.Number('Test Chart2', this.timeline);
+        // let position = new ThreeAudio.Tracks.Position('POSI!', this.timeline);
+        // let position2 = new ThreeAudio.Tracks.Position('POSI!2', this.timeline);
+        // let position3 = new ThreeAudio.Tracks.Position('POSI!3', this.timeline);
 
-        for(let speaker in this.envelop.speakers) {
-            let EnvelopSpeaker = new ThreeAudio.Tracks.Keyframe("Envelop " + speaker, this.envelop.speakers[speaker].material, this.timeline);
+        // for(let speaker in this.envelop.speakers) {
+        //     let EnvelopSpeaker = new ThreeAudio.Tracks.Keyframe("Envelop " + speaker, this.envelop.speakers[speaker].material, this.timeline);
 
-            EnvelopSpeaker
-                .keyframe(0, { opacity: .2 }, 1, "Quadratic.EaseIn")
-                .keyframe(1, { opacity:1 }, .2, "Quadratic.EaseIn")
-                .keyframe(1, { opacity: .6 }, .2, "Quadratic.EaseIn")
-                .keyframe(1, { opacity: .8 }, .2, "Quadratic.EaseIn")
-                .keyframe(1, { opacity:.4 }, .2, "Quadratic.EaseIn");
-        }
-        
-        // let inputCount = 0;
-        // let number = new ThreeAudio.Tracks.Number('Test Chart', this.timeline);
-        // for (let input in this.envelop.inputs) {
-        //     let EnvelopInput = new ThreeAudio.Tracks.Keyframe("Envelop " + inputCount, this.envelop.inputs[input].position, this.timeline);
-        //     let max = 40;
-        //     let min = 5;
-
-        //     EnvelopInput
-        //         .keyframe(0, { 
-        //             x: Math.floor(Math.random() * (max - min)) + min, 
-        //             y: Math.floor(Math.random() * (max - min)) + min 
-        //         }, 1, "Quadratic.EaseIn")
-        //         .keyframe(1, {
-        //             x: Math.floor(Math.random() * (max - min)) + min, 
-        //             y: Math.floor(Math.random() * (max - min)) + min 
-        //         }, 2, "Quadratic.EaseIn")
-        //         .keyframe(1, {
-        //             x: Math.floor(Math.random() * (max - min)) + min, 
-        //             y: Math.floor(Math.random() * (max - min)) + min 
-        //         }, 2, "Quadratic.EaseIn")
-        //         .keyframe(1, {
-        //             x: Math.floor(Math.random() * (max - min)) + min, 
-        //             y: Math.floor(Math.random() * (max - min)) + min 
-        //         }, 2, "Quadratic.EaseIn")
-        //         .keyframe(1, {
-        //             x: Math.floor(Math.random() * (max - min)) + min, 
-        //             y: Math.floor(Math.random() * (max - min)) + min, 
-        //             z: 0 
-        //         }, 2, "Quadratic.EaseIn");
-
-        //     inputCount += 1;
+        //     EnvelopSpeaker
+        //         .keyframe(0, { opacity: .2 }, 1, "Quadratic.EaseIn")
+        //         .keyframe(1, { opacity:1 }, .2, "Quadratic.EaseIn")
+        //         .keyframe(1, { opacity: .6 }, .2, "Quadratic.EaseIn")
+        //         .keyframe(1, { opacity: .8 }, .2, "Quadratic.EaseIn")
+        //         .keyframe(1, { opacity:.4 }, .2, "Quadratic.EaseIn");
         // }
+        
+        let inputCount = 0;
+        for (let input in this.envelop.inputs) {
+            let EnvelopInput = new ThreeAudio.Tracks.Keyframe("Envelop " + inputCount, this.envelop.inputs[input].position, this.timeline);
+            let max = 40;
+            let min = 5;
+
+            EnvelopInput
+                .keyframe(0, { 
+                    x: 0,
+                    y: 10
+                }, 1, "Quadratic.EaseIn")
+                .keyframe(1, {
+                    x: 20,
+                    y: 20
+                }, 2, "Quadratic.EaseIn")
+                .keyframe(1, {
+                    x: 30,
+                    y: 30
+                }, 2, "Quadratic.EaseIn")
+                .keyframe(1, {
+                    x: 40,
+                    y: 40
+                }, 2, "Quadratic.EaseIn")
+                .keyframe(1, {
+                    x: 50
+                }, 2, "Quadratic.EaseIn");
+
+            inputCount += 1;
+        }
 
         let GUI = new ThreeAudio.GUI(this.timeline);
-        this.animate();
+        this.animate(); 
     }
     setupTimeline() {
         let timeline = new ThreeAudio.Timeline();
@@ -118,7 +115,7 @@ class threeDScene {
     }
     animate() {
         let delta = this.clock.getDelta();
-        // this.controlSwitcher.controls.update(delta);
+        this.controlSwitcher.controls.update(delta);
         this.timeline.update(delta);
         this.renderer.render(this.scene, this.camera);
 
