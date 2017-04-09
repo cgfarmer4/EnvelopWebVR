@@ -1,9 +1,9 @@
 'use_strict';
-
+const THREE = require('three');
+const GUI = require('./gui');
 const Midway = require('./midway');
 const Label = require('./label');
 const Column = require('./column');
-const THREE = require('three');
 
 const INCHES = 1;
 const FEET = 12 * INCHES;
@@ -13,16 +13,17 @@ class Envelop {
         this.NUM_INPUTS = 8;
         this.columns = [];
         this.labels = [];
+        this.subs = [];
         this.speakers = {};
         this.inputs = {};
         this.scene = scene;
         this.venue = new Midway();
-
         this.inputModel();
         this.columnDraw();
         this.speakerDraw();
         this.subDraw();
         this.floorDraw();
+        this.GUI = new GUI(this);
     }
     inputModel() {
         for (let x = 0; x < this.NUM_INPUTS; x++) {
@@ -113,6 +114,7 @@ class Envelop {
             sub.rotateY(- Math.PI / 4);
             sub.position.set(subPosition.x, 10 * INCHES, subPosition.y);
             this.scene.add(sub);
+            this.subs.push(sub);
         });
     }
     floorDraw() {
@@ -126,6 +128,7 @@ class Envelop {
         });
         let plane = new THREE.Mesh(geometry, material);
         plane.rotateX(- Math.PI / 2);
+        this.floor = plane;
         this.scene.add(plane);
     }
 }

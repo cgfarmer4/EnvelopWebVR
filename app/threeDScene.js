@@ -77,23 +77,23 @@ class threeDScene {
             let min = 5;
 
             EnvelopInput
-                .keyframe(0, { 
+                .keyframe({ 
                     x: 0,
                     y: 10
                 }, 1, "Quadratic.EaseIn")
-                .keyframe(1, {
+                .keyframe({
                     x: 20,
                     y: 20
                 }, 2, "Quadratic.EaseIn")
-                .keyframe(1, {
+                .keyframe({
                     x: 30,
                     y: 30
                 }, 2, "Quadratic.EaseIn")
-                .keyframe(1, {
+                .keyframe({
                     x: 40,
                     y: 40
                 }, 2, "Quadratic.EaseIn")
-                .keyframe(1, {
+                .keyframe({
                     x: 50
                 }, 2, "Quadratic.EaseIn");
 
