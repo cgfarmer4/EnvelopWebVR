@@ -3,18 +3,32 @@ const eio = require('engine.io-client');
 class maxToBrowser {
     constructor() {
         let self = this;
-        const socket = new eio.Socket('ws://localhost:1337/');
+        this.speakers = {};
+        this.inputs = {};
 
-        socket.on('open', function(){
-            socket.on('message', function(data){
-                let oscMessage = JSON.parse(data);
-                console.log(oscMessage);
-                // let channel = "Speaker" + oscMessage.address.substr(18, oscMessage.address.length);
-                // self.speakers[channel].material.opacity = oscMessage.args[0];
+        const socket = new eio.Socket('ws://192.168.0.197:1337/');
+
+        socket.on('open', () => {
+            console.info('UDP / SOCKET --> success!');
+
+            socket.on('message', (data) => {
+                let messageData = JSON.parse(data);
                 
-                // Input positioning
-                console.info("Source 1", oscMessage[0].args[0], oscMessage[0].args[1], oscMessage[0].args[2])
-                console.info("Source 2", oscMessage[1].args[0], oscMessage[0].args[1], oscMessage[0].args[2])
+                if (messageData.type === 'speaker') {
+                    let input = messageData.address.substr(18, messageData.address.length)
+                    let channelName = "Speaker" + input;
+                    if(input.length) self.speakers[channelName] = messageData.args[0];
+                }
+                else if (messageData.type === 'position') {
+                    messageData.packets.forEach((packet) => {
+                        //parse address
+                        if(packet.address.substr(1, 6) === 'source') {
+                            let packetSplit = packet.address.split('/');
+                            let inputNumber = packetSplit[2];
+                            self.inputs["Input" + inputNumber] = packet.args;
+                        }
+                    })
+                }
             });
         });
     }

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "browserify app/index.js > dist/bundle.js"
+    "build": "browserify app/index.js > dist/bundle.js",
+    "develop": "budo app/index.js:dist/bundle.js -l"
   },
   "keywords": [],
   "author": "",
