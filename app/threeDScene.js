@@ -5,6 +5,7 @@ const Envelop = require('./envelop');
 const Controls = require('./controls');
 const Record = require('./record');
 const ThreeAudio = require('three-audio-timeline');
+const MaxToBrowser = require('./maxToBrowser');
 
 class threeDScene {
     constructor() {
@@ -51,9 +52,10 @@ class threeDScene {
         this.controlSwitcher = new Controls('trackball', this.scene, this.camera);
         
         //Envelop
-        this.envelop = new Envelop(this.scene);
+        let maxToBrowser = new MaxToBrowser();
+        this.envelop = new Envelop(this.scene, maxToBrowser);
         this.timeline = this.setupTimeline();
-        let number = new ThreeAudio.Tracks.Number('Test Chart', this.timeline);
+        // let number = new ThreeAudio.Tracks.Number('Test Chart', this.timeline);
         // let number1 = new ThreeAudio.Tracks.Number('Test Chart2', this.timeline);
         // let position = new ThreeAudio.Tracks.Position('POSI!', this.timeline);
         // let position2 = new ThreeAudio.Tracks.Position('POSI!2', this.timeline);
@@ -70,37 +72,37 @@ class threeDScene {
         //         .keyframe(1, { opacity:.4 }, .2, "Quadratic.EaseIn");
         // }
         
-        let inputCount = 0;
-        for (let input in this.envelop.inputs) {
-            let EnvelopInput = new ThreeAudio.Tracks.Keyframe("Envelop " + inputCount, this.envelop.inputs[input].position, this.timeline);
-            let max = 40;
-            let min = 5;
+        // let inputCount = 0;
+        // for (let input in this.envelop.inputs) {
+        //     let EnvelopInput = new ThreeAudio.Tracks.Keyframe("Envelop " + inputCount, this.envelop.inputs[input].position, this.timeline);
+        //     let max = 40;
+        //     let min = 5;
 
-            EnvelopInput
-                .keyframe({ 
-                    x: 0,
-                    y: 10
-                }, 1, "Quadratic.EaseIn")
-                .keyframe({
-                    x: 20,
-                    y: 20
-                }, 2, "Quadratic.EaseIn")
-                .keyframe({
-                    x: 30,
-                    y: 30
-                }, 2, "Quadratic.EaseIn")
-                .keyframe({
-                    x: 40,
-                    y: 40
-                }, 2, "Quadratic.EaseIn")
-                .keyframe({
-                    x: 50
-                }, 2, "Quadratic.EaseIn");
+        //     EnvelopInput
+        //         .keyframe({ 
+        //             x: 0,
+        //             y: 10
+        //         }, 1, "Quadratic.EaseIn")
+        //         .keyframe({
+        //             x: 20,
+        //             y: 20
+        //         }, 2, "Quadratic.EaseIn")
+        //         .keyframe({
+        //             x: 30,
+        //             y: 30
+        //         }, 2, "Quadratic.EaseIn")
+        //         .keyframe({
+        //             x: 40,
+        //             y: 40
+        //         }, 2, "Quadratic.EaseIn")
+        //         .keyframe({
+        //             x: 50
+        //         }, 2, "Quadratic.EaseIn");
 
-            inputCount += 1;
-        }
+        //     inputCount += 1;
+        // }
 
-        let GUI = new ThreeAudio.GUI(this.timeline);
+        // let GUI = new ThreeAudio.GUI(this.timeline);
         this.animate(); 
     }
     setupTimeline() {
@@ -117,6 +119,7 @@ class threeDScene {
         let delta = this.clock.getDelta();
         this.controlSwitcher.controls.update(delta);
         this.timeline.update(delta);
+        this.envelop.update(delta);
         this.renderer.render(this.scene, this.camera);
 
         // If we don't change the source here, the HMD will not move the camera.

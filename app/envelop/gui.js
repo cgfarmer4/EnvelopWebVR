@@ -29,7 +29,10 @@ class EnvelopGui {
 
         let speakerNumber = 1;
         for (let speaker in this.envelop.speakers) {
-            templateString += '<li id="meter_' + speakerNumber + '"></li>';
+            (speakerNumber < 10) ? speakerNumber = '0' + speakerNumber.toString() : speakerNumber = speakerNumber.toString();
+            templateString += '<li id="meter_Speaker' + speakerNumber + '">\
+                                <div class="speakerLevel"></div>';
+            templateString += '</li>';
             speakerNumber++;
         }
         templateString += '</ol>\
@@ -42,8 +45,14 @@ class EnvelopGui {
         let inputNumber = 1;
         for (let input in this.envelop.inputs) {
             templateString += '<div style="">';
-            templateString += '<h5 style="border: 1px solid #000; padding: 5px; margin: 10px 10px 0; display:inline-block">' + inputNumber + '</h5>';
-            templateString += '<p style="border: 1px solid #000; font-size:14px; margin: -2px 0 0 0; display:inline-block; padding: 5px;">  0, 0, 0</p><br>';
+           
+            templateString += '<h5 style="border: 1px solid #000; padding: 5px; \
+            margin: 10px 10px 0; display:inline-block">' + inputNumber + '</h5>';
+            
+            templateString += '<p id="Input' + inputNumber + '" style="border: 1px solid #000; \
+            font-size:14px; margin: -2px 0 0 0; display:inline-block; \
+            padding: 5px; width: 60%;">  0, 0, 0</p><br>';
+            
             templateString += '</div>';
             inputNumber++;
         }
