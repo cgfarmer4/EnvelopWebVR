@@ -11,27 +11,32 @@ var udpPort = new osc.UDPPort({
     localPort: 57121
 });
 
-// Positional level bundles
-udpPort.on("bundle", function (oscBundle, timeTag, info) {
-    myEmitter.emit('bundle', { 
-        0: oscBundle.packets[0],
-        1: oscBundle.packets[1]
-    });
-
-    console.log(oscBundle.packets[0],oscBundle.packets[1])
-});
-
-// Speaker level message
-udpPort.on("message", function (message, timeTag, info) {
-    myEmitter.emit('message', message);
-    console.log(message);
-});
-
 // UDP connection to MAX
 udpPort.open();
 
+// Positional level bundles
+udpPort.on("bundle", function (data, timeTag, info) {
+    let message = {
+        type: 'position'
+    };
+    Object.assign(message, data);
+
+    myEmitter.emit('bundle', message);
+});
+
+// Speaker level message
+udpPort.on("message", function (data, timeTag, info) {
+    let message = {
+        type: 'speaker'
+    };
+    Object.assign(message, data);
+    
+    myEmitter.emit('message', message);
+});
+
 // Browser Web Socket connection
 server.once('connection', function(socket){
+
     myEmitter.on('bundle', function(data) {
         socket.send(JSON.stringify(data));
     })
