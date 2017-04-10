@@ -17,11 +17,14 @@ udpPort.on("bundle", function (oscBundle, timeTag, info) {
         0: oscBundle.packets[0],
         1: oscBundle.packets[1]
     });
+
+    console.log(oscBundle.packets[0],oscBundle.packets[1])
 });
 
 // Speaker level message
 udpPort.on("message", function (message, timeTag, info) {
     myEmitter.emit('message', message);
+    console.log(message);
 });
 
 // UDP connection to MAX

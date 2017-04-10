@@ -11,8 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "downloadjs": "^1.4.7",
-    "three-audio-timeline": "git://github.com/cgfarmer4/three-audio-timeline.git",
+    "engine.io": "^3.0.0",
+    "engine.io-client": "^3.0.0",
     "osc": "^2.2.0",
-    "three": "^0.83.0"
+    "three": "^0.83.0",
+    "three-audio-timeline": "git://github.com/cgfarmer4/three-audio-timeline.git"
   }
 }
