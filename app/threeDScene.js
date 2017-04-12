@@ -1,10 +1,10 @@
 'use_strict';
 
 const THREE = require('three');
+THREE.AnimTimeline = require('three-anim-timeline');
 const Envelop = require('./envelop');
 const Controls = require('./controls');
 const Record = require('./record');
-const ThreeAudio = require('three-audio-timeline');
 const MaxToBrowser = require('./maxToBrowser');
 
 class threeDScene {
@@ -40,84 +40,80 @@ class threeDScene {
             this.capturing = true;
         });
 
-        document.getElementById('saveButton').addEventListener('click', (event) => {
-            this.capturing = false;
-            this.record.stop();
+        document.getElementById('envelopGuiView').addEventListener('click', (event) => {
+            if (this.envelopGuiDisplay) {
+                this.envelopGuiDisplay = false;
+                this.envelop.GUI.visible = false;
+                this.envelop.GUI.envelopGui.style.display = 'none';
+            }
+            else {
+                this.envelopGuiDisplay = true;
+                this.envelop.GUI.visible = true;
+                this.envelop.GUI.envelopGui.style.display = 'block';
+            }
+        });
+        document.getElementById('timelineGuiView').addEventListener('click', (event) => {
+            if (this.timelineGuiDisplay) {
+                this.timelineGuiDisplay = false;
+                this.timeline.GUI.container.style.display = 'none';
+            }
+            else {
+                this.timelineGuiDisplay = true;
+                this.timeline.GUI.container.style.display = 'block';
+            }
         });
 
         // Window events
         window.addEventListener('resize', this.onResize.bind(this));
 
         // Trackball defaut
-        this.controlSwitcher = new Controls('trackball', this.scene, this.camera);
+        // this.controlSwitcher = new Controls('trackball', this.scene, this.camera);
         
         //Envelop
         let maxToBrowser = new MaxToBrowser();
         this.envelop = new Envelop(this.scene, maxToBrowser);
-        this.timeline = this.setupTimeline();
-        // let number = new ThreeAudio.Tracks.Number('Test Chart', this.timeline);
-        // let number1 = new ThreeAudio.Tracks.Number('Test Chart2', this.timeline);
-        // let position = new ThreeAudio.Tracks.Position('POSI!', this.timeline);
-        // let position2 = new ThreeAudio.Tracks.Position('POSI!2', this.timeline);
-        // let position3 = new ThreeAudio.Tracks.Position('POSI!3', this.timeline);
-
-        // for(let speaker in this.envelop.speakers) {
-        //     let EnvelopSpeaker = new ThreeAudio.Tracks.Keyframe("Envelop " + speaker, this.envelop.speakers[speaker].material, this.timeline);
-
-        //     EnvelopSpeaker
-        //         .keyframe(0, { opacity: .2 }, 1, "Quadratic.EaseIn")
-        //         .keyframe(1, { opacity:1 }, .2, "Quadratic.EaseIn")
-        //         .keyframe(1, { opacity: .6 }, .2, "Quadratic.EaseIn")
-        //         .keyframe(1, { opacity: .8 }, .2, "Quadratic.EaseIn")
-        //         .keyframe(1, { opacity:.4 }, .2, "Quadratic.EaseIn");
-        // }
+        this.timeline = new THREE.AnimTimeline.Timeline();
+        this.envelop.timeline = this.timeline;
+        this.envelopGuiDisplay = false;
+        this.timelineGuiDisplay = false;
         
-        // let inputCount = 0;
-        // for (let input in this.envelop.inputs) {
-        //     let EnvelopInput = new ThreeAudio.Tracks.Keyframe("Envelop " + inputCount, this.envelop.inputs[input].position, this.timeline);
-        //     let max = 40;
-        //     let min = 5;
+        let number = new THREE.AnimTimeline.Tracks.Number('Test Chart', this.timeline);
+        let inputCount = 0;
+        for (let input in this.envelop.inputs) {
+            let EnvelopInput = new THREE.AnimTimeline.Tracks.Keyframe("Envelop " + inputCount, this.envelop.inputs[input].position, this.timeline);
+            let max = 40;
+            let min = 5;
 
-        //     EnvelopInput
-        //         .keyframe({ 
-        //             x: 0,
-        //             y: 10
-        //         }, 1, "Quadratic.EaseIn")
-        //         .keyframe({
-        //             x: 20,
-        //             y: 20
-        //         }, 2, "Quadratic.EaseIn")
-        //         .keyframe({
-        //             x: 30,
-        //             y: 30
-        //         }, 2, "Quadratic.EaseIn")
-        //         .keyframe({
-        //             x: 40,
-        //             y: 40
-        //         }, 2, "Quadratic.EaseIn")
-        //         .keyframe({
-        //             x: 50
-        //         }, 2, "Quadratic.EaseIn");
+            EnvelopInput
+                .keyframe({ 
+                    x: 0,
+                    y: 10
+                }, 1, "Quadratic.EaseIn")
+                .keyframe({
+                    x: 20,
+                    y: 20
+                }, 2, "Quadratic.EaseIn")
+                .keyframe({
+                    x: 30,
+                    y: 30
+                }, 2, "Quadratic.EaseIn")
+                .keyframe({
+                    x: 40,
+                    y: 40
+                }, 2, "Quadratic.EaseIn")
+                .keyframe({
+                    x: 50
+                }, 2, "Quadratic.EaseIn");
 
-        //     inputCount += 1;
-        // }
+            inputCount += 1;
+        }
 
-        // let GUI = new ThreeAudio.GUI(this.timeline);
+        this.timeline.GUI = new THREE.AnimTimeline.GUI(this.timeline);
         this.animate(); 
-    }
-    setupTimeline() {
-        let timeline = new ThreeAudio.Timeline();
-        // let cameraPosition = new ThreeAudio.Tracks.Keyframe("Camera Position", this.camera.position, timeline);
-
-        // cameraPosition
-        //     .keyframe(0, { x: 20, y: 20, z: 20 }, 3, "Quadratic.EaseIn")
-        //     .keyframe(3, { x: 60, y: 60, z: 60 }, 1, "Quadratic.EaseIn");
-
-        return timeline;
     }
     animate() {
         let delta = this.clock.getDelta();
-        this.controlSwitcher.controls.update(delta);
+        // this.controlSwitcher.controls.update(delta);
         this.timeline.update(delta);
         this.envelop.update(delta);
         this.renderer.render(this.scene, this.camera);

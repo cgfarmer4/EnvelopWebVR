@@ -28,10 +28,10 @@ class Controls {
         this.controls.rotateSpeed = 10.0;
         this.controls.zoomSpeed = 10.0;
         this.controls.panSpeed = 1.0;
-        this.controls.staticMoving = true;
-        // trackballControls.noZoom=false;
-        // trackballControls.noPan=false;
-        // trackballControls.dynamicDampingFactor=0.3;
+        this.controls.staticMoving = false;
+        // this.controls.noZoom=true;
+        // this.controls.noPan=true;
+        // this.controls.dynamicDampingFactor=0.3;
 
         return this;
     }

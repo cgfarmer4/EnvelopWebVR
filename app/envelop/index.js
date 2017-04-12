@@ -143,22 +143,28 @@ class Envelop {
         this.scene.add(plane);
     }
     update(delta) {
+        
         // Map this.maxValues to the values in Envelop.
         for(let input in this.maxValues.inputs) {
             this.inputs[input].position.x = this.maxValues.inputs[input][0] * 100;
             this.inputs[input].position.y = this.maxValues.inputs[input][1] * 100;
             this.inputs[input].position.z = this.maxValues.inputs[input][2] * 100;
 
-            // MOVE TO NOT READ DOM EVERY UPDATE!
-            document.getElementById(input).innerHTML = this.maxValues.inputs[input][0].toFixed(2) + ',' + 
-                                                          this.maxValues.inputs[input][1].toFixed(2) + ',' + 
-                                                          this.maxValues.inputs[input][2].toFixed(2);
+            if (this.GUI.visible) {
+                // MOVE TO NOT READ DOM EVERY UPDATE!
+                document.getElementById(input).innerHTML = this.maxValues.inputs[input][0].toFixed(2) + ',' +
+                    this.maxValues.inputs[input][1].toFixed(2) + ',' +
+                    this.maxValues.inputs[input][2].toFixed(2);
+
+            }
         }
         
         for(let speaker in this.maxValues.speakers) {
             // MOVE TO NOT READ DOM EVERY UPDATE!
-            let meter = document.getElementById('meter_' + speaker).querySelector('.speakerLevel');
-            meter.style.height = 80 - Math.floor(this.maxValues.speakers[speaker] * 300) + 'px';
+            if (this.GUI.visible) {
+                let meter = document.getElementById(speaker).querySelector('.speakerLevel');
+                meter.style.height = 80 - Math.floor(this.maxValues.speakers[speaker] * 300) + 'px';
+            }
         }
     }
 }

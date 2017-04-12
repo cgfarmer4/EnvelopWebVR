@@ -1,11 +1,13 @@
 'use_strict';
 
+
 class EnvelopGui {
     constructor(envelop) {
         this.envelop = envelop;
         this.envelopGui = document.createElement('div');
         this.envelopGui.id = 'envelopGui';
         this.envelopGui.innerHTML = this.template();
+        this.envelopGui.style.display = 'none';
         document.body.appendChild(this.envelopGui);
 
         this.envelop.labels.forEach((label) => {
@@ -18,11 +20,11 @@ class EnvelopGui {
         let templateString = '\
         <img style="height: 75px; width: 75px;" src="assets/logo_envelop.png"/>\
         <div style= "text-align: left; padding: 5px 10px" >\
-            <label  for="viewLabelsToggle" style="font-weight: 500; vertical-align: middle;"> Labels: </label>\
+            <label for="viewLabelsToggle" style="font-weight: 500; vertical-align: middle;"> Labels: </label>\
             <input type="checkbox" id="viewLabelsToggle"/>\
         </div>\
         <div style= "text-align: left; padding: 5px 10px 0 10px" >\
-            <label  for="viewSpeakersToggle" style="font-weight: 500; vertical-align: middle;"> Speakers: </label>\
+            <label for="viewSpeakersToggle" style="font-weight: 500; vertical-align: middle;"> Speakers: </label>\
             <input type="checkbox" id="viewSpeakersToggle" checked/>\
         </div>\
         <ol>';
@@ -30,7 +32,7 @@ class EnvelopGui {
         let speakerNumber = 1;
         for (let speaker in this.envelop.speakers) {
             (speakerNumber < 10) ? speakerNumber = '0' + speakerNumber.toString() : speakerNumber = speakerNumber.toString();
-            templateString += '<li id="meter_Speaker' + speakerNumber + '">\
+            templateString += '<li class="speakerLevelMeter" id="Speaker' + speakerNumber + '">\
                                 <div class="speakerLevel"></div>';
             templateString += '</li>';
             speakerNumber++;
@@ -44,15 +46,15 @@ class EnvelopGui {
 
         let inputNumber = 1;
         for (let input in this.envelop.inputs) {
-            templateString += '<div style="">';
-           
+            templateString += '<div class="envelopInput" id="Input' + inputNumber + '">';
+
             templateString += '<h5 style="border: 1px solid #000; padding: 5px; \
             margin: 10px 10px 0; display:inline-block">' + inputNumber + '</h5>';
-            
+
             templateString += '<p id="Input' + inputNumber + '" style="border: 1px solid #000; \
             font-size:14px; margin: -2px 0 0 0; display:inline-block; \
             padding: 5px; width: 60%;">  0, 0, 0</p><br>';
-            
+
             templateString += '</div>';
             inputNumber++;
         }
@@ -83,7 +85,7 @@ class EnvelopGui {
                 viewStatus = false;
             }
 
-            for(let speaker in this.envelop.speakers) {
+            for (let speaker in this.envelop.speakers) {
                 this.envelop.speakers[speaker].visible = viewStatus;
             }
 
@@ -109,6 +111,33 @@ class EnvelopGui {
                 this.envelop.inputs[input].visible = viewStatus;
             }
         };
+
+        let speakersAndInputs = this.envelopGui.querySelectorAll('.speakerLevelMeter, .envelopInput');
+        speakersAndInputs.forEach((object) => {
+            object.onclick = (event) => {
+                let targetName = '';
+                let target = event.target;
+
+                if (event.target.classList.contains('speakerLevelMeter') || event.target.classList.contains('speakerLevel')) {
+                    while (!target.classList.contains('speakerLevelMeter')) {
+                        target = target.parentNode;
+                    }
+                    targetName = target.id;
+                    target = this.envelop.maxValues.speakers[target.id];
+                }
+                else {
+                    while (!target.classList.contains('envelopInput')) {
+                        target = target.parentNode;
+                    }
+                    targetName = target.id;
+                    target = this.envelop.maxValues.inputs[target.id];
+                }
+                this.envelop.timeline.emit('add:trackTarget', {
+                    target: target,
+                    name: targetName
+                });
+            }
+        });
     }
 }
 
