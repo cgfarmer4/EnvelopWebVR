@@ -25,10 +25,10 @@ class Controls {
         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         this.controls = new THREE.TrackballControls(this.camera);
-        this.controls.rotateSpeed = 10.0;
+        this.controls.rotateSpeed = 5.0;
         this.controls.zoomSpeed = 10.0;
         this.controls.panSpeed = 1.0;
-        this.controls.staticMoving = false;
+        // this.controls.staticMoving = false;
         // this.controls.noZoom=true;
         // this.controls.noPan=true;
         // this.controls.dynamicDampingFactor=0.3;

@@ -35,7 +35,7 @@ udpPort.on("message", function (data, timeTag, info) {
 });
 
 // Browser Web Socket connection
-server.once('connection', function(socket){
+server.on('connection', function(socket){
 
     myEmitter.on('bundle', function(data) {
         socket.send(JSON.stringify(data));

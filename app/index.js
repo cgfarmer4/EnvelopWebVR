@@ -1,3 +1,6 @@
+const Menu = require('./menu');
 const ThreeDScene =  require('./threeDScene');
-let threeDScene = new ThreeDScene();
+
+let threeD = new ThreeDScene();
+let menu = new Menu(threeD);
 

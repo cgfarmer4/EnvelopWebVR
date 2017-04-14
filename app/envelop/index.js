@@ -4,12 +4,14 @@ const GUI = require('./gui');
 const Midway = require('./midway');
 const Label = require('./label');
 const Column = require('./column');
+const EventEmitter = require('events').EventEmitter;
 
 const INCHES = 1;
 const FEET = 12 * INCHES;
 
-class Envelop {
+class Envelop extends EventEmitter {
     constructor(scene, maxValues) {
+        super();
         this.NUM_INPUTS = 2;
 
         this.columns = [];
@@ -17,6 +19,7 @@ class Envelop {
         this.subs = [];
         this.speakers = {};
         this.inputs = {};
+        this.allModelParts = new THREE.Object3D();
         this.scene = scene;
         this.maxValues = maxValues;
         this.venue = new Midway();
@@ -26,13 +29,14 @@ class Envelop {
         this.speakerDraw();
         this.subDraw();
         this.floorDraw();
-        
+
+        this.scene.add(this.allModelParts);
         this.GUI = new GUI(this);
     }
     inputModel() {
         for (let x = 0; x < this.NUM_INPUTS; x++) {
             let geometry = new THREE.SphereGeometry(10, 16, 16);
-            let material = new THREE.MeshBasicMaterial({ 
+            let material = new THREE.MeshBasicMaterial({
                 color: 0xffffff,
                 wireframe: true
             });
@@ -45,8 +49,8 @@ class Envelop {
             group.add(sphere);
 
             this.inputs["Input" + (Number(x) + 1)] = group;
-            this.labels.push(inputLabel)
-            this.scene.add(group);
+            this.labels.push(inputLabel);
+            this.allModelParts.add(group);
         }
     }
     columnDraw() {
@@ -56,7 +60,7 @@ class Envelop {
             column.mesh.position.set(columnPosition.x, column.HEIGHT / 2, columnPosition.y);
             column.mesh.rotateY(column.theta);
             this.columns.push(column);
-            this.scene.add(column.mesh);
+            this.allModelParts.add(column.mesh);
         })
     }
     speakerDraw() {
@@ -67,21 +71,21 @@ class Envelop {
             speaker1.position.set(column.mesh.position.x, 1 * FEET, column.mesh.position.z);
             speaker1.rotateY(-column.theta);
             speaker1.rotateX(column.SPEAKER_ANGLE);
-            
+
             let speaker1Group = new THREE.Object3D();
             let speakerLabel = new Label(index + 17);
             this.labels.push(speakerLabel);
             speakerLabel.position.set(column.mesh.position.x, 1 * FEET, column.mesh.position.z);
             speaker1Group.add(speakerLabel);
             speaker1Group.add(speaker1);
-            this.scene.add(speaker1Group);
+            this.allModelParts.add(speaker1Group);
             let speakerNum = index + 17;
             this.speakers["Speaker" + speakerNum] = speaker1;
 
             let speaker2Geo = new THREE.BoxGeometry(21 * INCHES, 16 * INCHES, 15 * INCHES);
             let speaker2Mat = new THREE.MeshBasicMaterial({ color: 0xfffff });
             let speaker2 = new THREE.Mesh(speaker2Geo, speaker2Mat);
-            speaker2.position.set(column.mesh.position.x, 6 * FEET , column.mesh.position.z);
+            speaker2.position.set(column.mesh.position.x, 6 * FEET, column.mesh.position.z);
             speaker2.rotateY(-column.theta);
 
             let speaker2Group = new THREE.Object3D();
@@ -90,12 +94,11 @@ class Envelop {
             speakerLabel2.position.set(column.mesh.position.x, 6 * FEET, column.mesh.position.z);
             speaker2Group.add(speakerLabel2);
             speaker2Group.add(speaker2);
-            this.scene.add(speaker2Group);
-            
+            this.allModelParts.add(speaker2Group);
+
             speakerNum = index + 9;
             (speakerNum < 10) ? speakerNum = '0' + speakerNum.toString() : speakerNum = speakerNum.toString();
             this.speakers["Speaker" + speakerNum] = speaker2;
-            
 
             let speaker3Geo = new THREE.BoxGeometry(21 * INCHES, 16 * INCHES, 15 * INCHES);
             let speaker3Mat = new THREE.MeshBasicMaterial({ color: 0xfffff });
@@ -110,8 +113,8 @@ class Envelop {
             speakerLabel3.position.set(column.mesh.position.x, 11 * FEET, column.mesh.position.z);
             speaker3Group.add(speakerLabel3);
             speaker3Group.add(speaker3);
-            this.scene.add(speaker3Group);
-            
+            this.allModelParts.add(speaker3Group);
+
             speakerNum = index + 1;
             (speakerNum < 10) ? speakerNum = '0' + speakerNum.toString() : speakerNum = speakerNum.toString();
             this.speakers["Speaker" + speakerNum] = speaker3;
@@ -124,7 +127,7 @@ class Envelop {
             let sub = new THREE.Mesh(subGeo, subMat);
             sub.rotateY(- Math.PI / 4);
             sub.position.set(subPosition.x, 10 * INCHES, subPosition.y);
-            this.scene.add(sub);
+            this.allModelParts.add(sub);
             this.subs.push(sub);
         });
     }
@@ -140,28 +143,26 @@ class Envelop {
         let plane = new THREE.Mesh(geometry, material);
         plane.rotateX(- Math.PI / 2);
         this.floor = plane;
-        this.scene.add(plane);
+        this.allModelParts.add(plane);
     }
     update(delta) {
-        
         // Map this.maxValues to the values in Envelop.
-        for(let input in this.maxValues.inputs) {
-            this.inputs[input].position.x = this.maxValues.inputs[input][0] * 100;
-            this.inputs[input].position.y = this.maxValues.inputs[input][1] * 100;
-            this.inputs[input].position.z = this.maxValues.inputs[input][2] * 100;
+        for (let input in this.maxValues.inputs) {
+            this.inputs[input].position.x = this.maxValues.inputs[input][0];
+            this.inputs[input].position.y = this.maxValues.inputs[input][1];
+            this.inputs[input].position.z = this.maxValues.inputs[input][2];
 
             if (this.GUI.visible) {
-                // MOVE TO NOT READ DOM EVERY UPDATE!
-                document.getElementById(input).innerHTML = this.maxValues.inputs[input][0].toFixed(2) + ',' +
+                //TODO: MOVE TO NOT READ DOM EVERY UPDATE!
+                document.getElementById(input).querySelector('.inputPosition').textContent = this.maxValues.inputs[input][0].toFixed(2) + ',' +
                     this.maxValues.inputs[input][1].toFixed(2) + ',' +
                     this.maxValues.inputs[input][2].toFixed(2);
 
             }
         }
-        
-        for(let speaker in this.maxValues.speakers) {
-            // MOVE TO NOT READ DOM EVERY UPDATE!
-            if (this.GUI.visible) {
+        if (this.GUI.visible) {
+            for (let speaker in this.maxValues.speakers) {
+                //TODO: MOVE TO NOT READ DOM EVERY UPDATE!
                 let meter = document.getElementById(speaker).querySelector('.speakerLevel');
                 meter.style.height = 80 - Math.floor(this.maxValues.speakers[speaker] * 300) + 'px';
             }

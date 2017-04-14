@@ -1,6 +1,5 @@
 'use_strict';
 
-
 class EnvelopGui {
     constructor(envelop) {
         this.envelop = envelop;
@@ -51,7 +50,7 @@ class EnvelopGui {
             templateString += '<h5 style="border: 1px solid #000; padding: 5px; \
             margin: 10px 10px 0; display:inline-block">' + inputNumber + '</h5>';
 
-            templateString += '<p id="Input' + inputNumber + '" style="border: 1px solid #000; \
+            templateString += '<p class="inputPosition" style="border: 1px solid #000; \
             font-size:14px; margin: -2px 0 0 0; display:inline-block; \
             padding: 5px; width: 60%;">  0, 0, 0</p><br>';
 
@@ -116,24 +115,26 @@ class EnvelopGui {
         speakersAndInputs.forEach((object) => {
             object.onclick = (event) => {
                 let targetName = '';
+                let targetType = '';
                 let target = event.target;
 
                 if (event.target.classList.contains('speakerLevelMeter') || event.target.classList.contains('speakerLevel')) {
                     while (!target.classList.contains('speakerLevelMeter')) {
                         target = target.parentNode;
                     }
-                    targetName = target.id;
-                    target = this.envelop.maxValues.speakers[target.id];
+                    targetType = 'speakers';
                 }
                 else {
                     while (!target.classList.contains('envelopInput')) {
                         target = target.parentNode;
                     }
-                    targetName = target.id;
-                    target = this.envelop.maxValues.inputs[target.id];
+                    targetType = 'inputs';
                 }
-                this.envelop.timeline.emit('add:trackTarget', {
-                    target: target,
+
+                targetName = target.id;
+                
+                this.envelop.emit('add:trackTarget', {
+                    type: targetType,
                     name: targetName
                 });
             }
