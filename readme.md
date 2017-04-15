@@ -1,4 +1,4 @@
-WebVRandEnvelopForLive
+EnvelopWebVR
 ===================
 
 This repo is an accompaniment to the tutorials posted here:
