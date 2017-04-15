@@ -13,5 +13,17 @@
                 "app/*": "${workspaceRoot}/app/*"
             }
         }
+        {
+            "type": "chrome",
+            "request": "launch",
+            "port": 9222,
+            "name": "Launch Chrome",
+            "url": "http://localhost:9966/",
+            "webRoot": "${workspaceRoot}/dist",
+            "sourceMapPathOverrides": {
+                "../*": "${workspaceRoot}/node_modules/*",
+                "app/*": "${workspaceRoot}/app/*"
+            }
+        }
     ]
 }
