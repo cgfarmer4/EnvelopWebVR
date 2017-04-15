@@ -26,6 +26,7 @@ class EnvelopGui {
     template() {
         let templateString = '\
         <img style="height: 75px; width: 75px;" src="assets/logo_envelop.png"/>\
+        <div id="connection"><button> Disconnect </button></div>\
         <div style= "text-align: left; padding: 5px 10px" >\
             <label for="viewLabelsToggle" style="font-weight: 500; vertical-align: middle;"> Labels: </label>\
             <input type="checkbox" id="viewLabelsToggle"/>\
@@ -74,6 +75,19 @@ class EnvelopGui {
      * Event listeners for the inputs
      */
     domEvents() {
+        let connection = this.envelopGui.querySelector('#connection button');
+        connection.onclick = (event) => {
+            if(this.envelop.maxValues.connection) {
+                this.envelop.maxValues.connection = false;
+                connection.textContent = 'Connect';
+                this.envelop.maxValues.socket.close();    
+            }
+            else {
+                connection.textContent = 'Disconnect';
+                this.envelop.maxValues.connect();
+            }
+        }
+
         let viewLabels = this.envelopGui.querySelector('#viewLabelsToggle');
         viewLabels.onchange = (event) => {
             let labelStatus = true;
