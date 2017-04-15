@@ -3,7 +3,7 @@ const eio = require('engine.io-client');
 class maxToBrowser {
     constructor() {
         let self = this;
-        this.speakers = {};
+        this.channels = {};
         this.inputs = {};
 
         let venue = {
@@ -23,10 +23,10 @@ class maxToBrowser {
             socket.on('message', (data) => {
                 let messageData = JSON.parse(data);
                 
-                if (messageData.type === 'speaker') {
+                if (messageData.type === 'channel') {
                     let input = messageData.address.substr(18, messageData.address.length)
-                    let channelName = "Speaker" + input;
-                    if(input.length) self.speakers[channelName] = messageData.args[0];
+                    let channelName = "Channel" + input;
+                    if(input.length) self.channels[channelName] = messageData.args[0];
                 }
                 else if (messageData.type === 'position') {
                     messageData.packets.forEach((packet) => {

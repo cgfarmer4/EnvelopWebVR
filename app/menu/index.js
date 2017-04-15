@@ -2,6 +2,9 @@
 
 const Controls = require('../controls');
 
+/**
+ * Application centric menu. For viewing main UI pieces and 
+ */
 class Menu {
     constructor(threeD) {
         this.scene = threeD.scene;
@@ -18,11 +21,13 @@ class Menu {
         let menu = document.createElement('div');
         menu.innerHTML = this.template();
         document.body.appendChild(menu);
-        //Events
-        this.events();
+
+        this.domEvents();
     }
-    events() {
-        // Click events
+    /**
+     * Click Events
+     */
+    domEvents() {
         let startVR = document.getElementById('startVR');        
         startVR.onclick = () => {
             if (this.controlSwitcher && this.controlSwitcher.controls.type === 'vr') return;
@@ -72,6 +77,9 @@ class Menu {
             }
         };
     }
+    /**
+     * HTML
+     */
     template() {
         return `<nav id="appMenu">
                     <ul>

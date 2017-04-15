@@ -15,6 +15,9 @@ const OUTER_OFFSET_Z = -DEPTH / 2. + 7 * FEET + 8 * INCHES;
 const SUB_OFFSET_X = 36 * INCHES;
 const SUB_OFFSET_Z = 20 * INCHES;
 
+/**
+ * Midway configuration.
+ */
 class Midway {
     constructor() {
         this.COLUMN_POSITIONS = [

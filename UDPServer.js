@@ -24,10 +24,10 @@ udpPort.on("bundle", function (data, timeTag, info) {
     myEmitter.emit('bundle', message);
 });
 
-// Speaker level message
+// Channel level message
 udpPort.on("message", function (data, timeTag, info) {
     let message = {
-        type: 'speaker'
+        type: 'channel'
     };
     Object.assign(message, data);
     

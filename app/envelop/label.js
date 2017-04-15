@@ -1,6 +1,10 @@
 'use_strict';
 const THREE = require('three');
 
+/**
+ * Text label for model objects.
+ * @param {String}
+ */
 class Label {
     constructor(text) {
         const fontFace = 'Arial';

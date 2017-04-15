@@ -1,7 +1,7 @@
 'use_strict';
 
 const THREE = require('three');
-THREE.AnimTimeline = require('three-anim-timeline');
+const TimelineAudio = require('three-audio-timeline');
 const Controls = require('./controls');
 const Envelop = require('./envelop');
 const Helpers = require('./helpers');
@@ -32,45 +32,46 @@ class threeDScene {
         //Envelop
         let maxToBrowser = new MaxToBrowser();
         this.envelop = new Envelop(this.scene, maxToBrowser);
-        this.timeline = new THREE.AnimTimeline.Timeline();
+        this.timeline = new TimelineAudio.Timeline();
         this.timeline.envelop = this.envelop;
-        new Helpers(this.scene);
+        this.helpers = new Helpers(this.scene);
         
-        // let inputCount = 0;
-        // for (let input in this.envelop.inputs) {
-        //     let EnvelopInput = new THREE.AnimTimeline.Tracks.Keyframe("Envelop " + inputCount, this.envelop.inputs[input].position, this.timeline);
-        //     let max = 40;
-        //     let min = 5;
+        let inputCount = 0;
+        for (let input in this.envelop.inputs) {
+            let EnvelopInput = new TimelineAudio.Tracks.Keyframe("Envelop " + inputCount, this.envelop.inputs[input].position, this.timeline);
+            let max = 40;
+            let min = 5;
 
-        //     EnvelopInput
-        //         .keyframe({ 
-        //             x: 0,
-        //             y: 10
-        //         }, 1, "Quadratic.EaseIn")
-        //         .keyframe({
-        //             x: 20,
-        //             y: 20
-        //         }, 2, "Quadratic.EaseIn")
-        //         .keyframe({
-        //             x: 30,
-        //             y: 30
-        //         }, 2, "Quadratic.EaseIn")
-        //         .keyframe({
-        //             x: 40,
-        //             y: 40
-        //         }, 2, "Quadratic.EaseIn")
-        //         .keyframe({
-        //             x: 50
-        //         }, 2, "Quadratic.EaseIn");
+            EnvelopInput
+                .keyframe({ 
+                    x: 0,
+                    y: 10
+                }, 1, "Quadratic.EaseIn")
+                .keyframe({
+                    x: 20,
+                    y: 20
+                }, 2, "Quadratic.EaseIn")
+                .keyframe({
+                    x: 30,
+                    y: 30
+                }, 2, "Quadratic.EaseIn")
+                .keyframe({
+                    x: 40,
+                    y: 40
+                }, 2, "Quadratic.EaseIn")
+                .keyframe({
+                    x: 50
+                }, 2, "Quadratic.EaseIn");
 
-        //     inputCount += 1;
-        // }
+            inputCount += 1;
+        }
 
-        this.timeline.GUI = new THREE.AnimTimeline.GUI(this.timeline);
+        this.timeline.GUI = new TimelineAudio.GUI(this.timeline);
         this.animate(); 
     }
     animate() {
         let delta = this.clock.getDelta();
+        this.helpers.stats.begin();
         this.controlSwitcher.controls.update(delta);
         this.timeline.update(delta);
         this.envelop.update(delta);
@@ -85,7 +86,7 @@ class threeDScene {
         if (this.capturing) {
             this.record.cubeMap.update(this.camera, this.scene);
         }
-
+        this.helpers.stats.end();
         requestAnimationFrame(this.animate.bind(this));
     }
     onResize() {

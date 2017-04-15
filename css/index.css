@@ -120,7 +120,7 @@ canvas {
     display: inline-block;
 }
 
-#envelopGui ol li div.speakerLevel {
+#envelopGui ol li > div.channelLevel {
     position: absolute;
     background: #000;
     background-height: 50px;

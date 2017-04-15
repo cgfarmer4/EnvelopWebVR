@@ -4,6 +4,9 @@ const THREE = require('three');
 const INCHES = 1;
 const FEET = 12 * INCHES;
 
+/**
+ * Envelop installation columns
+ */
 class Column {
     constructor() {
         this.SPEAKER_ANGLE = 22. / 180. * Math.PI;

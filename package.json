@@ -15,7 +15,8 @@
     "engine.io": "^3.0.0",
     "engine.io-client": "^3.0.0",
     "osc": "^2.2.0",
+    "stats.js": "^0.17.0",
     "three": "^0.83.0",
-    "three-anim-timeline": "git://github.com/cgfarmer4/three-anim-timeline.git"
+    "three-audio-timeline": "git://github.com/cgfarmer4/three-audio-timeline.git"
   }
 }

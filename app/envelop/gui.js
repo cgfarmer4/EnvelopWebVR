@@ -1,5 +1,10 @@
 'use_strict';
 
+/**
+ * Display controls for Envelop including channel toggles, labels, and inputs for recording.
+ * 
+ * @param {Envelop}
+ */
 class EnvelopGui {
     constructor(envelop) {
         this.envelop = envelop;
@@ -15,6 +20,9 @@ class EnvelopGui {
 
         this.domEvents.call(this);
     }
+    /**
+     * HTML 
+     */
     template() {
         let templateString = '\
         <img style="height: 75px; width: 75px;" src="assets/logo_envelop.png"/>\
@@ -23,18 +31,18 @@ class EnvelopGui {
             <input type="checkbox" id="viewLabelsToggle"/>\
         </div>\
         <div style= "text-align: left; padding: 5px 10px 0 10px" >\
-            <label for="viewSpeakersToggle" style="font-weight: 500; vertical-align: middle;"> Speakers: </label>\
-            <input type="checkbox" id="viewSpeakersToggle" checked/>\
+            <label for="viewChannelsToggle" style="font-weight: 500; vertical-align: middle;"> Channels: </label>\
+            <input type="checkbox" id="viewChannelsToggle" checked/>\
         </div>\
         <ol>';
 
-        let speakerNumber = 1;
-        for (let speaker in this.envelop.speakers) {
-            (speakerNumber < 10) ? speakerNumber = '0' + speakerNumber.toString() : speakerNumber = speakerNumber.toString();
-            templateString += '<li class="speakerLevelMeter" id="Speaker' + speakerNumber + '">\
-                                <div class="speakerLevel"></div>';
+        let channelNumber = 1;
+        for (let channel in this.envelop.channels) {
+            (channelNumber < 10) ? channelNumber = '0' + channelNumber.toString() : channelNumber = channelNumber.toString();
+            templateString += '<li class="channelLevelMeter" id="channel' + channelNumber + '">\
+                                <div class="channelLevel"></div>';
             templateString += '</li>';
-            speakerNumber++;
+            channelNumber++;
         }
         templateString += '</ol>\
             <div style= "text-align: left; padding: 0 10px" >\
@@ -62,6 +70,9 @@ class EnvelopGui {
 
         return templateString;
     }
+    /**
+     * Event listeners for the inputs
+     */
     domEvents() {
         let viewLabels = this.envelopGui.querySelector('#viewLabelsToggle');
         viewLabels.onchange = (event) => {
@@ -76,16 +87,16 @@ class EnvelopGui {
             });
         }
 
-        let viewSpeakers = this.envelopGui.querySelector('#viewSpeakersToggle');
-        viewSpeakers.onchange = (event) => {
+        let viewChannels = this.envelopGui.querySelector('#viewChannelsToggle');
+        viewChannels.onchange = (event) => {
             let viewStatus = true;
 
             if (!event.target.checked) {
                 viewStatus = false;
             }
 
-            for (let speaker in this.envelop.speakers) {
-                this.envelop.speakers[speaker].visible = viewStatus;
+            for (let channel in this.envelop.channels) {
+                this.envelop.channels[channel].visible = viewStatus;
             }
 
             this.envelop.subs.forEach((sub) => {
@@ -98,7 +109,7 @@ class EnvelopGui {
 
             this.envelop.floor.visible = viewStatus;
         };
-
+        
         let viewInputs = this.envelopGui.querySelector('#viewInputsToggle');
         viewInputs.onchange = (event) => {
             let viewStatus = true;
@@ -111,18 +122,19 @@ class EnvelopGui {
             }
         };
 
-        let speakersAndInputs = this.envelopGui.querySelectorAll('.speakerLevelMeter, .envelopInput');
-        speakersAndInputs.forEach((object) => {
+        //For targeting the timeline track object. 
+        let channelsAndInputs = this.envelopGui.querySelectorAll('.channelLevelMeter, .envelopInput');
+        channelsAndInputs.forEach((object) => {
             object.onclick = (event) => {
                 let targetName = '';
                 let targetType = '';
                 let target = event.target;
 
-                if (event.target.classList.contains('speakerLevelMeter') || event.target.classList.contains('speakerLevel')) {
-                    while (!target.classList.contains('speakerLevelMeter')) {
+                if (event.target.classList.contains('channelLevelMeter') || event.target.classList.contains('channelLevel')) {
+                    while (!target.classList.contains('channelLevelMeter')) {
                         target = target.parentNode;
                     }
-                    targetType = 'speakers';
+                    targetType = 'channels';
                 }
                 else {
                     while (!target.classList.contains('envelopInput')) {
