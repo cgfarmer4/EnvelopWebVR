@@ -40,7 +40,7 @@ class EnvelopGui {
         let channelNumber = 1;
         for (let channel in this.envelop.channels) {
             (channelNumber < 10) ? channelNumber = '0' + channelNumber.toString() : channelNumber = channelNumber.toString();
-            templateString += '<li class="channelLevelMeter" id="channel' + channelNumber + '">\
+            templateString += '<li class="channelLevelMeter" id="Channel' + channelNumber + '">\
                                 <div class="channelLevel"></div>';
             templateString += '</li>';
             channelNumber++;
@@ -61,7 +61,7 @@ class EnvelopGui {
 
             templateString += '<p class="inputPosition" style="border: 1px solid #000; \
             font-size:14px; margin: -2px 0 0 0; display:inline-block; \
-            padding: 5px; width: 60%;">  0, 0, 0</p><br>';
+            padding: 5px; width: 70%;">  0, 0, 0</p><br>';
 
             templateString += '</div>';
             inputNumber++;
