@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "brace": "^0.10.0",
     "downloadjs": "^1.4.7",
     "engine.io": "^3.0.0",
     "engine.io-client": "^3.0.0",
@@ -18,5 +19,8 @@
     "stats.js": "^0.17.0",
     "three": "^0.84.0",
     "three-audio-timeline": "git://github.com/cgfarmer4/three-audio-timeline.git"
+  },
+  "devDependencies": {
+    "browserify": "^14.3.0"
   }
 }

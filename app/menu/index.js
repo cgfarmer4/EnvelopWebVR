@@ -1,6 +1,7 @@
 'use_strict';
 
 const Controls = require('../controls');
+const Editor = require('../editor');
 const Record = require('../record');
 
 /**
@@ -20,9 +21,9 @@ class Menu {
         this.timelineGuiDisplay = false;
 
         //Render
-        let menu = document.createElement('div');
-        menu.innerHTML = this.template();
-        document.body.appendChild(menu);
+        this.menu = document.createElement('div');
+        this.menu.innerHTML = this.template();
+        document.body.appendChild(this.menu);
 
         this.domEvents();
     }
@@ -30,6 +31,18 @@ class Menu {
      * Click Events
      */
     domEvents() {
+        //Editor 
+        let showEditor = this.menu.querySelector('#showEditor');
+        showEditor.onclick = (event) => {
+            if(!this.editor) {
+                this.editor = new Editor(this.controlSwitcher.controls);
+            }
+            else {
+                this.editor.element.style.display = 'block';
+            }
+            this.controlSwitcher.controls.enabled = false;
+        }
+
         //Controls TODO: Consolidate these.
         let startVR = document.getElementById('startVR');
         startVR.onclick = () => {
@@ -48,6 +61,16 @@ class Menu {
         startOrbit.onclick = () => {
             if (this.controlSwitcher && this.controlSwitcher.controls.type === 'orbit') return;
             this.controlSwitcher = new Controls('orbit', this.scene, this.camera);
+        };
+
+        let enableControls = document.getElementById('enableControls');
+        enableControls.onclick = () => {
+            if(this.controlSwitcher.controls.enabled) {
+                this.controlSwitcher.controls.enabled = false;
+            }
+            else {
+                this.controlSwitcher.controls.enabled = true;
+            }
         };
 
         //Capture
@@ -121,8 +144,15 @@ class Menu {
     template() {
         return `<nav id="appMenu">
                     <ul>
+                        <li id="showEditor"> <a>Editor</a>
+                            <ul>
+                                <li id="export"><a> Export File </a></li>
+                                <li id="import"><a> Import File </a></li>
+                            </ul>
+                        </li>
                         <li> <a>Controls</a>
                             <ul>
+                                <li id="enableControls"><a>On / Off</a></li>
                                 <li id="startTrackball"><a>Trackball</a></li>
                                 <li id="startVR"><a>VR</a></li>
                                 <li id="startOrbit"><a>Orbit</a></li>
@@ -134,15 +164,17 @@ class Menu {
                                 <li id="envelopGuiView"><a>Envelop</a></li>
                                 <li> <a> Helpers </a>
                                     <ul>
-                                        <li id="helpers_axes"> <a>View Scene Axis</a> </li>
-                                        <li id="helpers_fps"> <a>View Scene FPS</a> </li>
+                                        <li id="helpers_axes"> <a>Scene Axis</a> </li>
+                                        <li id="helpers_fps"> <a>Scene FPS</a> </li>
                                     </ul>
                                 </li>
+                                <!--<li>About<li>-->
                             </ul>
                         </li>
                         <li> <a>Capture</a>
                             <ul>
-                                <li id="startCapture"><a> 360 - Equirectangular </a></li>
+                                <li id="startCapture"><a> 2D </a></li>
+                                <li id="startCapture"><a> 360 </a></li>
                                 <!-- <li> 3D - Follow camera </li> -->
                             </ul>
                         </li>
