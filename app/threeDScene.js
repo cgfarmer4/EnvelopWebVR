@@ -27,47 +27,28 @@ class threeDScene {
         window.addEventListener('resize', this.onResize.bind(this));
 
         // Trackball defaut
-        this.controlSwitcher = new Controls('trackball', this.scene, this.camera);
+        this.controlSwitcher = new Controls('orbit', this.scene, this.camera);
+        this.helpers = new Helpers(this.scene);
         
         //Envelop
         let maxToBrowser = new MaxToBrowser();
         this.envelop = new Envelop(this.scene, maxToBrowser);
+
+        //Timeline
         this.timeline = new TimelineAudio.Timeline();
+        this.timeline.camera = this.camera;
         this.timeline.envelop = this.envelop;
-        this.helpers = new Helpers(this.scene);
+
+        //Keyframe Target
+        let cube = new THREE.Mesh(new THREE.CubeGeometry(10, 10, 10), new THREE.MeshNormalMaterial());
+        cube.position.y = 71;
+        cube.name = 'booyah';
         
-        let inputCount = 0;
-        for (let input in this.envelop.inputs) {
-            let EnvelopInput = new TimelineAudio.Tracks.Keyframe("Envelop " + inputCount, this.envelop.inputs[input].position, this.timeline);
-            let max = 40;
-            let min = 5;
-
-            EnvelopInput
-                .keyframe({ 
-                    x: 0,
-                    y: 10
-                }, 1, "Quadratic.EaseIn")
-                .keyframe({
-                    x: 20,
-                    y: 20
-                }, 2, "Quadratic.EaseIn")
-                .keyframe({
-                    x: 30,
-                    y: 30
-                }, 2, "Quadratic.EaseIn")
-                .keyframe({
-                    x: 40,
-                    y: 40
-                }, 2, "Quadratic.EaseIn")
-                .keyframe({
-                    x: 50
-                }, 2, "Quadratic.EaseIn");
-
-            inputCount += 1;
-        }
+        this.scene.add(cube);
+        this.timeline.targets.push(cube);
 
         this.timeline.GUI = new TimelineAudio.GUI(this.timeline);
-        this.animate(); 
+        this.animate();
     }
     animate() {
         let delta = this.clock.getDelta();
