@@ -5,10 +5,11 @@ require('brace/mode/json');
 require('brace/theme/monokai');
 
 class Editor {
-    constructor(controls) {
+    constructor(app, controls) {
         this.element = document.createElement('div');
         this.element.id = 'editor';
         this.controls = controls;
+        this.app = app;
 
         //Styles
         this.element.style.width = window.innerWidth + 'px';
@@ -32,49 +33,45 @@ class Editor {
         close.onclick = this.close.bind(this);
     }
     initCode() {
-        let sceneCode = this.element.querySelector('#sceneCode');
-        sceneCode.style.height = window.innerHeight - 100 + 'px';
+        this.sceneCodeElement = this.element.querySelector('#sceneCode');
+        this.sceneCodeElement.style.height = window.innerHeight - 100 + 'px';
 
-        let tracksCode = this.element.querySelector('#tracksCode');
-        tracksCode.style.height = window.innerHeight - 100 + 'px';
+        this.tracksCodeElement = this.element.querySelector('#tracksCode');
+        this.tracksCodeElement.style.height = window.innerHeight - 100 + 'px';
 
         this.sceneEditor = ace.edit('sceneCode');
         this.sceneEditor.getSession().setMode('ace/mode/javascript');
         this.sceneEditor.setTheme('ace/theme/monokai');
+        this.sceneEditor.setValue(this.app.code);
 
         this.tracksEditor = ace.edit('tracksCode');
         this.tracksEditor.getSession().setMode('ace/mode/json');
         this.tracksEditor.setTheme('ace/theme/monokai');
+        if(this.tracksCode) this.tracksEditor.setValue(this.tracksCode);
     }
     close() {
         this.element.style.display = 'none';
+        this.app.code = this.sceneEditor.getValue();
+        this.tracksCode = this.tracksEditor.getValue();
+        this.tracksEditor.destroy();
+        this.sceneEditor.destroy();
+        
+        while(this.sceneCodeElement.firstChild) {
+            this.sceneCodeElement.firstChild.remove();
+        }
+        
+        while(this.tracksCodeElement.firstChild) {
+            this.tracksCodeElement.firstChild.remove();
+        }
+
+        this.app.emit('app:codeUpdate');
         this.controls.enabled = true;
     }
     template() {
         return `
             <div id="sceneEditor">
                 <h2> Scene </h2>
-                <div id="sceneCode">
-/**
- * Declare all scene targets.
- * 
- * Variables available here: 
- * 
- * THREE, this.scene, this.camera, 
- * this.renderer, this.controls, this.timeline.
- * 
- * Here is where the code loops lives in the threeDScene.js
- * file.
- */
-let geometry = new THREE.CubeGeometry(10, 10, 10);
-let material = new new THREE.MeshNormalMaterial();
-let cube = new THREE.Mesh(geometry, material);
-cube.position.y = 71;
-cube.name = 'booyah';
-
-this.scene.add(cube);
-this.timeline.targets.push(cube);
-                </div>
+                <div id="sceneCode"></div>
             </div>
             <div id="tracksEditor">
                 <h2> Tracks </h2>

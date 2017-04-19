@@ -8,14 +8,15 @@ const Record = require('../record');
  * Application centric menu. For viewing main UI pieces and 
  */
 class Menu {
-    constructor(threeD) {
-        this.helpers = threeD.helpers;
-        this.scene = threeD.scene;
-        this.camera = threeD.camera;
-        this.renderer = threeD.renderer;
-        this.envelop = threeD.envelop;
-        this.timeline = threeD.timeline;
-        this.controlSwitcher = threeD.controlSwitcher;
+    constructor(app) {
+        this.app = app;
+        this.helpers = app.helpers;
+        this.scene = app.scene;
+        this.camera = app.camera;
+        this.renderer = app.renderer;
+        this.envelop = app.envelop;
+        this.timeline = app.timeline;
+        this.controlSwitcher = app.controlSwitcher;
 
         this.envelopGuiDisplay = false;
         this.timelineGuiDisplay = false;
@@ -35,9 +36,10 @@ class Menu {
         let showEditor = this.menu.querySelector('#showEditor');
         showEditor.onclick = (event) => {
             if(!this.editor) {
-                this.editor = new Editor(this.controlSwitcher.controls);
+                this.editor = new Editor(this.app, this.controlSwitcher.controls);
             }
             else {
+                this.editor.initCode();
                 this.editor.element.style.display = 'block';
             }
             this.controlSwitcher.controls.enabled = false;

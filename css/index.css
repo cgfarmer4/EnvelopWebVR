@@ -172,10 +172,6 @@ canvas {
     background: rgba(0, 0, 0, .4);
 }
 
-#appMenu ul li.current-menu-item {
-    background: #ddd
-}
-
 #appMenu ul li:hover {
     background: #f6f6f6;
     cursor: pointer;
@@ -212,6 +208,10 @@ canvas {
 #tracksEditor {
     float: left;
     width: 500px;
+}
+
+#tracksCode, #sceneCode {
+    opacity: .8;
 }
 
 #editor h2 {

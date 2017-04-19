@@ -1,6 +1,8 @@
-const Menu = require('./menu');
-const ThreeDScene =  require('./threeDScene');
+const AppMain =  require('./app');
+const AppMenu = require('./menu');
 
-let threeD = new ThreeDScene();
-let menu = new Menu(threeD);
+global.App = new AppMain();
+global.App.initCode();
+
+global.Menu = new AppMenu(global.App);
 
