@@ -4,7 +4,7 @@ class maxToBrowser {
     constructor() {
         this.channels = {};
         this.inputs = {};
-        this.connect();
+        // this.connect();
     }
     connect() {
         //TODO: Calculate and fix.

@@ -31,6 +31,12 @@ class Editor {
         //Events
         let close = this.element.querySelector('#closeEditor');
         close.onclick = this.close.bind(this);
+        
+        let runCode = this.element.querySelector('#editorOptions #run');
+        runCode.onclick = this.resetCodeLoop.bind(this);
+        
+        let saveCode = this.element.querySelector('#editorOptions #save');
+        saveCode.onclick = this.save.bind(this);  
     }
     initCode() {
         this.sceneCodeElement = this.element.querySelector('#sceneCode');
@@ -41,13 +47,30 @@ class Editor {
 
         this.sceneEditor = ace.edit('sceneCode');
         this.sceneEditor.getSession().setMode('ace/mode/javascript');
+        this.sceneEditor.$blockScrolling = Infinity;
         this.sceneEditor.setTheme('ace/theme/monokai');
         this.sceneEditor.setValue(this.app.code);
+        
 
         this.tracksEditor = ace.edit('tracksCode');
         this.tracksEditor.getSession().setMode('ace/mode/json');
+        this.tracksEditor.$blockScrolling = Infinity;
         this.tracksEditor.setTheme('ace/theme/monokai');
         if(this.tracksCode) this.tracksEditor.setValue(this.tracksCode);
+    }
+    resetCodeLoop() {
+        this.app.code = this.sceneEditor.getValue();
+        this.tracksCode = this.tracksEditor.getValue();
+        this.app.emit('app:codeUpdate');
+    }
+    clearLocal() {
+        
+    }
+    load() {
+
+    }
+    save() {
+
     }
     close() {
         this.element.style.display = 'none';
@@ -64,7 +87,6 @@ class Editor {
             this.tracksCodeElement.firstChild.remove();
         }
 
-        this.app.emit('app:codeUpdate');
         this.controls.enabled = true;
     }
     template() {
@@ -78,6 +100,7 @@ class Editor {
                 <div id="tracksCode">{}</div>
             </div>
             <ul id="editorOptions">
+                <li class="largeButton" id="run"> Run </li>
                 <li class="largeButton" id="save"> Save </li>
             </ul>
             <ul id="closeEditor">

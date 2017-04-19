@@ -23,6 +23,7 @@ class Envelop extends EventEmitter {
         this.channels = {};
         this.inputs = {};
         this.allModelParts = new THREE.Object3D();
+        this.allModelParts.name = 'envelop';
         this.scene = scene;
         this.maxValues = maxValues;
         this.venue = new Midway();
@@ -68,6 +69,7 @@ class Envelop extends EventEmitter {
             column.theta = Math.atan2(columnPosition.y, columnPosition.x) - Math.PI / 2;
             column.mesh.position.set(columnPosition.x, column.HEIGHT / 2, columnPosition.y);
             column.mesh.rotateY(column.theta);
+            column.mesh.visible = false;
             this.columns.push(column);
             this.allModelParts.add(column.mesh);
         })
@@ -168,25 +170,27 @@ class Envelop extends EventEmitter {
      * @param {*} delta 
      */
     update(delta) {
-        // Map this.maxValues to the values in Envelop.
-        for (let input in this.maxValues.inputs) {
-            this.inputs[input].position.x = this.maxValues.inputs[input][0];
-            this.inputs[input].position.y = this.maxValues.inputs[input][1];
-            this.inputs[input].position.z = this.maxValues.inputs[input][2];
+        if (this.maxValue && this.maxValue.inputs) {
+            // Map this.maxValues to the values in Envelop.
+            for (let input in this.maxValues.inputs) {
+                this.inputs[input].position.x = this.maxValues.inputs[input][0];
+                this.inputs[input].position.y = this.maxValues.inputs[input][1];
+                this.inputs[input].position.z = this.maxValues.inputs[input][2];
 
-            if (this.GUI.visible) {
-                //TODO: MOVE TO NOT READ DOM EVERY UPDATE!
-                document.getElementById(input).querySelector('.inputPosition').textContent = this.maxValues.inputs[input][0].toFixed(2) + ',' +
-                    this.maxValues.inputs[input][1].toFixed(2) + ',' +
-                    this.maxValues.inputs[input][2].toFixed(2);
+                if (this.GUI.visible) {
+                    //TODO: MOVE TO NOT READ DOM EVERY UPDATE!
+                    document.getElementById(input).querySelector('.inputPosition').textContent = this.maxValues.inputs[input][0].toFixed(2) + ',' +
+                        this.maxValues.inputs[input][1].toFixed(2) + ',' +
+                        this.maxValues.inputs[input][2].toFixed(2);
 
+                }
             }
-        }
-        if (this.GUI.visible) {
-            for (let channel in this.maxValues.channels) {
-                //TODO: MOVE TO NOT READ DOM EVERY UPDATE!
-                let meter = document.getElementById(channel).querySelector('.channelLevel');
-                meter.style.height = 80 - Math.floor(this.maxValues.channels[channel] * 300) + 'px';
+            if (this.GUI.visible) {
+                for (let channel in this.maxValues.channels) {
+                    //TODO: MOVE TO NOT READ DOM EVERY UPDATE!
+                    let meter = document.getElementById(channel).querySelector('.channelLevel');
+                    meter.style.height = 80 - Math.floor(this.maxValues.channels[channel] * 300) + 'px';
+                }
             }
         }
     }

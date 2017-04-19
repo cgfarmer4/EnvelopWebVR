@@ -13,8 +13,23 @@ class AppMain extends EventEmitter {
     constructor() {
         super();
         this.THREE = THREE;
-        this.loadTHREE();
+        this.clock = new THREE.Clock();
+        this.renderer = new THREE.WebGLRenderer({
+            antialias: true
+        });
         
+        this.scene = new THREE.Scene();
+        this.renderer.autoClear = false;
+        this.userScene = new THREE.Scene();
+
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 10000);
+
+        // Stage for rendering.
+        this.renderer.setClearColor(new THREE.Color(0x666666));
+        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.container = document.body.appendChild(this.renderer.domElement);
+
         // Window events
         window.addEventListener('resize', this.onResize.bind(this));
 
@@ -32,22 +47,6 @@ class AppMain extends EventEmitter {
         this.timeline.envelop = this.envelop;
         this.timeline.GUI = new TimelineAudio.GUI(this.timeline);
         this.animate();
-    }
-    loadTHREE() {
-        this.clock = new THREE.Clock();
-        this.renderer = new THREE.WebGLRenderer({
-            antialias: true
-        });
-        this.renderer.autoClear = false;
-        this.scene = new THREE.Scene();
-        this.userScene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 10000);
-
-        // Stage for rendering.
-        this.renderer.setClearColor(new THREE.Color(0x666666));
-        this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.container = document.body.appendChild(this.renderer.domElement);
     }
     animate() {
         let delta = this.clock.getDelta();
