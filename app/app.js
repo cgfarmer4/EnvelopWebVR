@@ -8,6 +8,7 @@ const Helpers = require('./helpers');
 const Record = require('./record');
 const MaxToBrowser = require('./maxToBrowser');
 const EventEmitter = require('events').EventEmitter;
+const IntroCode = require('./examples/introduction');
 
 class AppMain extends EventEmitter {
     constructor() {
@@ -48,12 +49,14 @@ class AppMain extends EventEmitter {
         this.timeline.GUI = new TimelineAudio.GUI(this.timeline);
 
         //Init with Camera Track
-        let cameraPos = new TimelineAudio.Tracks.Keyframe('Camera Position', this.camera.position, this.timeline);
+        let cameraPos = new TimelineAudio.Tracks.Keyframe('App.camera.position', this.camera.position, this.timeline);
         cameraPos.keyframe({
             x: 100,
             y: 100,
             z: 100
         }, 0);
+
+
 
         this.animate();
     }
@@ -88,24 +91,7 @@ class AppMain extends EventEmitter {
         // }
     }
     initCode() {
-        this.code = "/**\n\
-* Declare all scene targets.\n\
-*\n\
-* Variables available here: \n\
-*\n\
-* THREE, App.userScene, App.camera,\n\
-* App.renderer, App.controls, App.timeline.\n\
-*\n\
-* Here is where the code loops lives in the threeDScene.js\n\
-* file.\n\
-*/\n\
-let geometry = new App.THREE.CubeGeometry(10, 10, 10);\n\
-let material = new App.THREE.MeshNormalMaterial();\n\
-let cube = new App.THREE.Mesh(geometry, material);\n\
-cube.position.y = 71;\n\
-cube.name = 'booyah';\n\
-App.userScene.add(cube);\n\
-App.timeline.targets.push(cube);";
+        this.code = IntroCode;
 
         let script = document.createElement('script');
         script.id = 'include-scene';
@@ -129,6 +115,8 @@ App.timeline.targets.push(cube);";
             script.id = 'include-scene';
             script.textContent = '( function () { ' + this.code + ' } )()';
             document.head.appendChild(script);
+
+            this.timeline.resetTracks(event.tracks, this.userScene);
         });
     }
 }

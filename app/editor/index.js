@@ -20,7 +20,6 @@ class Editor {
         this.element.style.top = 0;
         this.element.style.left = 0;
         this.element.style.background = 'rgba(0,0,0,.4)';
-        this.element.style.background = 'rgba(0,0,0,.4)';
         this.element.style['z-index'] = 100;
 
         //Template
@@ -74,8 +73,9 @@ class Editor {
     resetCodeLoop() {
         this.app.code = this.sceneEditor.getValue();
         this.tracksCode = this.tracksEditor.getValue();
-        this.app.timeline.resetTracks(this.tracksCode);
-        this.app.emit('app:codeUpdate');
+        this.app.emit('app:codeUpdate', {
+            tracks: this.tracksCode
+        });
     }
     export() {
         download(this.app.code, 'scene.js', 'application/javascript'); 
