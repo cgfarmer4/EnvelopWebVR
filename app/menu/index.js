@@ -147,10 +147,6 @@ class Menu {
         return `<nav id="appMenu">
                     <ul>
                         <li id="showEditor"> <a>Editor</a>
-                            <ul>
-                                <li id="export"><a> Export File </a></li>
-                                <li id="import"><a> Import File </a></li>
-                            </ul>
                         </li>
                         <li> <a>Controls</a>
                             <ul>

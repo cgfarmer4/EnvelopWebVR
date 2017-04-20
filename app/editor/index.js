@@ -1,5 +1,7 @@
 'use_strict';
 const ace = require('brace');
+const download = require('downloadjs');
+
 require('brace/mode/javascript');
 require('brace/mode/json');
 require('brace/theme/monokai');
@@ -37,6 +39,15 @@ class Editor {
         
         let saveCode = this.element.querySelector('#editorOptions #save');
         saveCode.onclick = this.save.bind(this);  
+        
+        let exportCode = this.element.querySelector('#editorOptions #export');
+        exportCode.onclick = this.export.bind(this);
+        
+        let loadLocal = this.element.querySelector('#editorOptions #loadLocal');
+        loadLocal.onclick = this.load.bind(this);
+        
+        let deleteLocal = this.element.querySelector('#editorOptions #deleteLocal');
+        deleteLocal.onclick = this.deleteLocal.bind(this);
     }
     initCode() {
         this.sceneCodeElement = this.element.querySelector('#sceneCode');
@@ -56,21 +67,40 @@ class Editor {
         this.tracksEditor.getSession().setMode('ace/mode/json');
         this.tracksEditor.$blockScrolling = Infinity;
         this.tracksEditor.setTheme('ace/theme/monokai');
-        if(this.tracksCode) this.tracksEditor.setValue(this.tracksCode);
+
+        let timelineTracksCode = this.app.timeline.getJson();
+        this.tracksEditor.setValue(timelineTracksCode);
     }
     resetCodeLoop() {
         this.app.code = this.sceneEditor.getValue();
         this.tracksCode = this.tracksEditor.getValue();
+        this.app.timeline.resetTracks(this.tracksCode);
         this.app.emit('app:codeUpdate');
     }
-    clearLocal() {
-        
+    export() {
+        download(this.app.code, 'scene.js', 'application/javascript'); 
+        download(this.tracksCode, 'tracks.json', 'application/json'); 
     }
     load() {
-
+        if (localStorage['tracksCode']) {
+            this.tracksEditor.setValue(localStorage['tracksCode']);
+        }
+        if (localStorage['appCode']) {
+            this.sceneEditor.setValue(localStorage['appCode']);
+        }
+        
+        this.resetCodeLoop();
+    }
+    deleteLocal() {
+        localStorage['tracksCode'] = null;
+        localStorage['appCode'] = null;
     }
     save() {
+        this.tracksCode = this.tracksEditor.getValue();
+        localStorage['tracksCode'] = this.tracksCode;
 
+        this.app.code = this.sceneEditor.getValue();
+        localStorage['appCode'] = this.app.code;
     }
     close() {
         this.element.style.display = 'none';
@@ -102,6 +132,9 @@ class Editor {
             <ul id="editorOptions">
                 <li class="largeButton" id="run"> Run </li>
                 <li class="largeButton" id="save"> Save </li>
+                <li class="largeButton" id="export"> Export </li>
+                <li class="largeButton" id="loadLocal"> Load Local </li>
+                <li class="largeButton" id="deleteLocal"> Delete Local </li>
             </ul>
             <ul id="closeEditor">
                 <li> X </li>

@@ -46,6 +46,15 @@ class AppMain extends EventEmitter {
         this.timeline.camera = this.camera;
         this.timeline.envelop = this.envelop;
         this.timeline.GUI = new TimelineAudio.GUI(this.timeline);
+
+        //Init with Camera Track
+        let cameraPos = new TimelineAudio.Tracks.Keyframe('Camera Position', this.camera.position, this.timeline);
+        cameraPos.keyframe({
+            x: 100,
+            y: 100,
+            z: 100
+        }, 0);
+
         this.animate();
     }
     animate() {
