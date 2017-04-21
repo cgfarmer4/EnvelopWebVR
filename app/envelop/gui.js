@@ -28,7 +28,7 @@ class EnvelopGui {
         <img style="height: 75px; width: 75px;" src="assets/logo_envelop.png"/>\
         <div id="connection">\
             <input type="text" value="192.168.0.197:1337"/>\
-            <button> Connect </button></div>\
+            <button class="mediumButton"> Connect </button></div>\
         </div>\
         <div style= "text-align: left; padding: 5px 10px" >\
             <label for="viewLabelsToggle" style="font-weight: 500; vertical-align: middle;"> Labels: </label>\

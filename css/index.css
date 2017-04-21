@@ -13,11 +13,8 @@ canvas {
     user-select: none;
 }
 
-#buttonHolder {
-    position: absolute;
-    width: 90%;
-    margin: 0 auto;
-}
+
+/** TIMELINE **/
 
 #detailsView {
     position: absolute;
@@ -25,15 +22,26 @@ canvas {
     top: 0;
     width: 200px;
     padding: 10px;
-    background: rgba(255, 255, 255, .5);
+    background: rgba(0, 0, 0, .4);
+}
+
+#detailsView h2 {
+    color: #FFF;
+    text-transform: uppercase;
 }
 
 #detailsView h3 {
     color: aliceblue;
+    width: 80%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 #detailsView ul {
     padding: 0 0 10px 10px;
+    color: #FFF;
+    margin: 10px 0 0;
 }
 
 #detailsView #keyEdit input {
@@ -60,6 +68,10 @@ canvas {
     list-style: none;
 }
 
+#follow {
+    color: #FFF;
+}
+
 .option1,
 .option2 {
     margin: 10px 0;
@@ -70,6 +82,110 @@ canvas {
 .option2 label {
     margin: 0 0 0 5px;
 }
+
+#toolbar {
+    background: rgba(0, 0, 0, .4);
+    padding: 4px 0 5px 0;
+    color: #FFF;
+}
+
+#playButton,
+#pauseButton,
+#stopButton,
+#addTrack {
+    float: left;
+    cursor: pointer;
+}
+
+#playButton {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    margin: 3px 4px 0 10px;
+    border-width: 6px 0 6px 10.4px;
+    border-color: transparent transparent transparent #ffffff;
+}
+
+#pauseButton {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    box-sizing: content-box
+}
+
+#pauseButton:before {
+    position: absolute;
+    content: '';
+    margin: 3px 4px 0 10px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 3px;
+    height: 12px;
+    border: none;
+    border-left: 3px solid #FFF;
+    border-right: 3px solid #FFF;
+    box-sizing: content-box
+}
+
+#stopButton {
+    width: 11px;
+    height: 11px;
+    margin: 3px 4px 0;
+    background: #FFF;
+    border: 0;
+}
+
+#addTrack {
+    box-sizing: content-box;
+    display: inline-block!important;
+    position: relative;
+    width: 18px;
+    height: 18px;
+    margin: -3px 0 0;
+    border: 0;
+    background: rgba(0, 0, 0, 0)
+}
+
+#addTrack:before {
+    position: absolute;
+    content: '';
+    margin: auto;
+    width: 4px;
+    height: 12px;
+    background-color: #FFFFFF;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+#addTrack:after {
+    position: absolute;
+    content: '';
+    margin: auto;
+    width: 12px;
+    height: 4px;
+    background-color: #FFFFFF;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+#currentTime {
+    margin:0 0 0 5px;
+}
+
+.addTrackToTimeline {
+    color: #000;
+}
+
+
+/** ENVELOP **/
 
 #envelopGui {
     text-transform: uppercase;
@@ -129,6 +245,9 @@ canvas {
     width: 100%;
     top: 0;
 }
+
+
+/** APP MENU **/
 
 #appMenu {
     display: flex;
@@ -204,13 +323,17 @@ canvas {
     display: block
 }
 
+
+/** EDITOR **/
+
 #sceneEditor,
 #tracksEditor {
     float: left;
     width: 500px;
 }
 
-#tracksCode, #sceneCode {
+#tracksCode,
+#sceneCode {
     opacity: .8;
 }
 
@@ -248,6 +371,9 @@ canvas {
     margin: 15px 0;
 }
 
+
+/** BUTTONS **/
+
 .largeButton {
     text-transform: uppercase;
     font-weight: 700;
@@ -265,4 +391,24 @@ canvas {
 
 .largeButton:active {
     border: 5px solid green;
+}
+
+.mediumButton {
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 5px;
+    font-size: 16px;
+    background: none;
+    border: 3px solid #000;
+    cursor: pointer;
+    color: #FFF;
+}
+
+.mediumButton:hover {
+    border: 3px solid #FFF;
+    background: rgba(0, 0, 0, .4);
+}
+
+.mediumButton:active {
+    border: 3px solid green;
 }
