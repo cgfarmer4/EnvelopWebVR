@@ -15,7 +15,7 @@ const FEET = 12 * INCHES;
 class Envelop extends EventEmitter {
     constructor(scene, maxValues) {
         super();
-        this.NUM_INPUTS = 8;
+        this.NUM_INPUTS = 2;
 
         this.columns = [];
         this.labels = [];
@@ -140,7 +140,7 @@ class Envelop extends EventEmitter {
     subDraw() {
         this.venue.SUB_POSITIONS.forEach((subPosition) => {
             let subGeo = new THREE.BoxGeometry(29 * INCHES, 20 * INCHES, 29 * INCHES);
-            let subMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: .3 });
+            let subMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: false });
             let sub = new THREE.Mesh(subGeo, subMat);
             sub.rotateY(- Math.PI / 4);
             sub.position.set(subPosition.x, 10 * INCHES, subPosition.y);
@@ -170,7 +170,7 @@ class Envelop extends EventEmitter {
      * @param {*} delta 
      */
     update(delta) {
-        if (this.maxValue && this.maxValue.inputs) {
+        if (this.maxValues && this.maxValues.inputs) {
             // Map this.maxValues to the values in Envelop.
             for (let input in this.maxValues.inputs) {
                 this.inputs[input].position.x = this.maxValues.inputs[input][0];

@@ -37,9 +37,6 @@ class Label {
         // border color
         context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
         context.lineWidth = borderThickness;
-        
-        // roundRect(context, borderThickness / 2, borderThickness / 2, textWidth + borderThickness, fontsize * 1.4 + borderThickness, 6);
-        // 1.4 is extra height factor for text below baseline: g,j,p,q.
 
         // text color
         context.fillStyle = "rgba(255, 255, 255, 1.0)";

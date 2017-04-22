@@ -6,6 +6,10 @@ require('brace/mode/javascript');
 require('brace/mode/json');
 require('brace/theme/monokai');
 
+/**
+ * @class Editor
+ * For editing tracks json and scene elements.
+ */
 class Editor {
     constructor(app, controls) {
         this.element = document.createElement('div');
@@ -48,6 +52,9 @@ class Editor {
         let deleteLocal = this.element.querySelector('#editorOptions #deleteLocal');
         deleteLocal.onclick = this.deleteLocal.bind(this);
     }
+    /**
+     * Initialize the editors with the current timeline tracks and scene code
+     */
     initCode() {
         this.sceneCodeElement = this.element.querySelector('#sceneCode');
         this.sceneCodeElement.style.height = window.innerHeight - 100 + 'px';
@@ -70,6 +77,9 @@ class Editor {
         let timelineTracksCode = this.app.timeline.getJson();
         this.tracksEditor.setValue(timelineTracksCode);
     }
+    /**
+     * Reset the code loop for tracks and the scene.
+     */
     resetCodeLoop() {
         this.app.code = this.sceneEditor.getValue();
         this.tracksCode = this.tracksEditor.getValue();
@@ -77,10 +87,16 @@ class Editor {
             tracks: this.tracksCode
         });
     }
+    /**
+     * Export files scene and tracks for saving.
+     */
     export() {
         download(this.app.code, 'scene.js', 'application/javascript'); 
         download(this.tracksCode, 'tracks.json', 'application/json'); 
     }
+    /**
+     * Load local store save.
+     */
     load() {
         if (localStorage['tracksCode']) {
             this.tracksEditor.setValue(localStorage['tracksCode']);
@@ -91,10 +107,16 @@ class Editor {
         
         this.resetCodeLoop();
     }
+    /**
+     * Delete local storage save.
+     */
     deleteLocal() {
         localStorage['tracksCode'] = null;
         localStorage['appCode'] = null;
     }
+    /**
+     * Save to local storage.
+     */
     save() {
         this.tracksCode = this.tracksEditor.getValue();
         localStorage['tracksCode'] = this.tracksCode;
@@ -102,6 +124,9 @@ class Editor {
         this.app.code = this.sceneEditor.getValue();
         localStorage['appCode'] = this.app.code;
     }
+    /**
+     * Remove editor.
+     */
     close() {
         this.element.style.display = 'none';
         this.app.code = this.sceneEditor.getValue();
@@ -119,6 +144,9 @@ class Editor {
 
         this.controls.enabled = true;
     }
+    /**
+     * HTML
+     */
     template() {
         return `
             <div id="sceneEditor">

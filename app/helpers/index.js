@@ -14,7 +14,7 @@ class Helpers {
 
         this.stats = new Stats();
         this.stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-        this.stats.dom.style.display = 'none';
+        // this.stats.dom.style.display = 'none';
         document.body.appendChild(this.stats.dom);
     }
 }

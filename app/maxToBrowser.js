@@ -1,12 +1,15 @@
 const eio = require('engine.io-client');
 
-class maxToBrowser {
+/**
+ * @class MaxToBrowser
+ * Connects to UDP server to feed M4L data into app.
+ */
+class MaxToBrowser {
     constructor() {
         this.channels = {};
         this.inputs = {};
-        // this.connect();
     }
-    connect() {
+    connect(url) {
         //TODO: Calculate and fix.
         let venue = {
             xRange: 228.24,
@@ -18,7 +21,7 @@ class maxToBrowser {
         }
 
         let self = this;
-        this.socket = new eio.Socket('ws://192.168.0.197:1337/');
+        this.socket = new eio.Socket(`ws://${url}/`);
 
         this.socket.on('open', () => {
             console.info('UDP / SOCKET --> success!');
@@ -52,4 +55,4 @@ class maxToBrowser {
 }
 
 
-module.exports = maxToBrowser;
+module.exports = MaxToBrowser;

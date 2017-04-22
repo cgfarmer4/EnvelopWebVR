@@ -42,7 +42,7 @@ class AppMain extends EventEmitter {
         let maxToBrowser = new MaxToBrowser();
         this.envelop = new Envelop(this.scene, maxToBrowser);
 
-        //Timeline
+        // //Timeline
         this.timeline = new TimelineAudio.Timeline();
         this.timeline.camera = this.camera;
         this.timeline.envelop = this.envelop;
@@ -56,11 +56,14 @@ class AppMain extends EventEmitter {
             z: 100
         }, 0);
 
-
-
         this.animate();
     }
+    /**
+     * Animation loop.
+     */
     animate() {
+        requestAnimationFrame(this.animate.bind(this));
+
         let delta = this.clock.getDelta();
         this.helpers.stats.begin();
         this.controlSwitcher.controls.update(delta);
@@ -81,7 +84,7 @@ class AppMain extends EventEmitter {
             this.record.cubeMap.update(this.camera, this.scene);
         }
         this.helpers.stats.end();
-        requestAnimationFrame(this.animate.bind(this));
+        
     }
     onResize() {
         this.camera.aspect = window.innerWidth / window.innerHeight;
@@ -90,6 +93,9 @@ class AppMain extends EventEmitter {
         //     this.effect.setSize(window.innerWidth, window.innerHeight);
         // }
     }
+    /**
+     * Initialitize template on app create.
+     */
     initCode() {
         this.code = IntroCode;
 
