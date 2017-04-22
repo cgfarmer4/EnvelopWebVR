@@ -111,6 +111,7 @@ class Menu {
             if (this.timelineGuiDisplay) {
                 this.timelineGuiDisplay = false;
                 this.timeline.GUI.container.style.display = 'none';
+                this.timeline.GUI.details.element.style.display = 'none';
             }
             else {
                 this.timelineGuiDisplay = true;
