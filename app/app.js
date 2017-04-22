@@ -20,9 +20,9 @@ class AppMain extends EventEmitter {
         });
         
         this.scene = new THREE.Scene();
-        this.renderer.autoClear = false;
-        this.userScene = new THREE.Scene();
-
+        // this.renderer.autoClear = false;
+        // this.userScene = new THREE.Scene();
+        
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 10000);
 
         // Stage for rendering.
@@ -45,7 +45,7 @@ class AppMain extends EventEmitter {
         // //Timeline
         this.timeline = new TimelineAudio.Timeline();
         this.timeline.camera = this.camera;
-        this.timeline.envelop = this.envelop;
+        // this.timeline.envelop = this.envelop;
         this.timeline.GUI = new TimelineAudio.GUI(this.timeline);
 
         //Init with Camera Track
@@ -69,10 +69,10 @@ class AppMain extends EventEmitter {
         this.controlSwitcher.controls.update(delta);
         this.timeline.update(delta);
         this.envelop.update(delta);
-        this.renderer.clear();
+        // this.renderer.clear();
         this.renderer.render(this.scene, this.camera);
-        this.renderer.clearDepth();
-        this.renderer.render(this.userScene, this.camera);
+        // this.renderer.clearDepth();
+        // this.renderer.render(this.userScene, this.camera);
 
         // If we don't change the source here, the HMD will not move the camera.
         // if (this.controlSwitcher.controls.type === 'vr') {

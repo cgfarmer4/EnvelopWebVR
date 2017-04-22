@@ -63,7 +63,7 @@ class EnvelopGui {
             if (!event.target.checked) {
                 viewStatus = false;
             }
-
+            
             for (let channel in this.envelop.channels) {
                 this.envelop.channels[channel].visible = viewStatus;
             }
@@ -72,9 +72,9 @@ class EnvelopGui {
                 sub.visible = viewStatus;
             });
 
-            this.envelop.columns.forEach((column) => {
-                column.mesh.visible = viewStatus;
-            });
+            // this.envelop.columns.forEach((column) => {
+            //     column.mesh.visible = viewStatus;
+            // });
 
             this.envelop.floor.visible = viewStatus;
         };
@@ -134,13 +134,9 @@ class EnvelopGui {
             <input type="text" value="192.168.0.132:1337"/>
             <button class="mediumButton"> Connect </button></div>
         </div>
-        <div style= "clear: both; text-align: left; padding: 5px 10px" >
-            <label for="viewLabelsToggle" style="font-weight: 500; vertical-align: middle;"> Labels: </label>
-            <input type="checkbox" id="viewLabelsToggle"/>
-        </div>
         <div style= "text-align: left; padding: 5px 10px 0 10px" >
             <label for="viewChannelsToggle" style="font-weight: 500; vertical-align: middle;"> Channels: </label>
-            <input type="checkbox" id="viewChannelsToggle" checked/>
+            <input type="checkbox" id="viewChannelsToggle"/>
         </div>
         <ol>`;
 
@@ -152,12 +148,15 @@ class EnvelopGui {
             templateString += `</li>`;
             channelNumber++;
         }
-        templateString += '</ol>\
-            <div style= "text-align: left; padding: 0 10px" >\
-            <label  for="viewInputsToggle" style="font-weight: 500; vertical-align: middle;"> Inputs: </label>\
-            <input type="checkbox" id="viewInputsToggle" checked/>\
-        </div>\
-        <div style="text-align: left; padding-bottom: 10px;">';
+        templateString += `</ol><div style= "text-align: left; padding: 0 10px 5px 10px">
+                <label for="viewLabelsToggle" style="font-weight: 500; vertical-align: middle;"> Labels: </label>
+                <input type="checkbox" id="viewLabelsToggle" />
+        </div>
+        <div style= "text-align: left; padding: 0 10px" >
+            <label  for="viewInputsToggle" style="font-weight: 500; vertical-align: middle;"> Inputs: </label>
+            <input type="checkbox" id="viewInputsToggle"/>
+        </div>
+        <div style="text-align: left; padding-bottom: 10px;">`;
 
         let inputNumber = 1;
         for (let input in this.envelop.inputs) {

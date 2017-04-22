@@ -41,20 +41,22 @@ class Envelop extends EventEmitter {
      * Draw spheres to represent the audio inputs.
      */
     inputModel() {
-        for (let x = 0; x < this.NUM_INPUTS; x++) {
-            let geometry = new THREE.SphereGeometry(10, 16, 16);
-            let material = new THREE.MeshBasicMaterial({
-                color: 0xffffff,
-                wireframe: true
-            });
+        let geometry = new THREE.SphereGeometry(10, 16, 16);
+        let material = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            wireframe: true
+        });
+        let inputSphere = new THREE.Mesh(geometry, material);
 
-            let sphere = new THREE.Mesh(geometry, material);
+        for (let x = 0; x < this.NUM_INPUTS; x++) {
+            let sphere = inputSphere.clone();
             let inputLabel = new Label(Number(x) + 1);
             let group = new THREE.Object3D();
 
             group.add(inputLabel);
             group.add(sphere);
-
+            group.visible = false;
+            
             this.inputs["Input" + (Number(x) + 1)] = group;
             this.labels.push(inputLabel);
             this.allModelParts.add(group);
@@ -78,45 +80,38 @@ class Envelop extends EventEmitter {
      * Draw channels and their respective angles
      */
     channelDraw() {
-        this.columns.forEach((column, index) => {
-            let channel1Geo = new THREE.BoxGeometry(21 * INCHES, 16 * INCHES, 15 * INCHES);
-            let channel1Mat = new THREE.MeshBasicMaterial({ color: 0xfffff });
-            let channel1 = new THREE.Mesh(channel1Geo, channel1Mat);
+        let inputGeometry = new THREE.BoxGeometry(21 * INCHES, 16 * INCHES, 15 * INCHES);
+        let inputMaterial = new THREE.MeshBasicMaterial({ color: 0xfffff });
+        let channelMesh = new THREE.Mesh(inputGeometry, inputMaterial);
+        channelMesh.visible = false;
+
+        this.columns.forEach((column, index) => {            
+            let channel1 = channelMesh.clone();
             channel1.position.set(column.mesh.position.x, 1 * FEET, column.mesh.position.z);
             channel1.rotateY(-column.theta);
             channel1.rotateX(column.SPEAKER_ANGLE);
 
-            let channel1Group = new THREE.Object3D();
             let channelLabel = new Label(index + 17);
             this.labels.push(channelLabel);
             channelLabel.position.set(column.mesh.position.x, 1 * FEET, column.mesh.position.z);
-            channel1Group.add(channelLabel);
-            channel1Group.add(channel1);
-            this.allModelParts.add(channel1Group);
+            this.allModelParts.add(channel1);
             let channelNum = index + 17;
             this.channels["Channel" + channelNum] = channel1;
 
-            let channel2Geo = new THREE.BoxGeometry(21 * INCHES, 16 * INCHES, 15 * INCHES);
-            let channel2Mat = new THREE.MeshBasicMaterial({ color: 0xfffff });
-            let channel2 = new THREE.Mesh(channel2Geo, channel2Mat);
+            let channel2 = channelMesh.clone();
             channel2.position.set(column.mesh.position.x, 6 * FEET, column.mesh.position.z);
             channel2.rotateY(-column.theta);
 
-            let channel2Group = new THREE.Object3D();
             let channelLabel2 = new Label(index + 9);
             this.labels.push(channelLabel2);
             channelLabel2.position.set(column.mesh.position.x, 6 * FEET, column.mesh.position.z);
-            channel2Group.add(channelLabel2);
-            channel2Group.add(channel2);
-            this.allModelParts.add(channel2Group);
+            this.allModelParts.add(channel2);
 
             channelNum = index + 9;
             (channelNum < 10) ? channelNum = '0' + channelNum.toString() : channelNum = channelNum.toString();
             this.channels["Channel" + channelNum] = channel2;
 
-            let channel3Geo = new THREE.BoxGeometry(21 * INCHES, 16 * INCHES, 15 * INCHES);
-            let channel3Mat = new THREE.MeshBasicMaterial({ color: 0xfffff });
-            let channel3 = new THREE.Mesh(channel3Geo, channel3Mat);
+            let channel3 = channelMesh.clone();
             channel3.position.set(column.mesh.position.x, 11 * FEET, column.mesh.position.z);
             channel3.rotateY(-column.theta);
             channel3.rotateX(-column.SPEAKER_ANGLE);
@@ -125,9 +120,7 @@ class Envelop extends EventEmitter {
             let channelLabel3 = new Label(index + 1);
             this.labels.push(channelLabel3);
             channelLabel3.position.set(column.mesh.position.x, 11 * FEET, column.mesh.position.z);
-            channel3Group.add(channelLabel3);
-            channel3Group.add(channel3);
-            this.allModelParts.add(channel3Group);
+            this.allModelParts.add(channel3);
 
             channelNum = index + 1;
             (channelNum < 10) ? channelNum = '0' + channelNum.toString() : channelNum = channelNum.toString();
@@ -138,10 +131,13 @@ class Envelop extends EventEmitter {
      * Draw sub boxes.
      */
     subDraw() {
+        let subGeo = new THREE.BoxGeometry(29 * INCHES, 20 * INCHES, 29 * INCHES);
+        let subMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: false });
+        let subMesh = new THREE.Mesh(subGeo, subMat);
+        subMesh.visible = false;
+
         this.venue.SUB_POSITIONS.forEach((subPosition) => {
-            let subGeo = new THREE.BoxGeometry(29 * INCHES, 20 * INCHES, 29 * INCHES);
-            let subMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: false });
-            let sub = new THREE.Mesh(subGeo, subMat);
+            let sub = subMesh.clone();
             sub.rotateY(- Math.PI / 4);
             sub.position.set(subPosition.x, 10 * INCHES, subPosition.y);
             this.allModelParts.add(sub);
@@ -162,6 +158,7 @@ class Envelop extends EventEmitter {
         });
         let plane = new THREE.Mesh(geometry, material);
         plane.rotateX(- Math.PI / 2);
+        plane.visible = false;
         this.floor = plane;
         this.allModelParts.add(plane);
     }
