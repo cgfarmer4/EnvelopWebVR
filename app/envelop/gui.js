@@ -72,9 +72,9 @@ class EnvelopGui {
                 sub.visible = viewStatus;
             });
 
-            // this.envelop.columns.forEach((column) => {
-            //     column.mesh.visible = viewStatus;
-            // });
+            this.envelop.columns.forEach((column) => {
+                column.mesh.visible = viewStatus;
+            });
 
             this.envelop.floor.visible = viewStatus;
         };
