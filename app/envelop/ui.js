@@ -5,14 +5,13 @@
  * 
  * @param {Envelop}
  */
-class EnvelopGui {
+class EnvelopUI {
     constructor(envelop) {
         this.envelop = envelop;
-        this.envelopGui = document.createElement('div');
-        this.envelopGui.id = 'envelopGui';
-        this.envelopGui.innerHTML = this.template();
-        this.envelopGui.style.display = 'none';
-        document.body.appendChild(this.envelopGui);
+        this.element = document.createElement('div');
+        this.element.id = 'envelopUI';
+        this.element.innerHTML = this.template();
+        this.element.style.display = 'none';
 
         this.envelop.labels.forEach((label) => {
             label.visible = false;
@@ -24,7 +23,7 @@ class EnvelopGui {
      * Event listeners for the inputs
      */
     domEvents() {
-        let connection = this.envelopGui.querySelector('#connection button');
+        let connection = this.element.querySelector('#connection button');
         connection.onclick = (event) => {
             if (this.envelop.maxValues.connection) {
                 this.envelop.maxValues.connection = false;
@@ -32,18 +31,18 @@ class EnvelopGui {
                 this.envelop.maxValues.socket.close();
             }
             else {
-                let udpServer = this.envelopGui.querySelector('#connection input');
+                let udpServer = this.element.querySelector('#connection input');
                 connection.textContent = 'Disconnect';
                 this.envelop.maxValues.connect(udpServer.value);
             }
         }
 
-        let close = this.envelopGui.querySelector('header #closeEnvelop');
+        let close = this.element.querySelector('header #closeEnvelop');
         close.onclick = (event) => {
-            this.envelopGui.style.display = 'none';
+            this.element.style.display = 'none';
         }
 
-        let viewLabels = this.envelopGui.querySelector('#viewLabelsToggle');
+        let viewLabels = this.element.querySelector('#viewLabelsToggle');
         viewLabels.onchange = (event) => {
             let labelStatus = true;
 
@@ -56,7 +55,7 @@ class EnvelopGui {
             });
         }
 
-        let viewChannels = this.envelopGui.querySelector('#viewChannelsToggle');
+        let viewChannels = this.element.querySelector('#viewChannelsToggle');
         viewChannels.onchange = (event) => {
             let viewStatus = true;
 
@@ -79,7 +78,7 @@ class EnvelopGui {
             this.envelop.floor.visible = viewStatus;
         };
 
-        let viewInputs = this.envelopGui.querySelector('#viewInputsToggle');
+        let viewInputs = this.element.querySelector('#viewInputsToggle');
         viewInputs.onchange = (event) => {
             let viewStatus = true;
 
@@ -92,7 +91,7 @@ class EnvelopGui {
         };
 
         //For targeting the timeline track object. 
-        let channelsAndInputs = this.envelopGui.querySelectorAll('.channelLevelMeter, .envelopInput');
+        let channelsAndInputs = this.element.querySelectorAll('.channelLevelMeter, .envelopInput');
         channelsAndInputs.forEach((object) => {
             object.onclick = (event) => {
                 let targetName = '';
@@ -177,4 +176,4 @@ class EnvelopGui {
     }
 }
 
-module.exports = EnvelopGui;
+module.exports = EnvelopUI;

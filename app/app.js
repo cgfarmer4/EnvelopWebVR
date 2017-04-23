@@ -15,7 +15,9 @@ class AppMain extends EventEmitter {
         super();
         this.THREE = THREE;
         this.clock = new THREE.Clock();
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer({
+            antialias: true
+        });
         this.scene = new THREE.Scene();
         this.renderer.autoClear = false;
         this.userScene = new THREE.Scene();
@@ -26,6 +28,9 @@ class AppMain extends EventEmitter {
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.container = document.body.appendChild(this.renderer.domElement);
+        this.detailsRightUIView = document.createElement('div');
+        this.detailsRightUIView.id = 'detailsRightUIView';
+        document.body.appendChild(this.detailsRightUIView);
 
         // Window events
         window.addEventListener('resize', this.onResize.bind(this));
@@ -38,11 +43,11 @@ class AppMain extends EventEmitter {
         let maxToBrowser = new MaxToBrowser();
         this.envelop = new Envelop(this.scene, maxToBrowser);
 
-        // //Timeline
+        //Timeline
         this.timeline = new TimelineAudio.Timeline();
         this.timeline.camera = this.camera;
         this.timeline.envelop = this.envelop;
-        this.timeline.GUI = new TimelineAudio.GUI(this.timeline);
+        this.timeline.UI = new TimelineAudio.UIView(this.timeline);
 
         //Init with Camera Track
         let cameraPos = new TimelineAudio.Tracks.Keyframe('App.camera.position', this.camera.position, this.timeline);

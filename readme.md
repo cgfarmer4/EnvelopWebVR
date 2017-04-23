@@ -7,15 +7,10 @@ Audio reactive 2D, 3D and VR visuals using data from Ableton Live.
 #### What can I do with this repo?
 
 - Quick inspection of spatial audio mixes aligned with graphical object movement.
-
 - Perform live audio reactive visuals across multiple devices using WebVR.
-
 - Create, save and export keyframe rendering data with tweening / easing support for WebGL object properties.
-
-- Host a UDP / Web Socket server that talks to Max/Ableton and the web.
-
 - Record Envelop vector movements, channel levels and reassign those values to WebGL object properties.
-
+- Host a UDP / Web Socket server that talks to Max/Ableton and the web.
 - Render scene in 4k 360 or 1080p. Merge with B format audio for YouTube, Vimeo and Facebook 360.
 
 #### Examples
@@ -34,7 +29,8 @@ Audio reactive 2D, 3D and VR visuals using data from Ableton Live.
 - MIDI Input / Messaging
 
 #### Known Issues
-- Timeline blurry on retina screens.
+- Timeline blurry on retina screens. 
+- Antialias WebGL Renderer FPS performance on retina
 - UDP Server connections limit error.
 
 If you find other issues, please file them on Github or even better open a pull request :D.

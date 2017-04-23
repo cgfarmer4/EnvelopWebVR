@@ -1,6 +1,6 @@
 'use_strict';
 const THREE = require('three');
-const GUI = require('./gui');
+const UI = require('./ui');
 const Midway = require('./midway');
 const Label = require('./label');
 const Column = require('./column');
@@ -35,7 +35,7 @@ class Envelop extends EventEmitter {
         this.floorDraw();
 
         this.scene.add(this.allModelParts);
-        this.GUI = new GUI(this);
+        this.UI = new UI(this);
     }
     /**
      * Draw spheres to represent the audio inputs.
@@ -174,7 +174,7 @@ class Envelop extends EventEmitter {
                 this.inputs[input].position.y = this.maxValues.inputs[input][1];
                 this.inputs[input].position.z = this.maxValues.inputs[input][2];
 
-                if (this.GUI.visible) {
+                if (this.UI.visible) {
                     //TODO: MOVE TO NOT READ DOM EVERY UPDATE!
                     document.getElementById(input).querySelector('.inputPosition').textContent = this.maxValues.inputs[input][0].toFixed(2) + ',' +
                         this.maxValues.inputs[input][1].toFixed(2) + ',' +
@@ -182,7 +182,7 @@ class Envelop extends EventEmitter {
 
                 }
             }
-            if (this.GUI.visible) {
+            if (this.UI.visible) {
                 for (let channel in this.maxValues.channels) {
                     //TODO: MOVE TO NOT READ DOM EVERY UPDATE!
                     let meter = document.getElementById(channel).querySelector('.channelLevel');
