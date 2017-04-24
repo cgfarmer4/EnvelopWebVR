@@ -9,7 +9,7 @@ class Record {
         this.camera = camera;
         this.scene = scene;
         this.cubeMap = new CubemapToEquirectangular(this.renderer, true);
-        setTimeout(() => { this.start(); }, 5000);
+        this.start();
     }
     /**
      * Start recording using the MediaRecorder and MediaStream APIs.
@@ -34,8 +34,8 @@ class Record {
         });
 
         this.outputRecorder = new MediaRecorder(outputStream);
-        this.outputRecorder.onstop = this.stop.bind(this);
-        this.outputRecorder.onerror = function(err) {
+        // this.outputRecorder.onstop = this.stop.bind(this);
+        this.outputRecorder.onerror = function (err) {
             console.log(err);
         }
         this.outputRecorder.ondataavailable = this.data.bind(this);
@@ -57,9 +57,7 @@ class Record {
         this.outputRecorder.stop();
 
         let superBuffer = new Blob(this.outputStreamBlobs, { type: 'video/webm;codecs=h264' });
-        superBuffer.name = 'rmx__' + 'recordedVideo_' + this.videosAddedToUpload + '.webm';
-
-        download(superBuffer, 'testME.webm', 'video/webm'); 
+        download(superBuffer, 'video.webm', 'video/webm');
     }
 }
 

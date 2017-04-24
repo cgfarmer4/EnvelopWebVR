@@ -20,7 +20,6 @@ class AppMain extends EventEmitter {
         });
         this.scene = new THREE.Scene();
         this.renderer.autoClear = false;
-        this.userScene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 10000);
 
         // Stage for rendering.
@@ -72,8 +71,6 @@ class AppMain extends EventEmitter {
         this.envelop.update(delta);
         this.renderer.clear();
         this.renderer.render(this.scene, this.camera);
-        this.renderer.clearDepth();
-        this.renderer.render(this.userScene, this.camera);
 
         // If we don't change the source here, the HMD will not move the camera.
         // if (this.controlSwitcher.controls.type === 'vr') {
@@ -85,7 +82,7 @@ class AppMain extends EventEmitter {
             this.record.cubeMap.update(this.camera, this.scene);
         }
         this.helpers.stats.end();
-        
+
     }
     onResize() {
         this.camera.aspect = window.innerWidth / window.innerHeight;

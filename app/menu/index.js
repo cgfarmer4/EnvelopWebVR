@@ -78,19 +78,18 @@ class Menu {
 
         //Capture
         let startCapture = this.element.querySelector('#startCapture');
-        startCapture.onclick = (event) => {
-            if (!this.timeline.capturing) {
+        startCapture.onclick = function(event) {
+            if (!this.app.capturing) {
                 this.controlSwitcher = new Controls('orbit', this.scene, this.camera, this.renderer, this.container);
-                this.record = new Record(this.renderer, this.camera, this.scene);
-                this.timeline.capturing = true;
+                this.app.record = new Record(this.renderer, this.camera, this.scene);
+                this.app.capturing = true;
             }
             else {
-                this.record.stop();
-                this.record = {};
-                this.timeline.capturing = false;
+                this.app.record.stop();
+                this.app.record = {};
+                this.app.capturing = false;
             }
-        };
-
+        }.bind(this);
 
         //View -> UIs
         let envelopUIView = this.element.querySelector('#envelopUIView');
@@ -198,7 +197,7 @@ class Menu {
                         </li>
                         <li> <a>Capture</a>
                             <ul>
-                                <li id="startCapture"><a> 2D </a></li>
+                               <!-- <li id="startCapture"><a> 2D </a></li> -->
                                 <li id="startCapture"><a> 360 </a></li>
                                 <!-- <li> 3D - Follow camera </li> -->
                             </ul>

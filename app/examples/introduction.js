@@ -14,7 +14,7 @@ let material = new App.THREE.MeshNormalMaterial();\n\
 let cube = new App.THREE.Mesh(geometry, material);\n\
 cube.position.y = 71;\n\
 cube.name = 'cube1';\n\
-App.userScene.add(cube);\n\
+App.scene.add(cube);\n\
 App.timeline.targets.push(cube);";
 
 module.exports = Introduction;

@@ -11,7 +11,7 @@ Audio reactive 2D, 3D and VR visuals using data from Ableton Live.
 - Create, save and export keyframe rendering data with tweening / easing support for WebGL object properties.
 - Record Envelop vector movements, channel levels and reassign those values to WebGL object properties.
 - Host a UDP / Web Socket server that talks to Max/Ableton and the web.
-- Render scene in 4k 360 or 1080p. Merge with B format audio for YouTube, Vimeo and Facebook 360.
+- Render scene in 4k 360 and merge with B format audio for YouTube, Vimeo and Facebook 360.
 
 #### Examples
 
@@ -23,6 +23,7 @@ Audio reactive 2D, 3D and VR visuals using data from Ableton Live.
 
 #### Future 
 - Daydream controller as vector input
+- 1080p/2D Render
 - Binaural decoder support over WebSocket
 - Binaural HRTF visualization 
 - Two-way OSC messaging of input positioning like Oculus SDK
@@ -37,4 +38,4 @@ If you find other issues, please file them on Github or even better open a pull 
 
 #### Related Articles 
 
-
+https://francois.pitie.net/2016/05/05/360-audio-youtube-upload/
