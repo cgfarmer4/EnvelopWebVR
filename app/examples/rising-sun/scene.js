@@ -18,7 +18,7 @@ App.timeline.targets.push(sun);\n\
 //STARS\n\
 let particleCount = 1000;\n\
 let particles = new App.THREE.Geometry();\n\
-let pMaterial = new App.THREE.ParticleBasicMaterial({\n\
+let pMaterial = new App.THREE.PointsMaterial({\n\
     color: 0xFFFFFF,\n\
     size: 10,\n\
     map: textureLoader.load('app/examples/rising-sun/particle.png'),\n\
@@ -38,7 +38,7 @@ for (let p = 0; p < particleCount; p++) {\n\
     particles.vertices.push(particle);\n\
 }\n\
 // create the particle system\n\
-let stars = new App.THREE.ParticleSystem(\n\
+let stars = new App.THREE.Points(\n\
     particles,\n\
     pMaterial\n\
 );\n\

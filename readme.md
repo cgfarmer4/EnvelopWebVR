@@ -15,8 +15,9 @@ Perform live or render audio reactive 2D, 3D and VR visuals using data from Able
 #### Examples
 
 #### Tutorials
-[Getting started with WebVR and Spatial Audio] (http://chasefarmer.com/articles/2017-01-09-getting-started-with-webvr-and-spatial-audio/)
-[Getting started with WebVR and Spatial Audio part 2] (http://chasefarmer.com/articles/2017-02-16-webvr-and-spatial-audio-part-2/)
+[Getting started with WebVR and Spatial Audio](http://chasefarmer.com/articles/2017-01-09-getting-started-with-webvr-and-spatial-audio/)
+
+[Getting started with WebVR and Spatial Audio part 2](http://chasefarmer.com/articles/2017-02-16-webvr-and-spatial-audio-part-2/)
 
 #### Future 
 - Daydream controller as vector input
