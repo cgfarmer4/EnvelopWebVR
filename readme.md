@@ -5,7 +5,7 @@ Perform live or render audio reactive 2D, 3D and VR visuals using data from Able
 
 #### What can I do with this code?
 - Quick inspection of spatial audio mixes aligned with graphical object movement. 
-(Does not currently support reverberations and reflections from the graphical environment like most game audio SDKs.)
+(Does not support reverberations and reflections from the graphical environment like most game audio SDKs. Definitely could though!)
 - Perform live audio reactive visuals across multiple devices using WebSockets and WebGL.
 - Create, save and export keyframe rendering data with tweening / easing support for WebGL object properties.
 - Record Envelop for Live vector movements, channel levels and reassign those values to WebGL object properties.
@@ -19,6 +19,12 @@ Perform live or render audio reactive 2D, 3D and VR visuals using data from Able
 
 [Getting started with WebVR and Spatial Audio part 2](http://chasefarmer.com/articles/2017-02-16-webvr-and-spatial-audio-part-2/)
 
+#### HTTPS Local Setup for WebVR
+WebVR will display an error message about insecure content if you use a non HTTPS server with Chrome. In order to circumvent that `budo` has a way of emulating
+an HTTPS server.
+        
+    npm run vr
+
 #### Future 
 - Daydream controller as vector input
 - 1080p/2D Render
@@ -26,9 +32,10 @@ Perform live or render audio reactive 2D, 3D and VR visuals using data from Able
 - Binaural HRTF visualization
 - Scene Timeline
 - Two-way OSC messaging of input positioning like Oculus SDK
-- MIDI Input / Messaging
+- MIDI input with Boolean / String record input tracks.
 
 #### Known Issues
+- Browser scroll throws off timeline selections.
 - Timeline blurry on retina screens. 
 - Antialias WebGL Renderer FPS performance on retina
 - UDP Server connections limit error.

@@ -9,6 +9,7 @@ const Record = require('./record');
 const MaxToBrowser = require('./maxToBrowser');
 const EventEmitter = require('events').EventEmitter;
 const IntroCode = require('./examples/rising-sun/scene');
+const IntroTimeline = require('./examples/rising-sun/tracks');
 
 class AppMain extends EventEmitter {
     constructor() {
@@ -64,8 +65,6 @@ class AppMain extends EventEmitter {
                 this.vrDisplay = displays[0];
             });
         }
-
-        this.animate();
     }
     /**
      * Animation loop.
@@ -107,12 +106,12 @@ class AppMain extends EventEmitter {
      */
     initCode() {
         this.code = IntroCode;
-
         let script = document.createElement('script');
         script.id = 'include-scene';
         script.textContent = '( function () { ' + this.code + ' } )()';
         document.head.appendChild(script);
-
+        this.timeline.resetTracks(IntroTimeline, this.userScene);
+        
         this.on('app:codeUpdate', (event) => {
             //Remove Script
             let oldScript = document.getElementById('include-scene');

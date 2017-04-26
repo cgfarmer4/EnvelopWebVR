@@ -30,7 +30,8 @@ canvas {
     text-transform: uppercase;
 }
 
-#detailsView h3 {
+#detailsView h3, h4 {
+    margin: 0 10px;
     color: aliceblue;
     width: 80%;
     text-overflow: ellipsis;
