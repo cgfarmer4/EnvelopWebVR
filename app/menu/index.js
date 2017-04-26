@@ -17,7 +17,6 @@ class Menu {
         this.renderer = app.renderer;
         this.envelop = app.envelop;
         this.timeline = app.timeline;
-        this.controlSwitcher = app.controlSwitcher;
         this.cameraUIView = new CameraUIView(this.timeline, this.camera);
         this.timelineUIDisplay = false;
         this.detailsRightUIView = this.app.detailsRightUIView;
@@ -37,42 +36,41 @@ class Menu {
         let showEditor = this.element.querySelector('#showEditor');
         showEditor.onclick = (event) => {
             if(!this.editor) {
-                this.editor = new Editor(this.app, this.controlSwitcher.controls);
+                this.editor = new Editor(this.app, this.app.controlSwitcher.controls);
             }
             else {
                 this.editor.initCode();
                 this.editor.element.style.display = 'block';
             }
-            this.controlSwitcher.controls.enabled = false;
+            this.app.controlSwitcher.controls.enabled = false;
         }
 
         //Controls TODO: Consolidate these.
         let startVR = this.element.querySelector('#startVR');
         startVR.onclick = () => {
-            if (this.controlSwitcher && this.controlSwitcher.controls.type === 'vr') return;
-            this.controlSwitcher = new Controls('vr', this.scene, this.camera, this.renderer);
-            window.addEventListener('vrdisplaypresentchange', this.onResize.bind(this));
+            if (this.app.controlSwitcher && this.app.controlSwitcher.controls.type === 'vr') return;
+            this.app.controlSwitcher = new Controls('vr', this.app);
         };
 
         let startTrackball = this.element.querySelector('#startTrackball');
         startTrackball.onclick = () => {
-            if (this.controlSwitcher && this.controlSwitcher.controls.type === 'trackball') return;
-            this.controlSwitcher = new Controls('trackball', this.scene, this.camera);
+            if (this.app.controlSwitcher && this.app.controlSwitcher.controls.type === 'trackball') return;
+            this.app.controlSwitcher = new Controls('trackball', this.app);
         };
 
         let startOrbit = this.element.querySelector('#startOrbit');
         startOrbit.onclick = () => {
-            if (this.controlSwitcher && this.controlSwitcher.controls.type === 'orbit') return;
-            this.controlSwitcher = new Controls('orbit', this.scene, this.camera);
+            if (this.app.controlSwitcher && this.app.controlSwitcher.controls.type === 'orbit') return;
+            this.app.controlSwitcher = new Controls('orbit', this.app);
         };
 
         let enableControls = this.element.querySelector('#enableControls');
         enableControls.onclick = () => {
-            if(this.controlSwitcher.controls.enabled) {
-                this.controlSwitcher.controls.enabled = false;
+            if(this.app.controlSwitcher.controls.enabled) {
+                this.app.controlSwitcher.controls.enabled = false;
             }
             else {
-                this.controlSwitcher.controls.enabled = true;
+                this.app.controlSwitcher.controls.enabled = true;
             }
         };
 
@@ -80,7 +78,7 @@ class Menu {
         let startCapture = this.element.querySelector('#startCapture');
         startCapture.onclick = function(event) {
             if (!this.app.capturing) {
-                this.controlSwitcher = new Controls('orbit', this.scene, this.camera, this.renderer, this.container);
+                // this.app.controlSwitcher = new Controls('orbit', this.app);
                 this.app.record = new Record(this.renderer, this.camera, this.scene);
                 this.app.capturing = true;
             }

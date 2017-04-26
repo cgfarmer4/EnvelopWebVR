@@ -8,7 +8,7 @@ const Helpers = require('./helpers');
 const Record = require('./record');
 const MaxToBrowser = require('./maxToBrowser');
 const EventEmitter = require('events').EventEmitter;
-const IntroCode = require('./examples/introduction');
+const IntroCode = require('./examples/rising-sun/scene');
 
 class AppMain extends EventEmitter {
     constructor() {
@@ -16,11 +16,14 @@ class AppMain extends EventEmitter {
         this.THREE = THREE;
         this.clock = new THREE.Clock();
         this.renderer = new THREE.WebGLRenderer({
+            alpha: true,
             antialias: true
         });
         this.scene = new THREE.Scene();
+        this.userScene = new THREE.Scene();
         this.renderer.autoClear = false;
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 10000);
+        this.camera.position.set(100, 100, 100);
 
         // Stage for rendering.
         this.renderer.setClearColor(new THREE.Color(0x666666));
@@ -35,7 +38,7 @@ class AppMain extends EventEmitter {
         window.addEventListener('resize', this.onResize.bind(this));
 
         // Trackball defaut
-        this.controlSwitcher = new Controls('orbit', this.scene, this.camera);
+        this.controlSwitcher = new Controls('orbit', this);
         this.helpers = new Helpers(this.scene);
 
         //Envelop
@@ -56,40 +59,48 @@ class AppMain extends EventEmitter {
             z: 100
         }, 0);
 
+        if (navigator.getVRDisplays && navigator.getVRDisplays()) {
+            navigator.getVRDisplays().then((displays) => {
+                this.vrDisplay = displays[0];
+            });
+        }
+
         this.animate();
     }
     /**
      * Animation loop.
      */
     animate() {
-        requestAnimationFrame(this.animate.bind(this));
-
         let delta = this.clock.getDelta();
         this.helpers.stats.begin();
         this.controlSwitcher.controls.update(delta);
-        this.timeline.update(delta);
-        this.envelop.update(delta);
-        this.renderer.clear();
-        this.renderer.render(this.scene, this.camera);
 
-        // If we don't change the source here, the HMD will not move the camera.
-        // if (this.controlSwitcher.controls.type === 'vr') {
-        //     this.vrDisplay.requestAnimationFrame(this.animate.bind(this));
-        //     this.effect.render(this.scene, this.camera);
-        // }
+        if (this.controlSwitcher.type === 'vr') {
+            this.controlSwitcher.effect.requestAnimationFrame(this.animate.bind(this));
+            this.controlSwitcher.effect.render(this.userScene, this.camera);
+        }
+        else {
+            requestAnimationFrame(this.animate.bind(this));
+            this.timeline.update(delta);
+            this.envelop.update(delta);
+            this.renderer.clear();
+            this.renderer.render(this.scene, this.camera);
+            this.renderer.clearDepth();
+            this.renderer.render(this.userScene, this.camera);
+        }
 
         if (this.capturing) {
-            this.record.cubeMap.update(this.camera, this.scene);
+            this.record.cubeMap.update(this.camera, this.userScene);
         }
-        this.helpers.stats.end();
 
+        this.helpers.stats.end();
     }
     onResize() {
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
-        // if (this.controlSwitcher.controls.type === 'vr') {
-        //     this.effect.setSize(window.innerWidth, window.innerHeight);
-        // }
+        if (this.controlSwitcher.type === 'vr') {
+            this.effect.setSize(window.innerWidth, window.innerHeight);
+        }
     }
     /**
      * Initialitize template on app create.

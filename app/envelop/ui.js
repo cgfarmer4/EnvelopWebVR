@@ -40,6 +40,7 @@ class EnvelopUI {
         let close = this.element.querySelector('header #closeEnvelop');
         close.onclick = (event) => {
             this.element.style.display = 'none';
+            this.visible = false;
         }
 
         let viewLabels = this.element.querySelector('#viewLabelsToggle');

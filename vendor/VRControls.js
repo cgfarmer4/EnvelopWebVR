@@ -5,7 +5,7 @@
 
 const THREE = require('three');
 
-THREE.VRControls = function ( object, onError ) {
+module.exports = THREE.VRControls = function (object, onError) {
 
     var scope = this;
 
@@ -15,35 +15,35 @@ THREE.VRControls = function ( object, onError ) {
 
     var frameData = null;
 
-    if ( 'VRFrameData' in window ) {
+    if ('VRFrameData' in window) {
 
         frameData = new VRFrameData();
 
     }
 
-    function gotVRDisplays( displays ) {
+    function gotVRDisplays(displays) {
 
         vrDisplays = displays;
 
-        if ( displays.length > 0 ) {
+        if (displays.length > 0) {
 
-            vrDisplay = displays[ 0 ];
+            vrDisplay = displays[0];
 
         } else {
 
-            if ( onError ) onError( 'VR input not available.' );
+            if (onError) onError('VR input not available.');
 
         }
 
     }
 
-    if ( navigator.getVRDisplays ) {
+    if (navigator.getVRDisplays) {
 
-        navigator.getVRDisplays().then( gotVRDisplays ).catch ( function () {
+        navigator.getVRDisplays().then(gotVRDisplays).catch(function () {
 
-            console.warn( 'THREE.VRControls: Unable to get VR Displays' );
+            console.warn('THREE.VRControls: Unable to get VR Displays');
 
-        } );
+        });
 
     }
 
@@ -67,7 +67,7 @@ THREE.VRControls = function ( object, onError ) {
 
     };
 
-    this.setVRDisplay = function ( value ) {
+    this.setVRDisplay = function (value) {
 
         vrDisplay = value;
 
@@ -75,7 +75,7 @@ THREE.VRControls = function ( object, onError ) {
 
     this.getVRDisplays = function () {
 
-        console.warn( 'THREE.VRControls: getVRDisplays() is being deprecated.' );
+        console.warn('THREE.VRControls: getVRDisplays() is being deprecated.');
         return vrDisplays;
 
     };
@@ -88,81 +88,57 @@ THREE.VRControls = function ( object, onError ) {
 
     this.update = function () {
 
-        if ( vrDisplay ) {
+        if (vrDisplay) {
 
             var pose;
 
-            if ( vrDisplay.getFrameData ) {
+            if (vrDisplay.getFrameData) {
 
-                vrDisplay.getFrameData( frameData );
+                vrDisplay.getFrameData(frameData);
                 pose = frameData.pose;
 
-            } else if ( vrDisplay.getPose ) {
+            } else if (vrDisplay.getPose) {
 
                 pose = vrDisplay.getPose();
 
             }
 
-            if ( pose.orientation !== null ) {
+            if (pose.orientation !== null) {
 
-                object.quaternion.fromArray( pose.orientation );
+                object.quaternion.fromArray(pose.orientation);
 
             }
 
-            if ( pose.position !== null ) {
+            if (pose.position !== null) {
 
-                object.position.fromArray( pose.position );
+                object.position.fromArray(pose.position);
 
             } else {
 
-                object.position.set( 0, 0, 0 );
+                object.position.set(0, 0, 0);
 
             }
 
-            if ( this.standing ) {
+            if (this.standing) {
 
-                if ( vrDisplay.stageParameters ) {
+                if (vrDisplay.stageParameters) {
 
                     object.updateMatrix();
 
-                    standingMatrix.fromArray( vrDisplay.stageParameters.sittingToStandingTransform );
-                    object.applyMatrix( standingMatrix );
+                    standingMatrix.fromArray(vrDisplay.stageParameters.sittingToStandingTransform);
+                    object.applyMatrix(standingMatrix);
 
                 } else {
 
-                    object.position.setY( object.position.y + this.userHeight );
+                    object.position.setY(object.position.y + this.userHeight);
 
                 }
 
             }
 
-            object.position.multiplyScalar( scope.scale );
+            object.position.multiplyScalar(scope.scale);
 
         }
-
-    };
-
-    this.resetPose = function () {
-
-        if ( vrDisplay ) {
-
-            vrDisplay.resetPose();
-
-        }
-
-    };
-
-    this.resetSensor = function () {
-
-        console.warn( 'THREE.VRControls: .resetSensor() is now .resetPose().' );
-        this.resetPose();
-
-    };
-
-    this.zeroSensor = function () {
-
-        console.warn( 'THREE.VRControls: .zeroSensor() is now .resetPose().' );
-        this.resetPose();
 
     };
 

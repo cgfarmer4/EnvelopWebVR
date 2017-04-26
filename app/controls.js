@@ -5,12 +5,14 @@ const TrackballControls = require('../vendor/TrackballControls');
 const OrbitControls = require('../vendor/OrbitControls');
 
 class Controls {
-    constructor(type, threeDScene, camera, renderer, container) {
+    constructor(type, app) {
         this.type = type;
-        this.scene = threeDScene;
-        this.camera = camera;
-        this.renderer = renderer;
-        this.container = container;
+        this.scene = app.scene;
+        this.camera = app.camera;
+        this.renderer = app.renderer;
+        this.container = app.container;
+        this.vrDisplay = app.vrDisplay;
+        
         return this[type].call(this);
     }
     orbit() {
@@ -39,19 +41,11 @@ class Controls {
     }
     vr() {
         this.controls = new THREE.VRControls(this.camera);
+        this.renderer.sortObjects = false;
+        this.renderer.autoClear = true;
         this.controls.standing = true;
         this.effect = new THREE.VREffect(this.renderer);
-        this.effect.setSize(window.innerWidth, window.innerHeight);
-        this.vrDisplay = {};
-
-        navigator.getVRDisplays().then((displays) => {
-            if (displays.length > 0) {
-                this.vrDisplay = displays[0];
-            }
-
-            this.vrDisplay.requestPresent([{ source: this.renderer.domElement }]);
-        });
-
+        this.vrDisplay.requestPresent([{ source: this.renderer.domElement }]);
         return this;
     }
 }
