@@ -12,9 +12,9 @@
                         "name": "x",
                         "targetName": "App.camera.position",
                         "target": {
-                            "x": 10.601458074779128,
-                            "y": 179.1944698519985,
-                            "z": 307.2336767820653
+                            "x": -0.14000000000000168,
+                            "y": 181,
+                            "z": 244
                         },
                         "propertyName": "x",
                         "endValue": "-.14",
@@ -23,14 +23,13 @@
                         "time": 0,
                         "endTime": 0,
                         "easing": "Linear.EaseNone",
-                        "startValue": -0.23818780012309562,
+                        "startValue": -0.14000000000000168,
                         "selected": false
                     }
                 ],
                 "following": false,
                 "followTrack": {},
                 "followType": "",
-                "followingKeys": [],
                 "position": 70
             },
             "y": {
@@ -42,9 +41,9 @@
                         "name": "y",
                         "targetName": "App.camera.position",
                         "target": {
-                            "x": 10.601458074779128,
-                            "y": 179.1944698519985,
-                            "z": 307.2336767820653
+                            "x": -0.14000000000000168,
+                            "y": 181,
+                            "z": 244
                         },
                         "propertyName": "y",
                         "endValue": "181",
@@ -53,14 +52,13 @@
                         "time": 0,
                         "endTime": 0,
                         "easing": "Linear.EaseNone",
-                        "startValue": 292.05401540016953,
+                        "startValue": 181,
                         "selected": false
                     }
                 ],
                 "following": false,
                 "followTrack": {},
                 "followType": "",
-                "followingKeys": [],
                 "position": 90
             },
             "z": {
@@ -72,9 +70,9 @@
                         "name": "z",
                         "targetName": "App.camera.position",
                         "target": {
-                            "x": 10.601458074779128,
-                            "y": 179.1944698519985,
-                            "z": 307.2336767820653
+                            "x": -0.14000000000000168,
+                            "y": 181,
+                            "z": 244
                         },
                         "propertyName": "z",
                         "endValue": "244",
@@ -83,23 +81,22 @@
                         "time": 0,
                         "endTime": 0,
                         "easing": "Linear.EaseNone",
-                        "startValue": 415.1273087719593,
+                        "startValue": 244,
                         "selected": false
                     }
                 ],
                 "following": false,
                 "followTrack": {},
                 "followType": "",
-                "followingKeys": [],
                 "position": 110
             }
         },
         "followKeysMap": {},
         "type": "keyframe",
         "target": {
-            "x": 10.601458074779128,
-            "y": 179.1944698519985,
-            "z": 307.2336767820653
+            "x": -0.14000000000000168,
+            "y": 181,
+            "z": 244
         },
         "labelHeight": 20,
         "startTime": 0,
@@ -121,7 +118,7 @@
                         "targetName": "stars.rotation",
                         "target": {
                             "_x": 0,
-                            "_y": 1.0044125178708996,
+                            "_y": 0.22945314137470693,
                             "_z": 0,
                             "_order": "XYZ"
                         },
@@ -132,7 +129,7 @@
                         "time": 0,
                         "endTime": 0,
                         "easing": "Linear.EaseNone",
-                        "startValue": 1.0000011485926632
+                        "startValue": 1
                     },
                     {
                         "id": "stars.rotation.y",
@@ -141,7 +138,7 @@
                         "targetName": "stars.rotation",
                         "target": {
                             "_x": 0,
-                            "_y": 1.0044125178708996,
+                            "_y": 0.22945314137470693,
                             "_z": 0,
                             "_order": "XYZ"
                         },
@@ -160,7 +157,6 @@
                 "following": false,
                 "followTrack": {},
                 "followType": "",
-                "followingKeys": [],
                 "position": 150
             }
         },
@@ -168,7 +164,7 @@
         "type": "keyframe",
         "target": {
             "_x": 0,
-            "_y": 1.0044125178708996,
+            "_y": 0.22945314137470693,
             "_z": 0,
             "_order": "XYZ"
         },
@@ -176,8 +172,7 @@
         "startTime": 0,
         "endTime": 22.009999999999998,
         "time": 0,
-        "selectedProperty": "y",
-        "followableTracks": []
+        "selectedProperty": ""
     },
     {
         "id": "sun.rotation",
@@ -192,7 +187,7 @@
                         "name": "x",
                         "targetName": "sun.rotation",
                         "target": {
-                            "_x": 0.9981730800954999,
+                            "_x": 0.39193514893012726,
                             "_y": 0,
                             "_z": 0,
                             "_order": "XYZ"
@@ -204,7 +199,7 @@
                         "time": 0,
                         "endTime": 0,
                         "easing": "Linear.EaseNone",
-                        "startValue": 0.999999902538875
+                        "startValue": 1
                     },
                     {
                         "id": "sun.rotation.x",
@@ -212,7 +207,7 @@
                         "name": "x",
                         "targetName": "sun.rotation",
                         "target": {
-                            "_x": 0.9981730800954999,
+                            "_x": 0.39193514893012726,
                             "_y": 0,
                             "_z": 0,
                             "_order": "XYZ"
@@ -232,14 +227,13 @@
                 "following": false,
                 "followTrack": {},
                 "followType": "",
-                "followingKeys": [],
                 "position": 190
             }
         },
         "followKeysMap": {},
         "type": "keyframe",
         "target": {
-            "_x": 0.9981730800954999,
+            "_x": 0.39193514893012726,
             "_y": 0,
             "_z": 0,
             "_order": "XYZ"
@@ -248,7 +242,815 @@
         "startTime": 0,
         "endTime": 22.005,
         "time": 0,
-        "selectedProperty": "x",
-        "followableTracks": []
+        "selectedProperty": ""
+    },
+    {
+        "id": "Input1",
+        "targetName": "Input1",
+        "inputModifier": "",
+        "followInputTarget": "Input1",
+        "labelHeight": 90,
+        "type": "position",
+        "sampleRate": 1,
+        "min": -200,
+        "max": 200,
+        "nextTick": 0,
+        "recording": false,
+        "data": {
+            "x": [
+                -13.394457141252648,
+                -13.408224985750541,
+                -13.407472203714317,
+                -13.407265809468266,
+                -13.404522920474216,
+                -13.403785678785361,
+                -13.403024871182124,
+                -13.40227997830995,
+                -13.40154298440731,
+                -13.400789318952055,
+                -13.400060245561166,
+                -13.39932321612341,
+                -13.398561779002302,
+                -13.397832699029657,
+                -13.39708776547022,
+                -13.396342493237817,
+                -13.39560576167916,
+                -13.394853668655644,
+                -13.394119119914302,
+                -13.39339119096079,
+                -13.393043881417277,
+                -13.393694779656466,
+                -13.394441294991935
+            ],
+            "y": [
+                123.11852345854044,
+                -419.9106232094764,
+                -396.0256452989578,
+                -389.4769706511497,
+                -302.4477442765236,
+                -279.0556766343117,
+                -254.91581271886824,
+                -231.28082110881806,
+                -207.89633956074712,
+                -183.98270682692527,
+                -160.84914083361625,
+                -137.46278388142585,
+                -113.3013950574398,
+                -90.16586918234825,
+                -66.52573288261891,
+                -42.87188585817813,
+                -19.482791829705235,
+                4.411128041446204,
+                27.809049985706807,
+                51.4518050929904,
+                74.8441198323667,
+                98.72533848688005,
+                122.61432275056839
+            ],
+            "z": [
+                -17.383488277235696,
+                -17.401356352134744,
+                -17.400379382514842,
+                -17.400111521569166,
+                -17.39655176709976,
+                -17.3955949659304,
+                -17.394607580632687,
+                -17.393640849665193,
+                -17.392684370075777,
+                -17.39170625394399,
+                -17.390760053690396,
+                -17.389803527983076,
+                -17.388815325689468,
+                -17.387869116893995,
+                -17.38690233312208,
+                -17.385935109816298,
+                -17.384978970700068,
+                -17.38400289528919,
+                -17.383049589059638,
+                -17.3821048740707,
+                -17.38165413154978,
+                -17.38249887514717,
+                -17.383467711767132
+            ]
+        },
+        "timelineRecord": {},
+        "inputModiferElement": {}
+    },
+    {
+        "id": "sun.position",
+        "targetName": "sun.position",
+        "keysMap": {
+            "y": {
+                "keys": [
+                    {
+                        "id": "sun.position.y",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "name": "y",
+                        "targetName": "sun.position",
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "endValue": 0,
+                        "duration": 0,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 0,
+                        "easing": "Linear.EaseNone"
+                    }
+                ],
+                "following": true,
+                "followTrack": {
+                    "id": "Input1",
+                    "targetName": "Input1",
+                    "inputModifier": "",
+                    "followInputTarget": "Input1",
+                    "labelHeight": 90,
+                    "type": "position",
+                    "sampleRate": 1,
+                    "min": -200,
+                    "max": 200,
+                    "nextTick": 0,
+                    "recording": false,
+                    "data": {
+                        "x": [
+                            -13.394457141252648,
+                            -13.408224985750541,
+                            -13.407472203714317,
+                            -13.407265809468266,
+                            -13.404522920474216,
+                            -13.403785678785361,
+                            -13.403024871182124,
+                            -13.40227997830995,
+                            -13.40154298440731,
+                            -13.400789318952055,
+                            -13.400060245561166,
+                            -13.39932321612341,
+                            -13.398561779002302,
+                            -13.397832699029657,
+                            -13.39708776547022,
+                            -13.396342493237817,
+                            -13.39560576167916,
+                            -13.394853668655644,
+                            -13.394119119914302,
+                            -13.39339119096079,
+                            -13.393043881417277,
+                            -13.393694779656466,
+                            -13.394441294991935
+                        ],
+                        "y": [
+                            123.11852345854044,
+                            -419.9106232094764,
+                            -396.0256452989578,
+                            -389.4769706511497,
+                            -302.4477442765236,
+                            -279.0556766343117,
+                            -254.91581271886824,
+                            -231.28082110881806,
+                            -207.89633956074712,
+                            -183.98270682692527,
+                            -160.84914083361625,
+                            -137.46278388142585,
+                            -113.3013950574398,
+                            -90.16586918234825,
+                            -66.52573288261891,
+                            -42.87188585817813,
+                            -19.482791829705235,
+                            4.411128041446204,
+                            27.809049985706807,
+                            51.4518050929904,
+                            74.8441198323667,
+                            98.72533848688005,
+                            122.61432275056839
+                        ],
+                        "z": [
+                            -17.383488277235696,
+                            -17.401356352134744,
+                            -17.400379382514842,
+                            -17.400111521569166,
+                            -17.39655176709976,
+                            -17.3955949659304,
+                            -17.394607580632687,
+                            -17.393640849665193,
+                            -17.392684370075777,
+                            -17.39170625394399,
+                            -17.390760053690396,
+                            -17.389803527983076,
+                            -17.388815325689468,
+                            -17.387869116893995,
+                            -17.38690233312208,
+                            -17.385935109816298,
+                            -17.384978970700068,
+                            -17.38400289528919,
+                            -17.383049589059638,
+                            -17.3821048740707,
+                            -17.38165413154978,
+                            -17.38249887514717,
+                            -17.383467711767132
+                        ]
+                    },
+                    "timelineRecord": {},
+                    "inputModiferElement": {}
+                },
+                "followType": "ignoreKeys",
+                "followKeys": [
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": 122.23317400664129,
+                        "endValue": 123.11852345854044,
+                        "startTime": 0,
+                        "duration": 1,
+                        "time": 0,
+                        "endTime": 1,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": 123.11852345854044,
+                        "endValue": -419.9106232094764,
+                        "startTime": 1,
+                        "duration": 1,
+                        "time": 1,
+                        "endTime": 2,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -419.91062320947646,
+                        "endValue": -396.0256452989578,
+                        "startTime": 2,
+                        "duration": 1,
+                        "time": 2,
+                        "endTime": 3,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -396.0256452989578,
+                        "endValue": -389.4769706511497,
+                        "startTime": 3,
+                        "duration": 1,
+                        "time": 3,
+                        "endTime": 4,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -389.4769706511497,
+                        "endValue": -302.4477442765236,
+                        "startTime": 4,
+                        "duration": 1,
+                        "time": 4,
+                        "endTime": 5,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -302.4477442765236,
+                        "endValue": -279.0556766343117,
+                        "startTime": 5,
+                        "duration": 1,
+                        "time": 5,
+                        "endTime": 6,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -279.0556766343117,
+                        "endValue": -254.91581271886824,
+                        "startTime": 6,
+                        "duration": 1,
+                        "time": 6,
+                        "endTime": 7,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -254.91581271886824,
+                        "endValue": -231.28082110881806,
+                        "startTime": 7,
+                        "duration": 1,
+                        "time": 7,
+                        "endTime": 8,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -231.28082110881806,
+                        "endValue": -207.89633956074712,
+                        "startTime": 8,
+                        "duration": 1,
+                        "time": 8,
+                        "endTime": 9,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -207.89633956074712,
+                        "endValue": -183.98270682692527,
+                        "startTime": 9,
+                        "duration": 1,
+                        "time": 9,
+                        "endTime": 10,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": true,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -183.98270682692527,
+                        "endValue": -160.84914083361625,
+                        "startTime": 10,
+                        "duration": 1,
+                        "time": 10,
+                        "endTime": 11,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -160.84914083361625,
+                        "endValue": -137.46278388142585,
+                        "startTime": 11,
+                        "duration": 1,
+                        "time": 11,
+                        "endTime": 12,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -137.46278388142585,
+                        "endValue": -113.3013950574398,
+                        "startTime": 12,
+                        "duration": 1,
+                        "time": 12,
+                        "endTime": 13,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -113.3013950574398,
+                        "endValue": -90.16586918234825,
+                        "startTime": 13,
+                        "duration": 1,
+                        "time": 13,
+                        "endTime": 14,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -90.16586918234825,
+                        "endValue": -66.52573288261891,
+                        "startTime": 14,
+                        "duration": 1,
+                        "time": 14,
+                        "endTime": 15,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -66.52573288261891,
+                        "endValue": -42.87188585817813,
+                        "startTime": 15,
+                        "duration": 1,
+                        "time": 15,
+                        "endTime": 16,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -42.87188585817813,
+                        "endValue": -19.482791829705235,
+                        "startTime": 16,
+                        "duration": 1,
+                        "time": 16,
+                        "endTime": 17,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": -19.482791829705235,
+                        "endValue": 4.411128041446204,
+                        "startTime": 17,
+                        "duration": 1,
+                        "time": 17,
+                        "endTime": 18,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": 4.411128041446204,
+                        "endValue": 27.809049985706807,
+                        "startTime": 18,
+                        "duration": 1,
+                        "time": 18,
+                        "endTime": 19,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": 27.809049985706807,
+                        "endValue": 51.4518050929904,
+                        "startTime": 19,
+                        "duration": 1,
+                        "time": 19,
+                        "endTime": 20,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": 51.4518050929904,
+                        "endValue": 74.8441198323667,
+                        "startTime": 20,
+                        "duration": 1,
+                        "time": 20,
+                        "endTime": 21,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": 74.8441198323667,
+                        "endValue": 98.72533848688005,
+                        "startTime": 21,
+                        "duration": 1,
+                        "time": 21,
+                        "endTime": 22,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    },
+                    {
+                        "id": "Input1",
+                        "name": "Input1 -> y",
+                        "targetName": "Input1",
+                        "hasStarted": false,
+                        "hasEnded": false,
+                        "target": {
+                            "x": 0,
+                            "y": -164.11918605459988,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": 98.72533848688005,
+                        "endValue": 122.61432275056839,
+                        "startTime": 22,
+                        "duration": 1,
+                        "time": 22,
+                        "endTime": 23,
+                        "easing": "Linear.EaseNone",
+                        "followKey": true
+                    }
+                ],
+                "position": 320
+            }
+        },
+        "followKeysMap": {},
+        "type": "keyframe",
+        "target": {
+            "x": 0,
+            "y": -164.11918605459988,
+            "z": 0
+        },
+        "labelHeight": 20,
+        "startTime": 0,
+        "endTime": 23,
+        "time": 0,
+        "selectedProperty": "y",
+        "followableTracks": [
+            {
+                "id": "Input1",
+                "targetName": "Input1",
+                "inputModifier": "",
+                "followInputTarget": "Input1",
+                "labelHeight": 90,
+                "type": "position",
+                "sampleRate": 1,
+                "min": -200,
+                "max": 200,
+                "nextTick": 0,
+                "recording": false,
+                "data": {
+                    "x": [
+                        -13.394457141252648,
+                        -13.408224985750541,
+                        -13.407472203714317,
+                        -13.407265809468266,
+                        -13.404522920474216,
+                        -13.403785678785361,
+                        -13.403024871182124,
+                        -13.40227997830995,
+                        -13.40154298440731,
+                        -13.400789318952055,
+                        -13.400060245561166,
+                        -13.39932321612341,
+                        -13.398561779002302,
+                        -13.397832699029657,
+                        -13.39708776547022,
+                        -13.396342493237817,
+                        -13.39560576167916,
+                        -13.394853668655644,
+                        -13.394119119914302,
+                        -13.39339119096079,
+                        -13.393043881417277,
+                        -13.393694779656466,
+                        -13.394441294991935
+                    ],
+                    "y": [
+                        123.11852345854044,
+                        -419.9106232094764,
+                        -396.0256452989578,
+                        -389.4769706511497,
+                        -302.4477442765236,
+                        -279.0556766343117,
+                        -254.91581271886824,
+                        -231.28082110881806,
+                        -207.89633956074712,
+                        -183.98270682692527,
+                        -160.84914083361625,
+                        -137.46278388142585,
+                        -113.3013950574398,
+                        -90.16586918234825,
+                        -66.52573288261891,
+                        -42.87188585817813,
+                        -19.482791829705235,
+                        4.411128041446204,
+                        27.809049985706807,
+                        51.4518050929904,
+                        74.8441198323667,
+                        98.72533848688005,
+                        122.61432275056839
+                    ],
+                    "z": [
+                        -17.383488277235696,
+                        -17.401356352134744,
+                        -17.400379382514842,
+                        -17.400111521569166,
+                        -17.39655176709976,
+                        -17.3955949659304,
+                        -17.394607580632687,
+                        -17.393640849665193,
+                        -17.392684370075777,
+                        -17.39170625394399,
+                        -17.390760053690396,
+                        -17.389803527983076,
+                        -17.388815325689468,
+                        -17.387869116893995,
+                        -17.38690233312208,
+                        -17.385935109816298,
+                        -17.384978970700068,
+                        -17.38400289528919,
+                        -17.383049589059638,
+                        -17.3821048740707,
+                        -17.38165413154978,
+                        -17.38249887514717,
+                        -17.383467711767132
+                    ]
+                },
+                "timelineRecord": {},
+                "inputModiferElement": {}
+            }
+        ],
+        "followingPropertyPosition": "y",
+        "oldEndTime": 23
     }
 ]

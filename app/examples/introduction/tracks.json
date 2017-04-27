@@ -1,0 +1,107 @@
+[
+    {
+        "id": "App.camera.position",
+        "targetName": "App.camera.position",
+        "keysMap": {
+            "x": {
+                "keys": [
+                    {
+                        "id": "App.camera.position.x",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "name": "x",
+                        "targetName": "App.camera.position",
+                        "target": {
+                            "x": -0.14000000000000168,
+                            "y": 181,
+                            "z": 244
+                        },
+                        "propertyName": "x",
+                        "endValue": "-.14",
+                        "duration": 0,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 0,
+                        "easing": "Linear.EaseNone",
+                        "startValue": -0.14000000000000168,
+                        "selected": false
+                    }
+                ],
+                "following": false,
+                "followTrack": {},
+                "followType": "",
+                "position": 70
+            },
+            "y": {
+                "keys": [
+                    {
+                        "id": "App.camera.position.y",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "name": "y",
+                        "targetName": "App.camera.position",
+                        "target": {
+                            "x": -0.14000000000000168,
+                            "y": 181,
+                            "z": 244
+                        },
+                        "propertyName": "y",
+                        "endValue": "181",
+                        "duration": 0,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 0,
+                        "easing": "Linear.EaseNone",
+                        "startValue": 181,
+                        "selected": false
+                    }
+                ],
+                "following": false,
+                "followTrack": {},
+                "followType": "",
+                "position": 90
+            },
+            "z": {
+                "keys": [
+                    {
+                        "id": "App.camera.position.z",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "name": "z",
+                        "targetName": "App.camera.position",
+                        "target": {
+                            "x": -0.14000000000000168,
+                            "y": 181,
+                            "z": 244
+                        },
+                        "propertyName": "z",
+                        "endValue": "244",
+                        "duration": 0,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 0,
+                        "easing": "Linear.EaseNone",
+                        "startValue": 244,
+                        "selected": false
+                    }
+                ],
+                "following": false,
+                "followTrack": {},
+                "followType": "",
+                "position": 110
+            }
+        },
+        "followKeysMap": {},
+        "type": "keyframe",
+        "target": {
+            "x": -0.14000000000000168,
+            "y": 181,
+            "z": 244
+        },
+        "labelHeight": 20,
+        "startTime": 0,
+        "endTime": 0,
+        "time": 0,
+        "selectedProperty": ""
+    }
+]
