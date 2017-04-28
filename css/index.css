@@ -30,7 +30,8 @@ canvas {
     text-transform: uppercase;
 }
 
-#detailsView h3, h4 {
+#detailsView h3,
+h4 {
     margin: 0 10px;
     color: aliceblue;
     width: 80%;
@@ -184,6 +185,11 @@ canvas {
 
 .addTrackToTimeline {
     color: #000;
+}
+
+#toolbar #audioStatus {
+    float: right;
+    margin: 0 10px;
 }
 
 

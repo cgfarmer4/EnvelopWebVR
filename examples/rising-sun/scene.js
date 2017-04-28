@@ -3,7 +3,7 @@ const Scene = "App.scene.background = new App.THREE.Color(0x000000);\n\
 //SUN\n\
 let textureLoader = new App.THREE.TextureLoader();\n\
 let material = new App.THREE.MeshBasicMaterial({\n\
-    map: textureLoader.load('app/examples/rising-sun/sun-texture.jpg')\n\
+    map: textureLoader.load('examples/rising-sun/sun-texture.jpg')\n\
 });\n\
 let geometry = new App.THREE.SphereGeometry(40, 50, 50);\n\
 let sun = new App.THREE.Mesh(geometry, material);\n\
@@ -21,7 +21,7 @@ let particles = new App.THREE.Geometry();\n\
 let pMaterial = new App.THREE.PointsMaterial({\n\
     color: 0xFFFFFF,\n\
     size: 10,\n\
-    map: textureLoader.load('app/examples/rising-sun/particle.png'),\n\
+    map: textureLoader.load('examples/rising-sun/particle.png'),\n\
     blending: App.THREE.AdditiveBlending,\n\
     transparent: true\n\
 });\n\

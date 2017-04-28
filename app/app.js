@@ -8,8 +8,8 @@ const Helpers = require('./helpers');
 const Record = require('./record');
 const MaxToBrowser = require('./maxToBrowser');
 const EventEmitter = require('events').EventEmitter;
-const IntroCode = require('./examples/rising-sun/scene');
-const IntroTimeline = require('./examples/rising-sun/tracks');
+const IntroCode = require('../examples/rising-sun/scene');
+const IntroTimeline = require('../examples/rising-sun/tracks');
 
 class AppMain extends EventEmitter {
     constructor() {
@@ -42,12 +42,15 @@ class AppMain extends EventEmitter {
         this.controlSwitcher = new Controls('orbit', this);
         this.helpers = new Helpers(this.scene);
 
+        //Audio
+        this.omnitoneAudio = new TimelineAudio.OmnitoneAudio('/examples/rising-sun/rising-sun_Ableton/RisingSunAmbixB.wav');
+
         //Envelop
         let maxToBrowser = new MaxToBrowser();
         this.envelop = new Envelop(this.scene, maxToBrowser);
 
         //Timeline
-        this.timeline = new TimelineAudio.Timeline();
+        this.timeline = new TimelineAudio.Timeline(this.omnitoneAudio);
         this.timeline.camera = this.camera;
         this.timeline.envelop = this.envelop;
         this.timeline.UI = new TimelineAudio.UIView(this.timeline);
@@ -73,6 +76,9 @@ class AppMain extends EventEmitter {
         let delta = this.clock.getDelta();
         this.helpers.stats.begin();
         this.controlSwitcher.controls.update(delta);
+
+        // Rotate the sound field by passing Three.js camera object. (4x4 matrix)
+        this.omnitoneAudio.renderer.setRotationMatrixFromCamera(this.camera.matrix);
 
         if (this.controlSwitcher.type === 'vr') {
             this.controlSwitcher.effect.requestAnimationFrame(this.animate.bind(this));
