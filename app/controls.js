@@ -17,9 +17,9 @@ class Controls {
     }
     orbit() {
         this.controls = new THREE.OrbitControls(this.camera, this.container);
-        this.camera.position.x = 100;
-        this.camera.position.y = 100;
-        this.camera.position.z = 100;
+        this.camera.position.x = 465;
+        this.camera.position.y = 465;
+        this.camera.position.z = 465;
     }
     trackball() {
         // position and point the camera to the center of the scene

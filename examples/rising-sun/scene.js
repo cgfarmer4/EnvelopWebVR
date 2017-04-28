@@ -1,6 +1,4 @@
-const Scene = "App.scene.background = new App.THREE.Color(0x000000);\n\
-\n\
-//SUN\n\
+const Scene = "//SUN\n\
 let textureLoader = new App.THREE.TextureLoader();\n\
 let material = new App.THREE.MeshBasicMaterial({\n\
     map: textureLoader.load('examples/rising-sun/sun-texture.jpg')\n\

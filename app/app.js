@@ -27,7 +27,7 @@ class AppMain extends EventEmitter {
         this.camera.position.set(100, 100, 100);
 
         // Stage for rendering.
-        this.renderer.setClearColor(new THREE.Color(0x666666));
+        this.renderer.setClearColor(new THREE.Color(0x000000));
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.container = document.body.appendChild(this.renderer.domElement);
@@ -54,14 +54,6 @@ class AppMain extends EventEmitter {
         this.timeline.camera = this.camera;
         this.timeline.envelop = this.envelop;
         this.timeline.UI = new TimelineAudio.UIView(this.timeline);
-
-        //Init with Camera Track
-        let cameraPos = new TimelineAudio.Tracks.Keyframe('App.camera.position', this.camera.position, this.timeline);
-        cameraPos.keyframe({
-            x: 100,
-            y: 100,
-            z: 100
-        }, 0);
 
         if (navigator.getVRDisplays && navigator.getVRDisplays()) {
             navigator.getVRDisplays().then((displays) => {
