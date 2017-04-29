@@ -53,9 +53,17 @@ If you find other issues, please file them on Github or even better open a pull 
 
 #### Reference
 http://www.envelop.us/
+
 https://github.com/EnvelopSound/EnvelopForLive
+
 https://www.facebook.com/groups/E4LUsers/
+
 https://github.com/cgfarmer4/three-audio-timeline
+
 https://francois.pitie.net/2016/05/05/360-audio-youtube-upload/
+
 https://github.com/GoogleChrome/omnitone
+
 https://support.google.com/youtube/answer/7278886?hl=en
+
+https://bitbucket.org/ambidecodertoolbox/amb2yt
