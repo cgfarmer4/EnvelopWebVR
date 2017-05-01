@@ -1,48 +1,47 @@
-const Scene = "//SUN\n\
-let textureLoader = new App.THREE.TextureLoader();\n\
-let material = new App.THREE.MeshBasicMaterial({\n\
-    map: textureLoader.load('examples/rising-sun/sun-texture.jpg')\n\
-});\n\
-let geometry = new App.THREE.SphereGeometry(40, 50, 50);\n\
-let sun = new App.THREE.Mesh(geometry, material);\n\
-\n\
-sun.position.y = 71;\n\
-sun.name = 'sun';\n\
-\n\
-App.userScene.add(sun);\n\
-App.timeline.targets.push(sun);\n\
-\n\
-\n\
-//STARS\n\
-let particleCount = 1000;\n\
-let particles = new App.THREE.Geometry();\n\
-let pMaterial = new App.THREE.PointsMaterial({\n\
-    color: 0xFFFFFF,\n\
-    size: 10,\n\
-    map: textureLoader.load('examples/rising-sun/particle.png'),\n\
-    blending: App.THREE.AdditiveBlending,\n\
-    transparent: true\n\
-});\n\
-// now create the individual particles\n\
-for (let p = 0; p < particleCount; p++) {\n\
-    // create a particle with random\n\
-    // position values, -250 -> 250\n\
-    let pX = Math.random() * 500 - 250,\n\
-        pY = Math.random() * 500 - 250,\n\
-        pZ = Math.random() * 500 - 250,\n\
-        particle = new App.THREE.Vector3(pX, pY, pZ);\n\
-\n\
-    // add it to the geometry\n\
-    particles.vertices.push(particle);\n\
-}\n\
-// create the particle system\n\
-let stars = new App.THREE.Points(\n\
-    particles,\n\
-    pMaterial\n\
-);\n\
-stars.name = 'stars';\n\
-stars.sortParticles = true;\n\
-App.userScene.add(stars);\n\
-App.timeline.targets.push(stars);\n";
+module.exports = `//SUN
+let textureLoader = new App.THREE.TextureLoader();
+let material = new App.THREE.MeshBasicMaterial({
+    map: textureLoader.load('examples/rising-sun/sun-texture.jpg')
+});
+let geometry = new App.THREE.SphereGeometry(40, 50, 50);
+let sun = new App.THREE.Mesh(geometry, material);
 
-module.exports = Scene;
+sun.position.y = 71;
+sun.name = 'sun';
+
+App.userScene.add(sun);
+App.timeline.targets.push(sun);
+
+//STARS
+let particleCount = 1000;
+let particles = new App.THREE.Geometry();
+let pMaterial = new App.THREE.PointsMaterial({
+    color: 0xFFFFFF,
+    size: 10,
+    map: textureLoader.load('examples/rising-sun/particle.png'),
+    blending: App.THREE.AdditiveBlending,
+    transparent: true
+});
+
+// now create the individual particles
+for (let p = 0; p < particleCount; p++) {
+    // create a particle with random
+    // position values, -250 -> 250
+    let pX = Math.random() * 500 - 250,
+        pY = Math.random() * 500 - 250,
+        pZ = Math.random() * 500 - 250,
+        particle = new App.THREE.Vector3(pX, pY, pZ);
+
+    // add it to the geometry
+    particles.vertices.push(particle);
+}
+
+// create the particle system
+let stars = new App.THREE.Points(
+    particles,
+    pMaterial
+);
+stars.name = 'stars';
+stars.sortParticles = true;
+App.userScene.add(stars);
+App.timeline.targets.push(stars);`;

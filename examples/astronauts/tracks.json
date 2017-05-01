@@ -1,0 +1,472 @@
+[
+    {
+        "id": "App.camera.position",
+        "targetName": "App.camera.position",
+        "keysMap": {
+            "x": {
+                "keys": [
+                    {
+                        "id": "App.camera.position.x",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "name": "x",
+                        "targetName": "App.camera.position",
+                        "target": {
+                            "x": -0.1400000000000361,
+                            "y": 107.99999999999996,
+                            "z": -324.99999999999994
+                        },
+                        "propertyName": "x",
+                        "endValue": "-.14",
+                        "duration": 0,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 0,
+                        "easing": "Linear.EaseNone",
+                        "startValue": -0.11617547589265076,
+                        "selected": false
+                    }
+                ],
+                "following": false,
+                "followTrack": {},
+                "followType": "",
+                "position": 70
+            },
+            "y": {
+                "keys": [
+                    {
+                        "id": "App.camera.position.y",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "name": "y",
+                        "targetName": "App.camera.position",
+                        "target": {
+                            "x": -0.1400000000000361,
+                            "y": 107.99999999999996,
+                            "z": -324.99999999999994
+                        },
+                        "propertyName": "y",
+                        "endValue": "108",
+                        "duration": 0,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 0,
+                        "easing": "Linear.EaseNone",
+                        "startValue": 103.79105629190208,
+                        "selected": false
+                    }
+                ],
+                "following": false,
+                "followTrack": {},
+                "followType": "",
+                "position": 90
+            },
+            "z": {
+                "keys": [
+                    {
+                        "id": "App.camera.position.z",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "name": "z",
+                        "targetName": "App.camera.position",
+                        "target": {
+                            "x": -0.1400000000000361,
+                            "y": 107.99999999999996,
+                            "z": -324.99999999999994
+                        },
+                        "propertyName": "z",
+                        "endValue": "-325",
+                        "duration": 0,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 0,
+                        "easing": "Linear.EaseNone",
+                        "startValue": -326.715665624938,
+                        "selected": false
+                    }
+                ],
+                "following": false,
+                "followTrack": {},
+                "followType": "",
+                "position": 110
+            }
+        },
+        "followKeysMap": {},
+        "type": "keyframe",
+        "target": {
+            "x": -0.1400000000000361,
+            "y": 107.99999999999996,
+            "z": -324.99999999999994
+        },
+        "labelHeight": 20,
+        "startTime": 0,
+        "endTime": 0,
+        "time": 0,
+        "followingPropertyPosition": "x",
+        "selectedProperty": ""
+    },
+    {
+        "id": "astronaut0.position",
+        "targetName": "astronaut0.position",
+        "keysMap": {
+            "x": {
+                "keys": [
+                    {
+                        "id": "astronaut0.position.x",
+                        "hasStarted": true,
+                        "hasEnded": false,
+                        "name": "x",
+                        "targetName": "astronaut0",
+                        "target": {
+                            "x": 399.35079811848266,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "propertyName": "x",
+                        "endValue": "200",
+                        "duration": 10,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 10,
+                        "easing": "Quadratic.EaseInOut",
+                        "startValue": 700,
+                        "selected": false
+                    },
+                    {
+                        "id": "astronaut0.position.x",
+                        "hasStarted": true,
+                        "name": "x",
+                        "targetName": "astronaut0",
+                        "target": {
+                            "x": 399.35079811848266,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "propertyName": "x",
+                        "startValue": 355.62788300900013,
+                        "endValue": "700",
+                        "duration": 10,
+                        "startTime": 6.045,
+                        "time": 6.07,
+                        "endTime": 16.045,
+                        "easing": "Quadratic.EaseInOut",
+                        "selected": false,
+                        "hasEnded": false
+                    }
+                ],
+                "following": false,
+                "followTrack": {},
+                "followType": "",
+                "followKeys": [],
+                "position": 150
+            }
+        },
+        "followKeysMap": {},
+        "type": "keyframe",
+        "target": {
+            "x": 399.35079811848266,
+            "y": 0,
+            "z": 0
+        },
+        "labelHeight": 20,
+        "startTime": 0,
+        "endTime": 16.045,
+        "time": 0,
+        "followingPropertyPosition": "x",
+        "selectedProperty": "x",
+        "followableTracks": [],
+        "followInput": {
+            "0": {}
+        }
+    },
+    {
+        "id": "astronaut1.position",
+        "targetName": "astronaut1.position",
+        "keysMap": {
+            "x": {
+                "keys": [
+                    {
+                        "id": "astronaut1.position.x",
+                        "hasStarted": true,
+                        "hasEnded": false,
+                        "name": "x",
+                        "targetName": "astronaut1",
+                        "target": {
+                            "x": 4.588314366132688,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "propertyName": "x",
+                        "endValue": "1",
+                        "duration": 10,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 10,
+                        "easing": "Quadratic.EaseInOut",
+                        "startValue": 10,
+                        "selected": false
+                    },
+                    {
+                        "id": "astronaut1.position.x",
+                        "hasStarted": true,
+                        "name": "x",
+                        "targetName": "astronaut1",
+                        "target": {
+                            "x": 4.588314366132688,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "propertyName": "x",
+                        "startValue": 3.801301894162002,
+                        "endValue": "10",
+                        "duration": 10,
+                        "startTime": 6.045,
+                        "time": 6.07,
+                        "endTime": 16.045,
+                        "easing": "Quadratic.EaseInOut",
+                        "selected": false,
+                        "hasEnded": false
+                    }
+                ],
+                "following": false,
+                "followTrack": {},
+                "followType": "",
+                "followKeys": [],
+                "position": 190
+            }
+        },
+        "followKeysMap": {},
+        "type": "keyframe",
+        "target": {
+            "x": 4.588314366132688,
+            "y": 0,
+            "z": 0
+        },
+        "labelHeight": 20,
+        "startTime": 0,
+        "endTime": 16.045,
+        "time": 0,
+        "followingPropertyPosition": "x",
+        "selectedProperty": ""
+    },
+    {
+        "id": "astronaut9.position",
+        "targetName": "astronaut9.position",
+        "keysMap": {
+            "y": {
+                "keys": [
+                    {
+                        "id": "astronaut9.position.y",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "name": "y",
+                        "targetName": "astronaut9",
+                        "target": {
+                            "x": 900,
+                            "y": 1.1913815578450695,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "endValue": "10",
+                        "duration": 0,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 0,
+                        "easing": "Quadratic.EaseInOut",
+                        "startValue": -10,
+                        "selected": false
+                    },
+                    {
+                        "id": "astronaut9.position.y",
+                        "hasStarted": true,
+                        "name": "y",
+                        "targetName": "astronaut9",
+                        "target": {
+                            "x": 900,
+                            "y": 1.1913815578450695,
+                            "z": 0
+                        },
+                        "propertyName": "y",
+                        "startValue": 10,
+                        "endValue": "-10",
+                        "duration": 10,
+                        "startTime": 6.045,
+                        "time": 3,
+                        "endTime": 16.045,
+                        "easing": "Quadratic.EaseOut",
+                        "selected": false,
+                        "hasEnded": false
+                    }
+                ],
+                "following": false,
+                "followTrack": {},
+                "followType": "",
+                "followKeys": [],
+                "position": 230
+            }
+        },
+        "followKeysMap": {},
+        "type": "keyframe",
+        "target": {
+            "x": 900,
+            "y": 1.1913815578450695,
+            "z": 0
+        },
+        "labelHeight": 20,
+        "startTime": 0,
+        "endTime": 16.045,
+        "time": 0,
+        "followingPropertyPosition": "x",
+        "selectedProperty": ""
+    },
+    {
+        "id": "astronaut8.position",
+        "targetName": "astronaut8.position",
+        "keysMap": {
+            "z": {
+                "keys": [
+                    {
+                        "id": "astronaut8.position.z",
+                        "hasStarted": true,
+                        "hasEnded": false,
+                        "name": "z",
+                        "targetName": "astronaut8",
+                        "target": {
+                            "x": 800,
+                            "y": 0,
+                            "z": 140.92036054990695
+                        },
+                        "propertyName": "z",
+                        "endValue": "300",
+                        "duration": 10,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 10,
+                        "easing": "Quadratic.EaseInOut",
+                        "startValue": -500.3167887094974,
+                        "selected": false
+                    },
+                    {
+                        "id": "astronaut8.position.z",
+                        "hasStarted": true,
+                        "name": "z",
+                        "targetName": "astronaut8",
+                        "target": {
+                            "x": 800,
+                            "y": 0,
+                            "z": 140.92036054990695
+                        },
+                        "propertyName": "z",
+                        "startValue": 138.37514653698776,
+                        "endValue": "-500",
+                        "duration": 10,
+                        "startTime": 6.81,
+                        "time": 2.075,
+                        "endTime": 16.81,
+                        "easing": "Elastic.EaseInOut",
+                        "selected": false,
+                        "hasEnded": false
+                    }
+                ],
+                "following": false,
+                "followTrack": {},
+                "followType": "",
+                "followKeys": [],
+                "position": 270
+            }
+        },
+        "followKeysMap": {},
+        "type": "keyframe",
+        "target": {
+            "x": 800,
+            "y": 0,
+            "z": 140.92036054990695
+        },
+        "labelHeight": 20,
+        "startTime": 0,
+        "endTime": 16.81,
+        "time": 0,
+        "followingPropertyPosition": "x",
+        "selectedProperty": "z",
+        "followableTracks": [],
+        "followInput": {
+            "0": {}
+        }
+    },
+    {
+        "id": "astronaut5.rotation",
+        "targetName": "astronaut5.rotation",
+        "keysMap": {
+            "z": {
+                "keys": [
+                    {
+                        "id": "astronaut5.rotation.z",
+                        "hasStarted": true,
+                        "hasEnded": true,
+                        "name": "z",
+                        "targetName": "astronaut5.rotation",
+                        "target": {
+                            "_x": 0,
+                            "_y": 0,
+                            "_z": 87.84326052154977,
+                            "_order": "XYZ"
+                        },
+                        "propertyName": "z",
+                        "endValue": 0,
+                        "duration": 0,
+                        "startTime": 0,
+                        "time": 0,
+                        "endTime": 0,
+                        "easing": "Linear.EaseNone",
+                        "startValue": 0
+                    },
+                    {
+                        "id": "astronaut5.rotation.z",
+                        "hasStarted": true,
+                        "name": "z",
+                        "targetName": "astronaut5.rotation",
+                        "target": {
+                            "_x": 0,
+                            "_y": 0,
+                            "_z": 87.84326052154977,
+                            "_order": "XYZ"
+                        },
+                        "propertyName": "z",
+                        "startValue": 0,
+                        "endValue": "100",
+                        "duration": 10,
+                        "startTime": 1.03,
+                        "time": 1.03,
+                        "endTime": 11.03,
+                        "easing": "Quadratic.EaseInOut",
+                        "selected": true,
+                        "hasEnded": false
+                    }
+                ],
+                "following": false,
+                "followTrack": {},
+                "followType": "",
+                "followKeys": [],
+                "position": 310
+            }
+        },
+        "followKeysMap": {},
+        "type": "keyframe",
+        "target": {
+            "_x": 0,
+            "_y": 0,
+            "_z": 87.84326052154977,
+            "_order": "XYZ"
+        },
+        "labelHeight": 20,
+        "startTime": 0,
+        "endTime": 11.03,
+        "time": 0,
+        "followingPropertyPosition": "x",
+        "selectedProperty": "z",
+        "followableTracks": [],
+        "followInput": {
+            "0": {}
+        }
+    }
+]
