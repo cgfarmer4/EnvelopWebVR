@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "browserify app/index.js > dist/bundle.js",
+    "build": "mkdir -p dist && browserify app/index.js > dist/bundle.js",
     "develop": "budo app/index.js:dist/bundle.js -l",
     "vr": "budo app/index.js:dist/bundle.js -l --ssl --cors",
     "udp": "node UDPServer"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Chase Farmer",
   "dependencies": {
     "brace": "^0.10.0",
     "downloadjs": "^1.4.7",
